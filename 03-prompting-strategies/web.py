@@ -6,6 +6,7 @@
 
 import json
 import threading
+import traceback
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -256,8 +257,14 @@ class Handler(BaseHTTPRequestHandler):
             self._reply(404, "text/plain; charset=utf-8", b"not found")
 
     def do_POST(self):
-        length = int(self.headers.get("Content-Length", 0))
-        payload = json.loads(self.rfile.read(length))
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+            payload = json.loads(self.rfile.read(length))
+        except Exception as error:   # битое тело запроса не должно ронять поток
+            traceback.print_exc()
+            self._json({"error": True, "text": f"Ошибка: {error}", "tokens": 0,
+                        "seconds": 0, "calls": 0, "extra": {}})
+            return
 
         if self.path == "/api/solve":
             strategy = STRATEGIES.get(payload.get("strategy"))
@@ -268,7 +275,8 @@ class Handler(BaseHTTPRequestHandler):
             print(f"→ {strategy['title']}")
             try:
                 self._json(strategy["run"](payload["question"]))
-            except (RuntimeError, SystemExit) as error:   # ключ/сеть/API — показываем в карточке
+            except Exception as error:   # ключ/сеть/API — показываем в карточке
+                traceback.print_exc()
                 self._json({"error": True, "text": f"Ошибка: {error}", "tokens": 0,
                             "seconds": 0, "calls": 0, "extra": {}})
 
@@ -276,7 +284,8 @@ class Handler(BaseHTTPRequestHandler):
             print("→ судья")
             try:
                 self._json(judge(payload["question"], payload["answers"]))
-            except (RuntimeError, SystemExit) as error:
+            except Exception as error:
+                traceback.print_exc()
                 self._json({"winner": None, "ranking": [], "comment": f"Ошибка: {error}"})
 
         else:

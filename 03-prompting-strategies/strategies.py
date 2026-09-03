@@ -74,6 +74,8 @@ def ask(user_prompt, system=None):
         raise RuntimeError(f"Ошибка API {error.code}: {error.read().decode()}") from error
     except urllib.error.URLError as error:
         raise RuntimeError(f"Сеть недоступна: {error.reason}") from error
+    except TimeoutError as error:
+        raise RuntimeError("Таймаут: модель не ответила вовремя") from error
 
     return {
         "text": data["choices"][0]["message"]["content"].strip(),

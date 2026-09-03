@@ -6,6 +6,7 @@
 
 import json
 import threading
+import traceback
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -277,20 +278,23 @@ class Handler(BaseHTTPRequestHandler):
             self._reply(404, "text/plain; charset=utf-8", b"not found")
             return
 
-        length = int(self.headers.get("Content-Length", 0))
-        payload = json.loads(self.rfile.read(length))
-        temperature = float(payload["temperature"])
-        runs = max(1, min(5, int(payload.get("runs", RUNS_PER_TEMPERATURE))))
-
-        # Эталон берём из пресета, но только если запрос не переписали руками:
-        # для своего текста проверять точность не по чему.
-        preset = PRESETS.get(payload.get("preset"), {})
-        expect = preset.get("expect", []) if preset.get("prompt") == payload["prompt"] else []
-
-        print(f"→ temperature={temperature}, прогонов: {runs}")
+        # Разбор запроса тоже под try: битый payload не должен ронять поток
+        # обработчика — иначе браузер видит только «Load failed» без причины.
         try:
+            length = int(self.headers.get("Content-Length", 0))
+            payload = json.loads(self.rfile.read(length))
+            temperature = float(payload["temperature"])
+            runs = max(1, min(5, int(payload.get("runs", RUNS_PER_TEMPERATURE))))
+
+            # Эталон берём из пресета, но только если запрос не переписали руками:
+            # для своего текста проверять точность не по чему.
+            preset = PRESETS.get(payload.get("preset"), {})
+            expect = preset.get("expect", []) if preset.get("prompt") == payload["prompt"] else []
+
+            print(f"→ temperature={temperature}, прогонов: {runs}")
             self._json(run_temperature(payload["prompt"], temperature, runs, expect))
-        except (RuntimeError, SystemExit) as error:
+        except Exception as error:
+            traceback.print_exc()
             self._json({"error": True, "text": f"Ошибка: {error}"})
 
     def log_message(self, *args):
