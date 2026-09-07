@@ -7,6 +7,7 @@
 
 import itertools
 import json
+import pathlib
 
 import providers
 import toon
@@ -51,7 +52,107 @@ ROLES = {
             "на них, приводи конкретные числа."
         ),
     },
+    "programmer": {
+        "title": "Программист",
+        "prompt": (
+            "Ты опытный Python-разработчик. Пиши рабочий код без лишних зависимостей, "
+            "в стиле окружающего кода. Сначала код, потом короткое пояснение, что он "
+            "делает и какие есть ограничения. Не объясняй очевидное."
+        ),
+    },
+    "tester": {
+        "title": "Тестировщик",
+        "prompt": (
+            "Ты тестировщик. По присланному коду или описанию находи, чем его можно "
+            "сломать: граничные значения, пустой ввод, юникод, отрицательные числа, "
+            "конкурентный доступ, отказ сети. Выдавай список тест-кейсов: вход → "
+            "ожидаемое поведение. Начинай с самых вероятных отказов."
+        ),
+    },
+    "architect": {
+        "title": "Архитектор",
+        "prompt": (
+            "Ты архитектор ПО. Отвечай на уровне решений, а не строк: границы модулей, "
+            "потоки данных, где хранится состояние, что будет узким местом при росте. "
+            "Предлагай простейшее решение, которое закрывает задачу, и честно называй "
+            "его недостатки. Избегай преждевременных абстракций."
+        ),
+    },
+    "reviewer": {
+        "title": "Ревьюер кода",
+        "prompt": (
+            "Ты делаешь код-ревью. Ищи настоящие дефекты: ошибки логики, необработанные "
+            "исключения, утечки ресурсов, гонки, небезопасную работу с вводом. Для "
+            "каждого замечания — где, чем грозит и как починить. Стилистические придирки "
+            "не пиши. Если код в порядке, так и скажи."
+        ),
+    },
+    "debugger": {
+        "title": "Отладчик",
+        "prompt": (
+            "Ты помогаешь чинить баги. По traceback и описанию симптома называй наиболее "
+            "вероятную причину, объясняй механизм отказа и давай минимальную правку. "
+            "Если данных не хватает — скажи, какой ровно эксперимент или лог нужен."
+        ),
+    },
+    "docs": {
+        "title": "Технический писатель",
+        "prompt": (
+            "Ты пишешь техническую документацию. По коду делай короткое описание: что "
+            "делает, как запустить, какие параметры, что вернёт, чего не умеет. Без "
+            "маркетинга и воды, примеры — рабочие."
+        ),
+    },
 }
+
+# Свои роли пользователь заводит прямо в интерфейсе; храним рядом со скриптом,
+# чтобы они пережили перезапуск сервера.
+CUSTOM_ROLES_PATH = pathlib.Path(__file__).with_name("custom_roles.json")
+
+
+def custom_roles():
+    """Роли, созданные пользователем. Битый файл не должен ронять сервер."""
+    if not CUSTOM_ROLES_PATH.exists():
+        return {}
+    try:
+        return json.loads(CUSTOM_ROLES_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def all_roles():
+    """Встроенные плюс пользовательские, с пометкой происхождения для интерфейса."""
+    roles = {key: {**value, "custom": False} for key, value in ROLES.items()}
+    roles.update({key: {**value, "custom": True} for key, value in custom_roles().items()})
+    return roles
+
+
+def add_role(title, prompt):
+    """Заводит новую роль и возвращает обновлённый список всех ролей."""
+    title, prompt = title.strip(), prompt.strip()
+    if not title or not prompt:
+        raise RuntimeError("У роли должны быть и название, и описание")
+
+    custom = custom_roles()
+    key = f"custom{len(custom) + 1}"
+    while key in custom or key in ROLES:
+        key = f"custom{int(key[6:]) + 1}"
+
+    custom[key] = {"title": title, "prompt": prompt}
+    CUSTOM_ROLES_PATH.write_text(json.dumps(custom, ensure_ascii=False, indent=2),
+                                 encoding="utf-8")
+    return {"key": key, "roles": all_roles()}
+
+
+def delete_role(key):
+    """Удаляет пользовательскую роль. Встроенные не трогаем."""
+    custom = custom_roles()
+    if key not in custom:
+        raise RuntimeError("Удалять можно только свои роли")
+    custom.pop(key)
+    CUSTOM_ROLES_PATH.write_text(json.dumps(custom, ensure_ascii=False, indent=2),
+                                 encoding="utf-8")
+    return {"roles": all_roles()}
 
 DEFAULTS = {
     "name": "Агент",

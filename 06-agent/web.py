@@ -118,6 +118,25 @@ PAGE = '''<!doctype html>
     return res.json();
   };
 
+  function roleOptions(current) {
+    const group = (custom) =>
+      Object.entries(ROLES)
+        .filter(([, r]) => Boolean(r.custom) === custom)
+        .map(([k, r]) => `<option value="${k}" ${k === current ? "selected" : ""}>${r.title}</option>`)
+        .join("");
+    const mine = group(true);
+    return "<optgroup label='Встроенные'>" + group(false) + "</optgroup>" +
+           (mine ? "<optgroup label='Мои роли'>" + mine + "</optgroup>" : "");
+  }
+
+  function refreshRoles() {
+    // Роль, созданная в одной панели, должна появиться во всех остальных.
+    panels.forEach((state) => {
+      const select = state.panel.querySelector(".role");
+      select.innerHTML = roleOptions(state.settings.role);
+    });
+  }
+
   const esc = (text) => {
     const d = document.createElement("div");
     d.textContent = text;
@@ -150,9 +169,19 @@ PAGE = '''<!doctype html>
           <div class="row"><label>Модель</label><select class="model">
             ${CATALOG.map((m) => `<option value="${m.id}" ${m.id === st.model ? "selected" : ""}>${m.label}${m.size !== "—" ? " · " + m.size : ""}</option>`).join("")}
           </select></div>
-          <div class="row"><label>Роль</label><select class="role">
-            ${Object.entries(ROLES).map(([k, r]) => `<option value="${k}" ${k === st.role ? "selected" : ""}>${r.title}</option>`).join("")}
-          </select></div>
+          <div class="row"><label>Роль</label>
+            <select class="role">${roleOptions(st.role)}</select>
+            <button class="ghost newrole" title="Создать свою роль" style="padding:6px 10px">+</button>
+            <button class="ghost delrole" title="Удалить свою роль" style="padding:6px 10px">✕</button></div>
+          <div class="rolebox" style="display:none; gap:7px; padding:9px;
+               border:1px solid var(--border); border-radius:8px">
+            <input type="text" class="rt" placeholder="Название роли — например, «Рефакторинг»">
+            <textarea class="rp" rows="3" placeholder="Описание для system_prompt: кем модель должна себя считать и как отвечать"></textarea>
+            <div class="row" style="gap:6px">
+              <button class="rsave">Создать роль</button>
+              <button class="ghost rcancel">Отмена</button>
+            </div>
+          </div>
           <textarea class="system" rows="3" placeholder="system_prompt">${esc(st.system_prompt)}</textarea>
           <div class="row"><label>Температура</label>
             <input type="range" class="temp" min="0" max="2" step="0.1" value="${st.temperature}">
@@ -228,6 +257,30 @@ PAGE = '''<!doctype html>
       push({ role, system_prompt: ROLES[role].prompt });
     };
     q(".system").onchange = (e) => push({ system_prompt: e.target.value });
+
+    const box = q(".rolebox");
+    q(".newrole").onclick = () => { box.style.display = box.style.display === "none" ? "grid" : "none"; };
+    q(".rcancel").onclick = () => { box.style.display = "none"; };
+    q(".rsave").onclick = async () => {
+      const res = await api("/api/roles", { title: q(".rt").value, prompt: q(".rp").value });
+      if (res.error) { alert(res.text); return; }
+      Object.assign(ROLES, res.roles);
+      q(".rt").value = q(".rp").value = "";
+      box.style.display = "none";
+      state.settings.role = res.key;
+      refreshRoles();
+      q(".system").value = ROLES[res.key].prompt;
+      push({ role: res.key, system_prompt: ROLES[res.key].prompt });
+    };
+    q(".delrole").onclick = async () => {
+      const role = q(".role").value;
+      if (!ROLES[role] || !ROLES[role].custom) { alert("Удалять можно только свои роли"); return; }
+      const res = await api("/api/roles/delete", { key: role });
+      if (res.error) { alert(res.text); return; }
+      for (const key of Object.keys(ROLES)) if (!res.roles[key]) delete ROLES[key];
+      panels.forEach((s) => { if (s.settings.role === role) s.settings.role = "assistant"; });
+      refreshRoles();
+    };
     q(".temp").oninput = (e) => { q(".temp-val").textContent = e.target.value; };
     q(".temp").onchange = (e) => push({ temperature: Number(e.target.value) });
     q(".maxtok").onchange = (e) => push({ max_tokens: Number(e.target.value) });
@@ -326,8 +379,7 @@ PAGE = '''<!doctype html>
 
 def build_page():
     """Подставляет в страницу каталог моделей, роли и пример данных."""
-    roles = {key: {"title": value["title"], "prompt": value["prompt"]}
-             for key, value in agents.ROLES.items()}
+    roles = agents.all_roles()
     html = PAGE.replace("__CATALOG__", json.dumps(CATALOG, ensure_ascii=False))
     html = html.replace("__ROLES__", json.dumps(roles, ensure_ascii=False))
     html = html.replace("__SAMPLE__", json.dumps(
@@ -370,6 +422,13 @@ class Handler(BaseHTTPRequestHandler):
 
             elif self.path == "/api/savings":
                 self._json(toon.savings(json.loads(payload["data"])))
+
+            elif self.path == "/api/roles":
+                print(f"→ новая роль: {payload.get('title')}")
+                self._json(agents.add_role(payload["title"], payload["prompt"]))
+
+            elif self.path == "/api/roles/delete":
+                self._json(agents.delete_role(payload["key"]))
 
             elif len(parts) == 4 and parts[0] == "api" and parts[1] == "agents":
                 agent = agents.get(parts[2])

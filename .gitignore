@@ -16,3 +16,6 @@ venv/
 .vscode/
 .idea/
 .claude/
+
+# роли, созданные в интерфейсе задания 06
+06-agent/custom_roles.json
