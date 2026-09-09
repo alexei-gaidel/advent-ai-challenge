@@ -19,3 +19,7 @@ venv/
 
 # роли, созданные в интерфейсе задания 06
 06-agent/custom_roles.json
+
+# локальные данные заданий
+07-persistent-context/agents.db*
+07-persistent-context/custom_roles.json
