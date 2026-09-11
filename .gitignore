@@ -23,3 +23,5 @@ venv/
 # локальные данные заданий
 07-persistent-context/agents.db*
 07-persistent-context/custom_roles.json
+09-context-compression/agents.db*
+09-context-compression/custom_roles.json
