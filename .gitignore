@@ -29,3 +29,5 @@ venv/
 10-context-strategies/custom_roles.json
 11-memory-model/agents.db*
 11-memory-model/custom_roles.json
+12-personalization/agents.db*
+12-personalization/custom_roles.json
