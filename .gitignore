@@ -31,3 +31,5 @@ venv/
 11-memory-model/custom_roles.json
 12-personalization/agents.db*
 12-personalization/custom_roles.json
+13-task-state/agents.db*
+13-task-state/custom_roles.json
