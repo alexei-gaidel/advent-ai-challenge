@@ -33,3 +33,5 @@ venv/
 12-personalization/custom_roles.json
 13-task-state/agents.db*
 13-task-state/custom_roles.json
+14-invariants/agents.db*
+14-invariants/custom_roles.json
