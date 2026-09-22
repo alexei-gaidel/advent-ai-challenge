@@ -37,3 +37,5 @@ venv/
 14-invariants/custom_roles.json
 15-lifecycle/agents.db*
 15-lifecycle/custom_roles.json
+17-mcp-tool/agents.db*
+17-mcp-tool/custom_roles.json
