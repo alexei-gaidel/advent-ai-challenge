@@ -77,7 +77,11 @@ def read(since=None, symbol=None):
             sample = json.loads(line)
         except json.JSONDecodeError:
             continue           # битую строку пропускаем, а не роняем весь ряд
-        if symbol and sample.get("symbol") != symbol and sample.get("title") != symbol:
+        if symbol and symbol.upper() not in {
+            str(sample.get("title", "")).upper(),
+            str(sample.get("coin", "")).upper(),
+            str(sample.get("symbol", "")).upper(),   # ряды, снятые до смены источника
+        }:
             continue
         if since and sample.get("at", "") < iso(since):
             continue

@@ -22,8 +22,8 @@ SERVER_INFO = {"name": "advent-market-server", "version": "1.0.0"}
 TOOLS = [
     {
         "name": "market_digest",
-        "description": ("Агрегированная сводка по курсам криптовалют за период: цена, "
-                        "изменение за сутки и с начала дня, коридор цен, число наблюдений."),
+        "description": ("Сводка по курсам криптовалют: текущая цена и изменение "
+                        "за сутки по каждой монете."),
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -40,7 +40,7 @@ TOOLS = [
             "type": "object",
             "properties": {
                 "symbol": {"type": "string",
-                           "description": "Инструмент: BTC, ETH, LTC, XMR или пара вида BTCUSDT"},
+                           "description": "Монета: BTC, ETH, LTC, XMR или ETC"},
                 "limit": {"type": "integer", "description": "Сколько последних наблюдений",
                           "minimum": 1, "maximum": 200, "default": 20},
             },
@@ -98,19 +98,17 @@ def run_tool(name, arguments):
         symbol = str(arguments.get("symbol", "")).strip().upper()
         if not symbol:
             raise ValueError("нужен аргумент symbol")
-        if not symbol.endswith("USDT"):
-            symbol_pair = f"{symbol}USDT"
-        else:
-            symbol_pair = symbol
+        symbol = symbol.replace("USDT", "").replace("USD", "") or symbol
 
         limit = int(arguments.get("limit", 20))
-        rows = store.read(symbol=symbol_pair)[-max(1, min(200, limit)):]
+        rows = store.read(symbol=symbol)[-max(1, min(200, limit)):]
         if not rows:
-            return f"наблюдений по {symbol} пока нет"
+            known = ", ".join(market.COINS.values())
+            return f"наблюдений по {symbol} пока нет (отслеживаем: {known})"
         lines = [f"{row['at'][:16].replace('T', ' ')}  "
-                 f"{market.format_price(row['price'])}  {row['change_24h']:+.2f}%"
+                 f"{market.format_price(row['price']):>10}  {row['change_24h']:+.2f}%"
                  for row in rows]
-        return f"{symbol_pair}, последних наблюдений {len(rows)}:\n" + "\n".join(lines)
+        return f"{symbol}, последних наблюдений {len(rows)}:\n" + "\n".join(lines)
 
     if name == "collect_now":
         samples = market.fetch()

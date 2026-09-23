@@ -27,9 +27,11 @@ import market_server   # noqa: E402
 import scheduler       # noqa: E402
 import tools as mcp_tools  # noqa: E402
 
-COLLECT_EVERY = 4      # вместо часа
-DIGEST_EVERY = 12      # вместо восьми часов
-DURATION = 26          # столько секунд крутим планировщик
+# CoinGecko на бесплатном тарифе пускает несколько запросов в минуту, поэтому
+# интервал сбора крупнее: при 8 секундах половина проходов ловила 429.
+COLLECT_EVERY = 20     # вместо часа
+DIGEST_EVERY = 30      # вместо восьми часов
+DURATION = 55          # столько секунд крутим планировщик
 
 
 def head(title):

@@ -145,9 +145,9 @@ def main():
     cast = Cast()
 
     cast.say("$ python3 scheduler.py   # инструмент с расписанием", "dim")
-    scheduler.setup(interval=4, digest_every=10)
+    scheduler.setup(interval=20, digest_every=30)
     store.add_job("remind-demo", "remind", 0, {"text": "проверить сводку"},
-                  first_run=store.now() + store.timedelta(seconds=7))
+                  first_run=store.now() + store.timedelta(seconds=12))
     for job in store.list_jobs():
         period = f"каждые {job['every']} c" if job["every"] else "одноразовое"
         cast.say(f"  {job['name']:<12} {job['kind']:<8} {period}", "warn")
@@ -155,7 +155,7 @@ def main():
     cast.say()
 
     started = time.monotonic()
-    while time.monotonic() - started < 18:
+    while time.monotonic() - started < 46:
         for item in scheduler.tick(verbose=False):
             mark = "✓" if item["status"] == "ok" else "✕"
             cast.say(f"{int(time.monotonic() - started):>3} c  {mark} {item['job']:<12} "
