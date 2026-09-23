@@ -39,3 +39,7 @@ venv/
 15-lifecycle/custom_roles.json
 17-mcp-tool/agents.db*
 17-mcp-tool/custom_roles.json
+18-scheduled-mcp/agents.db*
+18-scheduled-mcp/custom_roles.json
+18-scheduled-mcp/schedule.db
+18-scheduled-mcp/data/outbox.log

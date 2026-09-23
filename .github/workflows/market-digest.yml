@@ -1,0 +1,49 @@
+# Сводка по курсам каждые 8 часов: собрать наблюдение, отправить в Telegram,
+# сохранить ряд обратно в репозиторий.
+#
+# Секреты задаются в Settings → Secrets and variables → Actions:
+#   TELEGRAM_BOT_TOKEN  — токен бота от @BotFather
+#   TELEGRAM_CHAT_ID    — куда слать сводку
+# Без них workflow всё равно отработает: сводка ляжет в файл, а не в чат.
+
+name: Сводка по рынку
+
+on:
+  schedule:
+    # 00:00, 08:00 и 16:00 UTC. Actions может опоздать на 5–20 минут — это нормально.
+    - cron: "0 */8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: market-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Собрать наблюдение и отправить сводку
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        working-directory: 18-scheduled-mcp
+        # --force: у сборщика на чистой машине нет истории расписания,
+        # поэтому выполняем задания сразу, а не ждём наступления времени.
+        run: python3 scheduler.py --once --force
+
+      - name: Сохранить ряд наблюдений
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 18-scheduled-mcp/data/samples.jsonl
+          if git diff --cached --quiet; then
+            echo "новых наблюдений нет"
+          else
+            git commit -m "Наблюдение за рынком $(date -u +%Y-%m-%dT%H:%M)"
+            git push
+          fi
