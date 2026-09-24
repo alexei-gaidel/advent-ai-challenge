@@ -1,0 +1,48 @@
+# Проверка билетов на матч Россия — Намибия каждый час в :02.
+# Запрашивается только публичная страница события, раз в час. Закрытые в robots.txt
+# разделы не используются, капча не обходится: если вместо страницы придёт проверка,
+# пайплайн честно упадёт с ошибкой и это будет видно в логе.
+#
+# Секреты (Settings → Secrets and variables → Actions):
+#   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+# Без них отчёт просто сохраняется в файл.
+
+name: Билеты на матч
+
+on:
+  schedule:
+    # Каждый час в :02. Actions может опоздать на 5–20 минут — это нормально.
+    - cron: "2 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tickets-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Прогнать цепочку получить → обработать → сохранить
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        working-directory: 19-mcp-pipeline
+        run: python3 pipeline.py --once --notify
+
+      - name: Сохранить снимки и отчёты
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 19-mcp-pipeline/data/snapshots.jsonl 19-mcp-pipeline/data/reports
+          if git diff --cached --quiet; then
+            echo "нового нет"
+          else
+            git commit -m "Проверка билетов $(date -u +%Y-%m-%dT%H:%M)"
+            git push
+          fi

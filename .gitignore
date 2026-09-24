@@ -43,3 +43,7 @@ venv/
 18-scheduled-mcp/custom_roles.json
 18-scheduled-mcp/schedule.db
 18-scheduled-mcp/data/outbox.log
+19-mcp-pipeline/agents.db*
+19-mcp-pipeline/custom_roles.json
+19-mcp-pipeline/pipeline.db
+19-mcp-pipeline/data/outbox.log
