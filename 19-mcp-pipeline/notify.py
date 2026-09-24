@@ -78,3 +78,14 @@ def send(text):
 
 def configured():
     return bool(get_setting("TELEGRAM_BOT_TOKEN") and get_setting("TELEGRAM_CHAT_ID"))
+
+
+if __name__ == "__main__":
+    import sys
+
+    if "--test" in sys.argv:
+        # Проверка доставки: убеждаемся, что токен и chat_id рабочие,
+        # не дожидаясь настоящих изменений в продаже билетов.
+        print("telegram настроен:", configured())
+        print(send("Проверка связи: мониторинг билетов на матч Россия — Намибия "
+                   "настроен и работает."))
