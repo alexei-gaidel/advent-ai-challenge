@@ -47,3 +47,6 @@ venv/
 19-mcp-pipeline/custom_roles.json
 19-mcp-pipeline/pipeline.db
 19-mcp-pipeline/data/outbox.log
+20-mcp-orchestration/agents.db*
+20-mcp-orchestration/custom_roles.json
+20-mcp-orchestration/data/notes.json
