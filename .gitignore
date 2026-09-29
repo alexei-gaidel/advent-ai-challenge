@@ -50,3 +50,6 @@ venv/
 20-mcp-orchestration/agents.db*
 20-mcp-orchestration/custom_roles.json
 20-mcp-orchestration/data/notes.json
+21-document-index/index.db*
+21-document-index/agents.db*
+21-document-index/custom_roles.json
