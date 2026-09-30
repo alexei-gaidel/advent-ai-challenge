@@ -53,3 +53,6 @@ venv/
 21-document-index/index.db*
 21-document-index/agents.db*
 21-document-index/custom_roles.json
+22-first-rag/index.db*
+22-first-rag/agents.db*
+22-first-rag/custom_roles.json
