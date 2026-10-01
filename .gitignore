@@ -56,3 +56,6 @@ venv/
 22-first-rag/index.db*
 22-first-rag/agents.db*
 22-first-rag/custom_roles.json
+23-rerank-filter/index.db*
+23-rerank-filter/agents.db*
+23-rerank-filter/custom_roles.json
