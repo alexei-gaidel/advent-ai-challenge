@@ -62,3 +62,7 @@ venv/
 24-citations/index.db*
 24-citations/agents.db*
 24-citations/custom_roles.json
+25-rag-chat/index.db*
+25-rag-chat/chat.db*
+25-rag-chat/agents.db*
+25-rag-chat/custom_roles.json
