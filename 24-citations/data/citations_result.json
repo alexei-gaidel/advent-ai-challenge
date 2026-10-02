@@ -1,0 +1,2458 @@
+{
+ "model": "deepseek-chat",
+ "judge": "deepseek-reasoner",
+ "params": {
+  "threshold": 0.45,
+  "k_before": 20,
+  "k_after": 5,
+  "rerank_min": 5
+ },
+ "gate_min": 7,
+ "questions": [
+  {
+   "q": "На какой срок избирается Президент России и сколько сроков может занимать должность один человек?",
+   "expect": "Шесть лет; одно лицо не может занимать должность более двух сроков.",
+   "sources": [
+    "81"
+   ],
+   "type": "answer"
+  },
+  {
+   "q": "Может ли минимальный размер оплаты труда быть ниже прожиточного минимума?",
+   "expect": "Нет: МРОТ гарантируется не менее величины прожиточного минимума трудоспособного населения в целом по РФ.",
+   "sources": [
+    "75"
+   ],
+   "type": "answer"
+  },
+  {
+   "q": "Как Конституция определяет брак?",
+   "expect": "Как союз мужчины и женщины; защита института брака — совместное ведение РФ и субъектов.",
+   "sources": [
+    "72"
+   ],
+   "type": "answer"
+  },
+  {
+   "q": "Сколько представителей Российской Федерации в Совете Федерации может назначить Президент и сколько из них пожизненно?",
+   "expect": "Не более 30 представителей, из них не более семи — пожизненно.",
+   "sources": [
+    "95"
+   ],
+   "type": "answer"
+  },
+  {
+   "q": "Могут ли меня держать под арестом без суда больше двух суток?",
+   "expect": "Нет: арест — только по судебному решению; до решения суда задержание не более 48 часов.",
+   "sources": [
+    "22"
+   ],
+   "type": "answer"
+  },
+  {
+   "q": "Обязан ли я давать показания против своей жены?",
+   "expect": "Нет: никто не обязан свидетельствовать против себя, своего супруга и близких родственников.",
+   "sources": [
+    "51"
+   ],
+   "type": "answer"
+  },
+  {
+   "q": "Какой пенсионный возраст установлен Конституцией РФ?",
+   "expect": "Конкретного пенсионного возраста Конституция не устанавливает. Допустимо и «в Конституции этого нет», и «не знаю» с просьбой уточнить; называть цифры возраста — ошибка.",
+   "sources": [
+    "39",
+    "75"
+   ],
+   "type": "either"
+  },
+  {
+   "q": "Какой штраф за превышение скорости на 40 км/ч?",
+   "expect": "В Конституции этого нет. Агент должен сказать «не знаю» и попросить уточнить, не называя суммы.",
+   "sources": [],
+   "type": "unknown"
+  },
+  {
+   "q": "Что там про сроки?",
+   "expect": "Вопрос расплывчатый: непонятно, чьи сроки. Хороший ответ — «не знаю» и просьба уточнить (сроки Президента, Думы, задержания…). Перечень нескольких сроков с источниками — частично.",
+   "sources": [],
+   "type": "unknown"
+  },
+  {
+   "q": "Сколько длится отпуск по уходу за ребёнком?",
+   "expect": "В Конституции длительности отпуска нет (есть только защита материнства и детства, ст. 38). Агент должен сказать «не знаю» и попросить уточнить; называть сроки отпуска — ошибка.",
+   "sources": [],
+   "type": "unknown"
+  }
+ ],
+ "runs": [
+  {
+   "rows": [
+    {
+     "n": 1,
+     "judge_tokens": 1290,
+     "judge_cost": 0.000565,
+     "rag": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет [ст.81]. Одно и то же лицо не может занимать эту должность более двух сроков [ст.81]. При этом часть 3.1 статьи 81 уточняет, что это ограничение применяется без учёта числа сроков, которые лицо занимало должность на момент вступления в силу соответствующей поправки [ст.81].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.81#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (3.1–4)",
+        "parts": "3.1–4"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует ожиданию; дополнительное уточнение подтверждено материалами",
+      "prompt_tokens": 5579,
+      "completion_tokens": 309,
+      "cost": 0.001847,
+      "seconds": 3.37,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.81#1",
+        "text": "Президент Российской Федерации избирается сроком на шесть лет гражданами Российской Федерации на основе всеобщего равного и прямого избирательного права при тайном голосовании.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "text": "Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ожиданию; факты подтверждены материалами",
+      "prompt_tokens": 5704,
+      "completion_tokens": 382,
+      "cost": 0.001961,
+      "seconds": 3.02,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 2,
+     "judge_tokens": 4529,
+     "judge_cost": 0.003941,
+     "rag": {
+      "answer": "Нет, не может. Государством гарантируется минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации [ст.75]. Это соответствует и принципу социального государства [ст.7], а также праву на вознаграждение за труд не ниже установленного федеральным законом МРОТ [ст.37].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.37",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-37",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 37",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.7",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-7",
+        "section": "Глава 1. Основы конституционного строя › Статья 7",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Верно, подтверждено ст.75, 37, 7.",
+      "prompt_tokens": 1736,
+      "completion_tokens": 109,
+      "cost": 0.000589,
+      "seconds": 2.76,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, не может. Конституция гарантирует минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации. Кроме того, каждый имеет право на вознаграждение за труд не ниже установленного федеральным законом минимального размера оплаты труда.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.37",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-37",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 37",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.75",
+        "text": "Государством гарантируется минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.37",
+        "text": "Каждый имеет право на труд в условиях, отвечающих требованиям безопасности и гигиены, на вознаграждение за труд без какой бы то ни было дискриминации и не ниже установленного федеральным законом минимального размера оплаты труда, а также право на защиту от безработицы.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Верно, подтверждено ст.75 и 37.",
+      "prompt_tokens": 1857,
+      "completion_tokens": 249,
+      "cost": 0.000776,
+      "seconds": 2.36,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 3,
+     "judge_tokens": 1267,
+     "judge_cost": 0.000674,
+     "rag": {
+      "answer": "Конституция определяет брак как союз мужчины и женщины: в совместном ведении РФ и субъектов находится защита института брака именно в таком качестве [ст.72, п. «ж.1»].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.72#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-72",
+        "section": "Глава 3. Федеративное устройство › Статья 72 (1 п. а–ж.1)",
+        "parts": "1 п. а–ж.1"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует; оба факта подтверждены ст.72",
+      "prompt_tokens": 5054,
+      "completion_tokens": 227,
+      "cost": 0.001615,
+      "seconds": 3.08,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Конституция относит защиту института брака к совместному ведению Российской Федерации и субъектов Российской Федерации. При этом брак определяется как союз мужчины и женщины.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.72#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-72",
+        "section": "Глава 3. Федеративное устройство › Статья 72 (1 п. а–ж.1)",
+        "parts": "1 п. а–ж.1"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.72#1",
+        "text": "ж.1) защита семьи, материнства, отцовства и детства; защита института брака как союза мужчины и женщины; создание условий для достойного воспитания детей в семье, а также для осуществления совершеннолетними детьми обязанности заботиться о родителях;",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует; оба факта подтверждены цитатой",
+      "prompt_tokens": 5177,
+      "completion_tokens": 324,
+      "cost": 0.001755,
+      "seconds": 2.81,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 4,
+     "judge_tokens": 1801,
+     "judge_cost": 0.000842,
+     "rag": {
+      "answer": "Президент Российской Федерации назначает не более 30 представителей Российской Федерации в Совете Федерации, из которых не более семи могут быть назначены пожизненно [ст.95].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.95#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (1–3 п. а–в)",
+        "parts": "1–3 п. а–в"
+       },
+       {
+        "chunk_id": "ст.95#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (4–7)",
+        "parts": "4–7"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует; ст.95 подтверждает оба числа.",
+      "prompt_tokens": 6333,
+      "completion_tokens": 254,
+      "cost": 0.00199,
+      "seconds": 3.4,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации назначает не более 30 представителей Российской Федерации в Совете Федерации, из которых не более семи могут быть назначены пожизненно.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.95#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (1–3 п. а–в)",
+        "parts": "1–3 п. а–в"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.95#1",
+        "text": "в) не более 30 представителей Российской Федерации, назначаемых Президентом Российской Федерации, из которых не более семи могут быть назначены пожизненно.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует ожиданию, подтверждено ст.95.",
+      "prompt_tokens": 6460,
+      "completion_tokens": 323,
+      "cost": 0.0021,
+      "seconds": 3.1,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 5,
+     "judge_tokens": 919,
+     "judge_cost": 0.000539,
+     "rag": {
+      "answer": "Нет. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению, а до судебного решения задержание не может превышать 48 часов [ст.22].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.22",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-22",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 22",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует; все факты подтверждены материалами.",
+      "prompt_tokens": 3183,
+      "completion_tokens": 220,
+      "cost": 0.001101,
+      "seconds": 2.67,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, не могут. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению, а до судебного решения лицо не может быть подвергнуто задержанию на срок более 48 часов.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.22",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-22",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 22",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.22",
+        "text": "2. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению. До судебного решения лицо не может быть подвергнуто задержанию на срок более 48 часов.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует; все факты подтверждены материалами.",
+      "prompt_tokens": 3304,
+      "completion_tokens": 316,
+      "cost": 0.001239,
+      "seconds": 3.13,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 6,
+     "judge_tokens": 841,
+     "judge_cost": 0.000467,
+     "rag": {
+      "answer": "Нет, вы не обязаны свидетельствовать против своего супруга — это прямо запрещено [ст.51]. Круг близких родственников, включая супруга, определяется федеральным законом [ст.51]. Кроме того, федеральным законом могут устанавливаться и иные случаи освобождения от обязанности давать показания [ст.51].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.51",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-51",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 51",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ст.51, все факты подтверждены.",
+      "prompt_tokens": 599,
+      "completion_tokens": 97,
+      "cost": 0.000269,
+      "seconds": 2.3,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, вы не обязаны свидетельствовать против своей жены. Согласно статье 51 Конституции РФ, никто не обязан свидетельствовать против себя самого, своего супруга и близких родственников, круг которых определяется федеральным законом.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.51",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-51",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 51",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.51",
+        "text": "1. Никто не обязан свидетельствовать против себя самого, своего супруга и близких родственников, круг которых определяется федеральным законом.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Верно передаёт ст.51, факты подтверждены материалом.",
+      "prompt_tokens": 720,
+      "completion_tokens": 137,
+      "cost": 0.000345,
+      "seconds": 2.11,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 7,
+     "judge_tokens": 4211,
+     "judge_cost": 0.003903,
+     "rag": {
+      "answer": "В найденных статьях ответа нет: в приведённом фрагменте [ст.75] говорится лишь о формировании системы пенсионного обеспечения, индексации пенсий и социальных гарантиях, но конкретный пенсионный возраст не устанавливается.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 5,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Верно указано отсутствие возраста, подтверждено ст.75.",
+      "prompt_tokens": 4646,
+      "completion_tokens": 263,
+      "cost": 0.001544,
+      "seconds": 3.21,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Не знаю: лучший фрагмент оценён реранкером на 5/10 — меньше 7. Уточните, пожалуйста, вопрос. Возможно, вас интересует: ст. 75 — Денежной единицей в Российской Федерации является рубль. Денежная эмиссия осуществляется исключительно Централ; ст. 39 — Каждому гарантируется социальное обеспечение по возрасту, в случае болезни, инвалидности, потери кормильца, дл; ст. 7 — Российская Федерация — социальное государство, политика которого направлена на создание условий, обеспечивающи.",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "лучший фрагмент оценён реранкером на 5/10 — меньше 7",
+      "clarify": [
+       {
+        "chunk_id": "ст.75",
+        "article": "75",
+        "hint": "Денежной единицей в Российской Федерации является рубль. Денежная эмиссия осуществляется исключительно Централ"
+       },
+       {
+        "chunk_id": "ст.39",
+        "article": "39",
+        "hint": "Каждому гарантируется социальное обеспечение по возрасту, в случае болезни, инвалидности, потери кормильца, дл"
+       },
+       {
+        "chunk_id": "ст.7",
+        "article": "7",
+        "hint": "Российская Федерация — социальное государство, политика которого направлена на создание условий, обеспечивающи"
+       }
+      ],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 5,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": false,
+      "correct": 2,
+      "support": "n/a",
+      "note": "Отказ, просьба уточнить, возраст не назван.",
+      "prompt_tokens": 4087,
+      "completion_tokens": 204,
+      "cost": 0.001328,
+      "seconds": 1.93,
+      "llm_calls": 1
+     }
+    },
+    {
+     "n": 8,
+     "judge_tokens": 5531,
+     "judge_cost": 0.005762,
+     "rag": {
+      "answer": "В найденных статьях ответа нет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Нет суммы, но не просит уточнить.",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost": 0,
+      "seconds": 0.07,
+      "llm_calls": 0
+     },
+     "cited": {
+      "answer": "Не знаю: ни один фрагмент не прошёл порог релевантности — вопрос, похоже, не про Конституцию. Уточните, пожалуйста, что именно вы хотите узнать о Конституции.",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "ни один фрагмент не прошёл порог релевантности — вопрос, похоже, не про Конституцию",
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 2,
+      "support": "supported",
+      "note": "Отказ, просит уточнить, суммы нет.",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost": 0,
+      "seconds": 0.03,
+      "llm_calls": 0
+     }
+    },
+    {
+     "n": 9,
+     "judge_tokens": 2038,
+     "judge_cost": 0.001271,
+     "rag": {
+      "answer": "Срок полномочий Президента — шесть лет, и одно и то же лицо не может занимать эту должность более двух сроков [ст.81]. При этом ограничение по числу сроков применяется без учёта сроков, отбытых до вступления в силу соответствующей поправки, и не исключает для такого лица возможности занимать должность в течение сроков, допустимых этой нормой [ст.81]. Государственная Дума избирается на пять лет [ст.96].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (3.1–4)",
+        "parts": "3.1–4"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.96",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-96",
+        "section": "Глава 5. Федеральное Собрание › Статья 96",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Перечислил сроки с деталью, но не попросил уточнить",
+      "prompt_tokens": 3500,
+      "completion_tokens": 238,
+      "cost": 0.001207,
+      "seconds": 2.88,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет, при этом одно и то же лицо не может занимать эту должность более двух сроков. Государственная Дума избирается сроком на пять лет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.96",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-96",
+        "section": "Глава 5. Федеральное Собрание › Статья 96",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.81#1",
+        "text": "1. Президент Российской Федерации избирается сроком на шесть лет гражданами Российской Федерации на основе всеобщего равного и прямого избирательного права при тайном голосовании.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "text": "3. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.96",
+        "text": "1. Государственная Дума избирается сроком на пять лет.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Перечислил сроки, но не уточнил расплывчатый вопрос",
+      "prompt_tokens": 3625,
+      "completion_tokens": 331,
+      "cost": 0.001343,
+      "seconds": 2.94,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 10,
+     "judge_tokens": 5064,
+     "judge_cost": 0.005214,
+     "rag": {
+      "answer": "В найденных статьях ответа нет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "n/a",
+      "note": "Нет явного «не знаю» и просьбы уточнить.",
+      "prompt_tokens": 203,
+      "completion_tokens": 8,
+      "cost": 6.4e-05,
+      "seconds": 1.17,
+      "llm_calls": 1
+     },
+     "cited": {
+      "answer": "Не знаю: кандидаты нашлись, но реранкер не счёл ни один относящимся к вопросу. Уточните, пожалуйста, вопрос. Возможно, вас интересует: ст. 38 — Материнство и детство, семья находятся под защитой государства..",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "кандидаты нашлись, но реранкер не счёл ни один относящимся к вопросу",
+      "clarify": [
+       {
+        "chunk_id": "ст.38",
+        "article": "38",
+        "hint": "Материнство и детство, семья находятся под защитой государства."
+       }
+      ],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 2,
+      "support": "unsupported",
+      "note": "Соответствует: не знает, просит уточнить, упоминает ст. 38.",
+      "prompt_tokens": 203,
+      "completion_tokens": 8,
+      "cost": 6.4e-05,
+      "seconds": 0.78,
+      "llm_calls": 1
+     }
+    }
+   ],
+   "summary": {
+    "rag": {
+     "correct_sum": 17,
+     "correct_max": 20,
+     "answered": 10,
+     "with_sources": 8,
+     "with_quotes": 0,
+     "quotes": 0,
+     "rejected": 0,
+     "retried": 0,
+     "supported": 9,
+     "partial": 0,
+     "unsupported": 0,
+     "unknown_hit": 0,
+     "unknown_expected": 3,
+     "unknown_false": 0,
+     "source_ok": 6,
+     "prompt_tokens": 30833,
+     "completion_tokens": 1725,
+     "cost": 0.01023,
+     "llm_calls": 17
+    },
+    "cited": {
+     "correct_sum": 19,
+     "correct_max": 20,
+     "answered": 7,
+     "with_sources": 7,
+     "with_quotes": 7,
+     "quotes": 11,
+     "rejected": 0,
+     "retried": 0,
+     "supported": 7,
+     "partial": 0,
+     "unsupported": 0,
+     "unknown_hit": 2,
+     "unknown_expected": 3,
+     "unknown_false": 0,
+     "source_ok": 6,
+     "prompt_tokens": 31137,
+     "completion_tokens": 2274,
+     "cost": 0.01091,
+     "llm_calls": 16
+    }
+   },
+   "seconds": 138.6
+  },
+  {
+   "rows": [
+    {
+     "n": 1,
+     "judge_tokens": 2167,
+     "judge_cost": 0.001527,
+     "rag": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет [ст.81]. Одно и то же лицо не может занимать эту должность более двух сроков [ст.81]. При этом часть 3.1 статьи 81 уточняет, что это ограничение применяется без учёта сроков, которые лицо занимало должность на момент вступления в силу соответствующей поправки [ст.81].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.81#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (3.1–4)",
+        "parts": "3.1–4"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Основное верно; дополнение ч.3.1 подтверждено материалами.",
+      "prompt_tokens": 5579,
+      "completion_tokens": 308,
+      "cost": 0.001846,
+      "seconds": 3.34,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.81#1",
+        "text": "1. Президент Российской Федерации избирается сроком на шесть лет гражданами Российской Федерации на основе всеобщего равного и прямого избирательного права при тайном голосовании.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "text": "3. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью совпадает с ожиданием; факты подтверждены материалами.",
+      "prompt_tokens": 5704,
+      "completion_tokens": 378,
+      "cost": 0.001956,
+      "seconds": 3.25,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 2,
+     "judge_tokens": 2735,
+     "judge_cost": 0.002021,
+     "rag": {
+      "answer": "Нет, не может. Государством гарантируется минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации [ст.75]. Это соответствует и принципу социального государства [ст.7], а также праву на вознаграждение за труд не ниже установленного федеральным законом МРОТ [ст.37].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.37",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-37",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 37",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.7",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-7",
+        "section": "Глава 1. Основы конституционного строя › Статья 7",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью подтверждён ст.75, ст.7, ст.37.",
+      "prompt_tokens": 1736,
+      "completion_tokens": 109,
+      "cost": 0.000589,
+      "seconds": 2.33,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, согласно Конституции Российской Федерации минимальный размер оплаты труда не может быть ниже прожиточного минимума. Статья 75 гарантирует, что государством обеспечивается минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации. Это положение закреплено в главе 3 Конституции.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.75",
+        "text": "Государством гарантируется минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "partial",
+      "note": "Основной факт подтверждён; глава 3 в материалах не указана.",
+      "prompt_tokens": 1857,
+      "completion_tokens": 184,
+      "cost": 0.000704,
+      "seconds": 2.37,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 3,
+     "judge_tokens": 2527,
+     "judge_cost": 0.002049,
+     "rag": {
+      "answer": "Конституция определяет брак как союз мужчины и женщины — это следует из положения о защите института брака [ст.72, п. «ж.1»]. Данный вопрос отнесён к совместному ведению Российской Федерации и субъектов РФ [ст.72].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.72#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-72",
+        "section": "Глава 3. Федеративное устройство › Статья 72 (1 п. а–ж.1)",
+        "parts": "1 п. а–ж.1"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Оба факта подтверждены полным текстом статьи 72.",
+      "prompt_tokens": 5054,
+      "completion_tokens": 240,
+      "cost": 0.001629,
+      "seconds": 2.42,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Конституция относит защиту института брака к совместному ведению Российской Федерации и субъектов Российской Федерации. При этом брак определяется как союз мужчины и женщины.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.72#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-72",
+        "section": "Глава 3. Федеративное устройство › Статья 72 (1 п. а–ж.1)",
+        "parts": "1 п. а–ж.1"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.72#1",
+        "text": "ж.1) защита семьи, материнства, отцовства и детства; защита института брака как союза мужчины и женщины; создание условий для достойного воспитания детей в семье, а также для осуществления совершеннолетними детьми обязанности заботиться о родителях;",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "partial",
+      "note": "Определение подтверждено; совместное ведение не процитировано в материалах.",
+      "prompt_tokens": 5177,
+      "completion_tokens": 324,
+      "cost": 0.001755,
+      "seconds": 3.08,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 4,
+     "judge_tokens": 1656,
+     "judge_cost": 0.000681,
+     "rag": {
+      "answer": "Президент Российской Федерации назначает не более 30 представителей Российской Федерации в Совете Федерации, из которых не более семи могут быть назначены пожизненно [ст.95].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.95#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (1–3 п. а–в)",
+        "parts": "1–3 п. а–в"
+       },
+       {
+        "chunk_id": "ст.95#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (4–7)",
+        "parts": "4–7"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Совпадает с ожиданием; подтверждено статьёй 95",
+      "prompt_tokens": 6333,
+      "completion_tokens": 254,
+      "cost": 0.00199,
+      "seconds": 2.72,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации может назначить не более 30 представителей Российской Федерации в Совете Федерации, из которых не более семи могут быть назначены пожизненно.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.95#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (1–3 п. а–в)",
+        "parts": "1–3 п. а–в"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.95#1",
+        "text": "в) не более 30 представителей Российской Федерации, назначаемых Президентом Российской Федерации, из которых не более семи могут быть назначены пожизненно.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Совпадает с ожиданием; подтверждено статьёй 95",
+      "prompt_tokens": 6460,
+      "completion_tokens": 324,
+      "cost": 0.002101,
+      "seconds": 3.28,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 5,
+     "judge_tokens": 929,
+     "judge_cost": 0.00055,
+     "rag": {
+      "answer": "Нет. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению, а до судебного решения задержание не может превышать 48 часов [ст.22].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.22",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-22",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 22",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ожиданию, подтверждено ст.22.",
+      "prompt_tokens": 3183,
+      "completion_tokens": 216,
+      "cost": 0.001097,
+      "seconds": 2.57,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, не могут. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению, а до судебного решения лицо не может быть подвергнуто задержанию на срок более 48 часов.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.22",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-22",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 22",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.22",
+        "text": "2. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению. До судебного решения лицо не может быть подвергнуто задержанию на срок более 48 часов.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ожиданию, подтверждено ст.22.",
+      "prompt_tokens": 3304,
+      "completion_tokens": 316,
+      "cost": 0.001239,
+      "seconds": 2.87,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 6,
+     "judge_tokens": 7482,
+     "judge_cost": 0.007318,
+     "rag": {
+      "answer": "Нет, вы не обязаны свидетельствовать против своего супруга — это прямо запрещено [ст.51]. Круг близких родственников, включая супруга, определяется федеральным законом [ст.51]. Кроме того, федеральным законом могут устанавливаться и иные случаи освобождения от обязанности давать показания [ст.51].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.51",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-51",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 51",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ст. 51, все факты подтверждены материалами.",
+      "prompt_tokens": 599,
+      "completion_tokens": 97,
+      "cost": 0.000269,
+      "seconds": 2.66,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, вы не обязаны свидетельствовать против своей жены. Согласно статье 51 Конституции РФ, никто не обязан свидетельствовать против себя самого, своего супруга и близких родственников, круг которых определяется федеральным законом.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.51",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-51",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 51",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.51",
+        "text": "Никто не обязан свидетельствовать против себя самого, своего супруга и близких родственников, круг которых определяется федеральным законом.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует ожиданию, факт подтверждён цитатой ст. 51.",
+      "prompt_tokens": 720,
+      "completion_tokens": 135,
+      "cost": 0.000343,
+      "seconds": 2.26,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 7,
+     "judge_tokens": 4331,
+     "judge_cost": 0.004035,
+     "rag": {
+      "answer": "В найденных статьях ответа нет: в приведённом фрагменте [ст.75] говорится лишь о формировании системы пенсионного обеспечения, индексации пенсий и социальных гарантиях, но конкретный пенсионный возраст не устанавливается.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 5,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует: ст.75 не устанавливает возраст; факты подтверждены.",
+      "prompt_tokens": 4646,
+      "completion_tokens": 263,
+      "cost": 0.001544,
+      "seconds": 2.97,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Не знаю: лучший фрагмент оценён реранкером на 5/10 — меньше 7. Уточните, пожалуйста, вопрос. Возможно, вас интересует: ст. 75 — Денежной единицей в Российской Федерации является рубль. Денежная эмиссия осуществляется исключительно Централ; ст. 39 — Каждому гарантируется социальное обеспечение по возрасту, в случае болезни, инвалидности, потери кормильца, дл; ст. 7 — Российская Федерация — социальное государство, политика которого направлена на создание условий, обеспечивающи.",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "лучший фрагмент оценён реранкером на 5/10 — меньше 7",
+      "clarify": [
+       {
+        "chunk_id": "ст.75",
+        "article": "75",
+        "hint": "Денежной единицей в Российской Федерации является рубль. Денежная эмиссия осуществляется исключительно Централ"
+       },
+       {
+        "chunk_id": "ст.39",
+        "article": "39",
+        "hint": "Каждому гарантируется социальное обеспечение по возрасту, в случае болезни, инвалидности, потери кормильца, дл"
+       },
+       {
+        "chunk_id": "ст.7",
+        "article": "7",
+        "hint": "Российская Федерация — социальное государство, политика которого направлена на создание условий, обеспечивающи"
+       }
+      ],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 5,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": false,
+      "correct": 2,
+      "support": "unsupported",
+      "note": "Отказ корректен, но материалы отсутствуют; вставки не подтверждены.",
+      "prompt_tokens": 4087,
+      "completion_tokens": 204,
+      "cost": 0.001328,
+      "seconds": 1.83,
+      "llm_calls": 1
+     }
+    },
+    {
+     "n": 8,
+     "judge_tokens": 2179,
+     "judge_cost": 0.002075,
+     "rag": {
+      "answer": "В найденных статьях ответа нет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "unsupported",
+      "note": "Отказ есть, но нет просьбы уточнить",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost": 0,
+      "seconds": 0.07,
+      "llm_calls": 0
+     },
+     "cited": {
+      "answer": "Не знаю: ни один фрагмент не прошёл порог релевантности — вопрос, похоже, не про Конституцию. Уточните, пожалуйста, что именно вы хотите узнать о Конституции.",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "ни один фрагмент не прошёл порог релевантности — вопрос, похоже, не про Конституцию",
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 2,
+      "support": "unsupported",
+      "note": "Не знает, просит уточнить, не называет сумму",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost": 0,
+      "seconds": 0.03,
+      "llm_calls": 0
+     }
+    },
+    {
+     "n": 9,
+     "judge_tokens": 1723,
+     "judge_cost": 0.000928,
+     "rag": {
+      "answer": "Срок полномочий Президента — шесть лет [ст.81], а одно и то же лицо не может занимать эту должность более двух сроков [ст.81]. При этом часть 3.1 статьи 81 устанавливает, что это ограничение применяется без учёта сроков, которые лицо уже занимало должность на момент вступления поправки в силу [ст.81]. Государственная Дума избирается сроком на пять лет [ст.96].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (3.1–4)",
+        "parts": "3.1–4"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.96",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-96",
+        "section": "Глава 5. Федеральное Собрание › Статья 96",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Перечислены сроки и поправка, уточнение не запрошено",
+      "prompt_tokens": 3500,
+      "completion_tokens": 233,
+      "cost": 0.001202,
+      "seconds": 2.54,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет, при этом одно и то же лицо не может занимать эту должность более двух сроков. Государственная Дума избирается сроком на пять лет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.96",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-96",
+        "section": "Глава 5. Федеральное Собрание › Статья 96",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.81#1",
+        "text": "1. Президент Российской Федерации избирается сроком на шесть лет гражданами Российской Федерации на основе всеобщего равного и прямого избирательного права при тайном голосовании.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "text": "3. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.96",
+        "text": "1. Государственная Дума избирается сроком на пять лет.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Перечислены сроки без уточнения расплывчатого вопроса",
+      "prompt_tokens": 3625,
+      "completion_tokens": 331,
+      "cost": 0.001343,
+      "seconds": 2.85,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 10,
+     "judge_tokens": 3637,
+     "judge_cost": 0.003645,
+     "rag": {
+      "answer": "В найденных статьях ответа нет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "unsupported",
+      "note": "Нет просьбы уточнить, не упоминает ст. 38",
+      "prompt_tokens": 203,
+      "completion_tokens": 8,
+      "cost": 6.4e-05,
+      "seconds": 1.05,
+      "llm_calls": 1
+     },
+     "cited": {
+      "answer": "Не знаю: кандидаты нашлись, но реранкер не счёл ни один относящимся к вопросу. Уточните, пожалуйста, вопрос. Возможно, вас интересует: ст. 38 — Материнство и детство, семья находятся под защитой государства..",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "кандидаты нашлись, но реранкер не счёл ни один относящимся к вопросу",
+      "clarify": [
+       {
+        "chunk_id": "ст.38",
+        "article": "38",
+        "hint": "Материнство и детство, семья находятся под защитой государства."
+       }
+      ],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 2,
+      "support": "unsupported",
+      "note": "Соответствует ожиданию, но ст. 38 не подтверждена",
+      "prompt_tokens": 203,
+      "completion_tokens": 8,
+      "cost": 6.4e-05,
+      "seconds": 0.75,
+      "llm_calls": 1
+     }
+    }
+   ],
+   "summary": {
+    "rag": {
+     "correct_sum": 17,
+     "correct_max": 20,
+     "answered": 10,
+     "with_sources": 8,
+     "with_quotes": 0,
+     "quotes": 0,
+     "rejected": 0,
+     "retried": 0,
+     "supported": 8,
+     "partial": 0,
+     "unsupported": 2,
+     "unknown_hit": 0,
+     "unknown_expected": 3,
+     "unknown_false": 0,
+     "source_ok": 6,
+     "prompt_tokens": 30833,
+     "completion_tokens": 1728,
+     "cost": 0.01023,
+     "llm_calls": 17
+    },
+    "cited": {
+     "correct_sum": 19,
+     "correct_max": 20,
+     "answered": 7,
+     "with_sources": 7,
+     "with_quotes": 7,
+     "quotes": 10,
+     "rejected": 0,
+     "retried": 0,
+     "supported": 5,
+     "partial": 2,
+     "unsupported": 0,
+     "unknown_hit": 2,
+     "unknown_expected": 3,
+     "unknown_false": 0,
+     "source_ok": 6,
+     "prompt_tokens": 31137,
+     "completion_tokens": 2204,
+     "cost": 0.01083,
+     "llm_calls": 16
+    }
+   },
+   "seconds": 143.5
+  },
+  {
+   "rows": [
+    {
+     "n": 1,
+     "judge_tokens": 1575,
+     "judge_cost": 0.000876,
+     "rag": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет [ст.81]. Одно и то же лицо не может занимать эту должность более двух сроков [ст.81]. При этом часть 3.1 статьи 81 уточняет, что это ограничение применяется без учёта сроков, которые лицо занимало должность на момент вступления в силу соответствующей поправки [ст.81].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.81#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (3.1–4)",
+        "parts": "3.1–4"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Основное верно; уточнение подтверждено материалами.",
+      "prompt_tokens": 5579,
+      "completion_tokens": 308,
+      "cost": 0.001846,
+      "seconds": 3.15,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.81#1",
+        "text": "1. Президент Российской Федерации избирается сроком на шесть лет гражданами Российской Федерации на основе всеобщего равного и прямого избирательного права при тайном голосовании.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "text": "3. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Обе цифры совпадают с ожиданием.",
+      "prompt_tokens": 5704,
+      "completion_tokens": 378,
+      "cost": 0.001956,
+      "seconds": 2.99,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 2,
+     "judge_tokens": 1583,
+     "judge_cost": 0.000767,
+     "rag": {
+      "answer": "Нет, не может. Государством гарантируется минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации [ст.75]. Это соответствует и принципу социального государства [ст.7], а также праву на вознаграждение за труд не ниже установленного федеральным законом МРОТ [ст.37].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.37",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-37",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 37",
+        "parts": "весь текст"
+       },
+       {
+        "chunk_id": "ст.7",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-7",
+        "section": "Глава 1. Основы конституционного строя › Статья 7",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует ожиданию, все ссылки подтверждены материалами.",
+      "prompt_tokens": 1736,
+      "completion_tokens": 109,
+      "cost": 0.000589,
+      "seconds": 2.36,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, минимальный размер оплаты труда не может быть ниже прожиточного минимума трудоспособного населения в целом по Российской Федерации. Конституция гарантирует, что государством обеспечивается минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.75",
+        "text": "Государством гарантируется минимальный размер оплаты труда не менее величины прожиточного минимума трудоспособного населения в целом по Российской Федерации.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Точно соответствует ожиданию, подтверждено цитатой ст.75.",
+      "prompt_tokens": 1857,
+      "completion_tokens": 168,
+      "cost": 0.000687,
+      "seconds": 2.07,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 3,
+     "judge_tokens": 1175,
+     "judge_cost": 0.000573,
+     "rag": {
+      "answer": "Конституция определяет брак как союз мужчины и женщины: в совместном ведении РФ и субъектов находится защита института брака именно в таком качестве [ст.72, п. «ж.1»].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.72#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-72",
+        "section": "Глава 3. Федеративное устройство › Статья 72 (1 п. а–ж.1)",
+        "parts": "1 п. а–ж.1"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует: брак как союз мужчины и женщины; защита в совместном ведении.",
+      "prompt_tokens": 5054,
+      "completion_tokens": 227,
+      "cost": 0.001615,
+      "seconds": 2.56,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Конституция относит защиту института брака к совместному ведению Российской Федерации и субъектов Российской Федерации. При этом брак определяется как союз мужчины и женщины.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.72#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-72",
+        "section": "Глава 3. Федеративное устройство › Статья 72 (1 п. а–ж.1)",
+        "parts": "1 п. а–ж.1"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.72#1",
+        "text": "ж.1) защита семьи, материнства, отцовства и детства; защита института брака как союза мужчины и женщины; создание условий для достойного воспитания детей в семье, а также для осуществления совершеннолетними детьми обязанности заботиться о родителях;",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует: защита брака в совместном ведении; брак — союз мужчины и женщины.",
+      "prompt_tokens": 5177,
+      "completion_tokens": 324,
+      "cost": 0.001755,
+      "seconds": 2.63,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 4,
+     "judge_tokens": 1710,
+     "judge_cost": 0.000741,
+     "rag": {
+      "answer": "Президент Российской Федерации назначает не более 30 представителей Российской Федерации в Совете Федерации, из которых не более семи могут быть назначены пожизненно [ст.95].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.95#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (1–3 п. а–в)",
+        "parts": "1–3 п. а–в"
+       },
+       {
+        "chunk_id": "ст.95#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (4–7)",
+        "parts": "4–7"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ст.95; лимиты 30 и семь подтверждены.",
+      "prompt_tokens": 6333,
+      "completion_tokens": 254,
+      "cost": 0.00199,
+      "seconds": 2.53,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации может назначить не более 30 представителей Российской Федерации в Совете Федерации, из которых не более семи могут быть назначены пожизненно.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.95#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-95",
+        "section": "Глава 5. Федеральное Собрание › Статья 95 (1–3 п. а–в)",
+        "parts": "1–3 п. а–в"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.95#1",
+        "text": "в) не более 30 представителей Российской Федерации, назначаемых Президентом Российской Федерации, из которых не более семи могут быть назначены пожизненно.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ст.95; лимиты 30 и семь подтверждены.",
+      "prompt_tokens": 6460,
+      "completion_tokens": 324,
+      "cost": 0.002101,
+      "seconds": 3.26,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 5,
+     "judge_tokens": 749,
+     "judge_cost": 0.000345,
+     "rag": {
+      "answer": "Нет. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению, а до судебного решения задержание не может превышать 48 часов [ст.22].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.22",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-22",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 22",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует статье 22 и ожиданию.",
+      "prompt_tokens": 3183,
+      "completion_tokens": 242,
+      "cost": 0.001125,
+      "seconds": 2.38,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, согласно Конституции, арест, заключение под стражу и содержание под стражей допускаются только по судебному решению. До судебного решения лицо не может быть подвергнуто задержанию на срок более 48 часов, то есть более двух суток.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.22",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-22",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 22",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.22",
+        "text": "2. Арест, заключение под стражу и содержание под стражей допускаются только по судебному решению. До судебного решения лицо не может быть подвергнуто задержанию на срок более 48 часов.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует статье 22 и ожиданию.",
+      "prompt_tokens": 3304,
+      "completion_tokens": 324,
+      "cost": 0.001248,
+      "seconds": 3.07,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 6,
+     "judge_tokens": 1659,
+     "judge_cost": 0.001363,
+     "rag": {
+      "answer": "Нет, вы не обязаны свидетельствовать против своего супруга — это прямо закреплено в ч. 1 ст. 51 Конституции [ст.51]. Круг близких родственников определяется федеральным законом [ст.51]. Кроме того, федеральным законом могут устанавливаться и иные случаи освобождения от обязанности давать свидетельские показания [ст.51].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.51",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-51",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 51",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Полностью соответствует ст.51, включая п.2.",
+      "prompt_tokens": 599,
+      "completion_tokens": 103,
+      "cost": 0.000275,
+      "seconds": 1.68,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Нет, вы не обязаны свидетельствовать против своей жены. Согласно статье 51 Конституции, никто не обязан свидетельствовать против себя самого, своего супруга и близких родственников, круг которых определяется федеральным законом.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.51",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-51",
+        "section": "Глава 2. Права и свободы человека и гражданина › Статья 51",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.51",
+        "text": "1. Никто не обязан свидетельствовать против себя самого, своего супруга и близких родственников, круг которых определяется федеральным законом.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Соответствует ст.51 п.1, без выдумок.",
+      "prompt_tokens": 720,
+      "completion_tokens": 136,
+      "cost": 0.000344,
+      "seconds": 2.09,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 7,
+     "judge_tokens": 3980,
+     "judge_cost": 0.003633,
+     "rag": {
+      "answer": "В найденных статьях ответа нет. Статья 75 лишь закрепляет формирование системы пенсионного обеспечения на принципах всеобщности, справедливости и солидарности поколений и индексацию пенсий не реже одного раза в год [ст.75]. Конкретный пенсионный возраст Конституцией не устанавливается.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.75",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-75",
+        "section": "Глава 3. Федеративное устройство › Статья 75",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 5,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": true,
+      "correct": 2,
+      "support": "supported",
+      "note": "Верно: возраст Конституцией не установлен; ст.75 подтверждает пенсионное обеспечение.",
+      "prompt_tokens": 4646,
+      "completion_tokens": 282,
+      "cost": 0.001565,
+      "seconds": 2.82,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Не знаю: лучший фрагмент оценён реранкером на 5/10 — меньше 7. Уточните, пожалуйста, вопрос. Возможно, вас интересует: ст. 75 — Денежной единицей в Российской Федерации является рубль. Денежная эмиссия осуществляется исключительно Централ; ст. 39 — Каждому гарантируется социальное обеспечение по возрасту, в случае болезни, инвалидности, потери кормильца, дл; ст. 7 — Российская Федерация — социальное государство, политика которого направлена на создание условий, обеспечивающи.",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "лучший фрагмент оценён реранкером на 5/10 — меньше 7",
+      "clarify": [
+       {
+        "chunk_id": "ст.75",
+        "article": "75",
+        "hint": "Денежной единицей в Российской Федерации является рубль. Денежная эмиссия осуществляется исключительно Централ"
+       },
+       {
+        "chunk_id": "ст.39",
+        "article": "39",
+        "hint": "Каждому гарантируется социальное обеспечение по возрасту, в случае болезни, инвалидности, потери кормильца, дл"
+       },
+       {
+        "chunk_id": "ст.7",
+        "article": "7",
+        "hint": "Российская Федерация — социальное государство, политика которого направлена на создание условий, обеспечивающи"
+       }
+      ],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 5,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": false,
+      "correct": 2,
+      "support": "unsupported",
+      "note": "Не знаю с уточнением; возраст не назван; цитаты без материалов.",
+      "prompt_tokens": 4087,
+      "completion_tokens": 204,
+      "cost": 0.001328,
+      "seconds": 1.52,
+      "llm_calls": 1
+     }
+    },
+    {
+     "n": 8,
+     "judge_tokens": 3158,
+     "judge_cost": 0.003152,
+     "rag": {
+      "answer": "В найденных статьях ответа нет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "n/a",
+      "note": "Частично: не называет сумму, но не просит уточнить.",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost": 0,
+      "seconds": 0.08,
+      "llm_calls": 0
+     },
+     "cited": {
+      "answer": "Не знаю: ни один фрагмент не прошёл порог релевантности — вопрос, похоже, не про Конституцию. Уточните, пожалуйста, что именно вы хотите узнать о Конституции.",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "ни один фрагмент не прошёл порог релевантности — вопрос, похоже, не про Конституцию",
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 2,
+      "support": "n/a",
+      "note": "Соответствует ожиданию: отказ, уточнение, без суммы.",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "cost": 0,
+      "seconds": 0.03,
+      "llm_calls": 0
+     }
+    },
+    {
+     "n": 9,
+     "judge_tokens": 1683,
+     "judge_cost": 0.000884,
+     "rag": {
+      "answer": "Срок полномочий Президента — шесть лет [ст.81], а одно и то же лицо не может занимать эту должность более двух сроков [ст.81]. При этом часть 3.1 статьи 81 устанавливает, что это ограничение применяется без учёта сроков, которые лицо уже занимало должность на момент вступления поправки в силу [ст.81]. Государственная Дума избирается сроком на пять лет [ст.96].",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#2",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (3.1–4)",
+        "parts": "3.1–4"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.96",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-96",
+        "section": "Глава 5. Федеральное Собрание › Статья 96",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Перечислил сроки, но не уточнил, о каких сроках вопрос",
+      "prompt_tokens": 3500,
+      "completion_tokens": 233,
+      "cost": 0.001202,
+      "seconds": 2.94,
+      "llm_calls": 2
+     },
+     "cited": {
+      "answer": "Президент Российской Федерации избирается сроком на шесть лет, при этом одно и то же лицо не может занимать эту должность более двух сроков. Государственная Дума избирается сроком на пять лет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [
+       {
+        "chunk_id": "ст.81#1",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-81",
+        "section": "Глава 4. Президент Российской Федерации › Статья 81 (1–3)",
+        "parts": "1–3"
+       },
+       {
+        "chunk_id": "ст.96",
+        "source": "http://www.kremlin.ru/acts/constitution/item#article-96",
+        "section": "Глава 5. Федеральное Собрание › Статья 96",
+        "parts": "весь текст"
+       }
+      ],
+      "quotes": [
+       {
+        "chunk_id": "ст.81#1",
+        "text": "1. Президент Российской Федерации избирается сроком на шесть лет гражданами Российской Федерации на основе всеобщего равного и прямого избирательного права при тайном голосовании.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.81#1",
+        "text": "3. Одно и то же лицо не может занимать должность Президента Российской Федерации более двух сроков.",
+        "status": "verified"
+       },
+       {
+        "chunk_id": "ст.96",
+        "text": "1. Государственная Дума избирается сроком на пять лет.",
+        "status": "verified"
+       }
+      ],
+      "rejected": [],
+      "attempts": 1,
+      "best_rerank": 10,
+      "has_sources": true,
+      "has_quotes": true,
+      "source_ok": null,
+      "correct": 1,
+      "support": "supported",
+      "note": "Перечислил несколько сроков, уточнения не запросил",
+      "prompt_tokens": 3625,
+      "completion_tokens": 331,
+      "cost": 0.001343,
+      "seconds": 3.15,
+      "llm_calls": 2
+     }
+    },
+    {
+     "n": 10,
+     "judge_tokens": 3235,
+     "judge_cost": 0.003202,
+     "rag": {
+      "answer": "В найденных статьях ответа нет.",
+      "unknown": false,
+      "stage": "answer",
+      "reason": null,
+      "clarify": [],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 1,
+      "support": "n/a",
+      "note": "Отказ есть, но нет прямого «не знаю» и просьбы уточнить.",
+      "prompt_tokens": 203,
+      "completion_tokens": 8,
+      "cost": 6.4e-05,
+      "seconds": 0.91,
+      "llm_calls": 1
+     },
+     "cited": {
+      "answer": "Не знаю: кандидаты нашлись, но реранкер не счёл ни один относящимся к вопросу. Уточните, пожалуйста, вопрос. Возможно, вас интересует: ст. 38 — Материнство и детство, семья находятся под защитой государства..",
+      "unknown": true,
+      "stage": "gate",
+      "reason": "кандидаты нашлись, но реранкер не счёл ни один относящимся к вопросу",
+      "clarify": [
+       {
+        "chunk_id": "ст.38",
+        "article": "38",
+        "hint": "Материнство и детство, семья находятся под защитой государства."
+       }
+      ],
+      "sources": [],
+      "quotes": [],
+      "rejected": [],
+      "attempts": null,
+      "best_rerank": null,
+      "has_sources": false,
+      "has_quotes": false,
+      "source_ok": null,
+      "correct": 2,
+      "support": "unsupported",
+      "note": "Сказал не знаю и просит уточнить; цитата ст. 38 без материалов.",
+      "prompt_tokens": 203,
+      "completion_tokens": 8,
+      "cost": 6.4e-05,
+      "seconds": 0.94,
+      "llm_calls": 1
+     }
+    }
+   ],
+   "summary": {
+    "rag": {
+     "correct_sum": 17,
+     "correct_max": 20,
+     "answered": 10,
+     "with_sources": 8,
+     "with_quotes": 0,
+     "quotes": 0,
+     "rejected": 0,
+     "retried": 0,
+     "supported": 8,
+     "partial": 0,
+     "unsupported": 0,
+     "unknown_hit": 0,
+     "unknown_expected": 3,
+     "unknown_false": 0,
+     "source_ok": 6,
+     "prompt_tokens": 30833,
+     "completion_tokens": 1766,
+     "cost": 0.01027,
+     "llm_calls": 17
+    },
+    "cited": {
+     "correct_sum": 19,
+     "correct_max": 20,
+     "answered": 7,
+     "with_sources": 7,
+     "with_quotes": 7,
+     "quotes": 10,
+     "rejected": 0,
+     "retried": 0,
+     "supported": 7,
+     "partial": 0,
+     "unsupported": 0,
+     "unknown_hit": 2,
+     "unknown_expected": 3,
+     "unknown_false": 0,
+     "source_ok": 6,
+     "prompt_tokens": 31137,
+     "completion_tokens": 2197,
+     "cost": 0.01083,
+     "llm_calls": 16
+    }
+   },
+   "seconds": 105.7
+  }
+ ],
+ "judge_tokens": 77364,
+ "judge_cost": 0.06354
+}
