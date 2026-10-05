@@ -66,3 +66,5 @@ venv/
 25-rag-chat/chat.db*
 25-rag-chat/agents.db*
 25-rag-chat/custom_roles.json
+26-local-llm/agents.db*
+26-local-llm/custom_roles.json

@@ -1,0 +1,373 @@
+{
+ "model": "qwen2.5:3b",
+ "info": {
+  "name": "qwen2.5:3b",
+  "size_gb": 1.93,
+  "params": "3.1B"
+ },
+ "ollama": "0.34.4",
+ "date": "2026-10-05 17:39",
+ "cold": {
+  "loaded_before": [],
+  "loaded_after": [
+   {
+    "name": "qwen2.5:3b",
+    "vram_gb": 2.16
+   }
+  ],
+  "cold": {
+   "text": "OK",
+   "model": "qwen2.5:3b",
+   "prompt_tokens": 40,
+   "output_tokens": 2,
+   "load_s": 1.32,
+   "prompt_s": 0.23,
+   "eval_s": 0.04,
+   "total_s": 1.59,
+   "tok_per_s": 48.0,
+   "done_reason": "stop"
+  },
+  "warm": {
+   "text": "OK",
+   "model": "qwen2.5:3b",
+   "prompt_tokens": 40,
+   "output_tokens": 2,
+   "load_s": 0.0,
+   "prompt_s": 0.04,
+   "eval_s": 0.03,
+   "total_s": 0.08,
+   "tok_per_s": 57.3,
+   "done_reason": "stop"
+  }
+ },
+ "paths": {
+  "prompt": "Сколько будет 2+2? Ответь только числом.",
+  "cli": {
+   "command": "ollama run qwen2.5:3b \"Сколько будет 2+2? Ответь только числом.\"",
+   "answer": "4",
+   "seconds": 0.25
+  },
+  "http": {
+   "url": "http://localhost:11434/api/generate",
+   "answer": "4",
+   "eval_count": 2
+  },
+  "python": {
+   "answer": "4",
+   "total_s": 0.07,
+   "tok_per_s": 57.4
+  }
+ },
+ "tasks": [
+  {
+   "level": 1,
+   "name": "простой факт",
+   "prompt": "Столица Австралии? Ответь одним словом.",
+   "check": "substring",
+   "expect": "Канберр",
+   "runs": [
+    {
+     "text": "Брисбен",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 45,
+     "output_tokens": 5,
+     "load_s": 0.0,
+     "prompt_s": 0.12,
+     "eval_s": 0.14,
+     "total_s": 0.27,
+     "tok_per_s": 34.7,
+     "done_reason": "stop",
+     "ok": false,
+     "note": ""
+    },
+    {
+     "text": "Брисбен",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 45,
+     "output_tokens": 5,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 0.14,
+     "total_s": 0.18,
+     "tok_per_s": 35.2,
+     "done_reason": "stop",
+     "ok": false,
+     "note": ""
+    },
+    {
+     "text": "Брисбен",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 45,
+     "output_tokens": 5,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 0.14,
+     "total_s": 0.18,
+     "tok_per_s": 34.6,
+     "done_reason": "stop",
+     "ok": false,
+     "note": ""
+    }
+   ],
+   "identical": true,
+   "passed": 0
+  },
+  {
+   "level": 2,
+   "name": "задача в 3 шага",
+   "prompt": "В корзине 23 яблока. Съели 7, потом докупили втрое больше, чем съели. Сколько яблок стало? Реши по шагам, в конце напиши «Ответ: N».",
+   "check": "answer",
+   "expect": "37",
+   "runs": [
+    {
+     "text": "Давайте решим это по шагам:\n\n1) Начальное количество яблок: 23\n\n2) Съели 7 яблок, значит осталось:\n   23 - 7 = 16 яблок\n\n3) Докупили втрое больше, чем съели, то есть:\n   7 * 3 = 21 яблоко\n\n4) После покупки количество яблок стало:\n   16 + 21 = 37 яблок\n\nОтвет: 37",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 86,
+     "output_tokens": 117,
+     "load_s": 0.0,
+     "prompt_s": 0.22,
+     "eval_s": 4.11,
+     "total_s": 4.33,
+     "tok_per_s": 28.5,
+     "done_reason": "stop",
+     "ok": true,
+     "note": "ответ модели: 37"
+    },
+    {
+     "text": "Давайте решим это по шагам:\n\n1) Начальное количество яблок: 23\n\n2) Съели 7 яблок, значит осталось:\n   23 - 7 = 16 яблок\n\n3) Докупили втрое больше, чем съели, то есть:\n   7 * 3 = 21 яблоко\n\n4) После покупки количество яблок стало:\n   16 + 21 = 37 яблок\n\nОтвет: 37",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 86,
+     "output_tokens": 117,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 4.07,
+     "total_s": 4.11,
+     "tok_per_s": 28.7,
+     "done_reason": "stop",
+     "ok": true,
+     "note": "ответ модели: 37"
+    },
+    {
+     "text": "Давайте решим это по шагам:\n\n1) Начальное количество яблок: 23\n\n2) Съели 7 яблок, значит осталось:\n   23 - 7 = 16 яблок\n\n3) Докупили втрое больше, чем съели, то есть:\n   7 * 3 = 21 яблоко\n\n4) После покупки количество яблок стало:\n   16 + 21 = 37 яблок\n\nОтвет: 37",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 86,
+     "output_tokens": 117,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 4.14,
+     "total_s": 4.18,
+     "tok_per_s": 28.2,
+     "done_reason": "stop",
+     "ok": true,
+     "note": "ответ модели: 37"
+    }
+   ],
+   "identical": true,
+   "passed": 3
+  },
+  {
+   "level": 3,
+   "name": "код + тесты",
+   "prompt": "Напиши функцию на Python is_palindrome(s) -> bool, которая игнорирует регистр, пробелы и знаки препинания и работает с русским текстом. Только код, без объяснений.",
+   "check": "code",
+   "expect": "5 assert-ов проходят",
+   "runs": [
+    {
+     "text": "```python\nimport re\n\ndef is_palindrome(s: str) -> bool:\n    s = re.sub(r'\\s|[^a-zA-Z0-9]', '', s.lower())\n    return s == s[::-1]\n```",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 79,
+     "output_tokens": 48,
+     "load_s": 0.0,
+     "prompt_s": 0.22,
+     "eval_s": 1.7,
+     "total_s": 1.93,
+     "tok_per_s": 28.3,
+     "done_reason": "stop",
+     "ok": false,
+     "note": "assert not is_palindrome(\"Привет, мир\")"
+    },
+    {
+     "text": "```python\nimport re\n\ndef is_palindrome(s: str) -> bool:\n    s = re.sub(r'\\s|[^a-zA-Z0-9]', '', s.lower())\n    return s == s[::-1]\n```",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 79,
+     "output_tokens": 48,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 1.67,
+     "total_s": 1.71,
+     "tok_per_s": 28.8,
+     "done_reason": "stop",
+     "ok": false,
+     "note": "assert not is_palindrome(\"Привет, мир\")"
+    },
+    {
+     "text": "```python\nimport re\n\ndef is_palindrome(s: str) -> bool:\n    s = re.sub(r'\\s|[^a-zA-Z0-9]', '', s.lower())\n    return s == s[::-1]\n```",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 79,
+     "output_tokens": 48,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 1.65,
+     "total_s": 1.69,
+     "tok_per_s": 29.1,
+     "done_reason": "stop",
+     "ok": false,
+     "note": "assert not is_palindrome(\"Привет, мир\")"
+    }
+   ],
+   "identical": true,
+   "passed": 0
+  },
+  {
+   "level": 4,
+   "name": "логическая ловушка",
+   "prompt": "У Маши 3 брата. У каждого брата 2 сестры. Сколько сестёр у Маши? Подумай и в конце напиши «Ответ: N».",
+   "check": "answer",
+   "expect": "1",
+   "runs": [
+    {
+     "text": "У Маши 3 брата. У каждого брата 2 сестры, значит в семье в общей сложности 3*2=6 сестер. Машины сестёр в семье 6. Машины сестёр у Маши 2 (так как Машина сама является сестрой). \n\nОтвет: 2",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 74,
+     "output_tokens": 85,
+     "load_s": 0.0,
+     "prompt_s": 0.22,
+     "eval_s": 2.96,
+     "total_s": 3.19,
+     "tok_per_s": 28.7,
+     "done_reason": "stop",
+     "ok": false,
+     "note": "ответ модели: 2"
+    },
+    {
+     "text": "У Маши 3 брата. У каждого брата 2 сестры, значит в семье в общей сложности 3*2=6 сестер. Машины сестёр в семье 6. Машины сестёр у Маши 2 (так как Машина сама является сестрой). \n\nОтвет: 2",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 74,
+     "output_tokens": 85,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 2.94,
+     "total_s": 2.98,
+     "tok_per_s": 28.9,
+     "done_reason": "stop",
+     "ok": false,
+     "note": "ответ модели: 2"
+    },
+    {
+     "text": "У Маши 3 брата. У каждого брата 2 сестры, значит в семье в общей сложности 3*2=6 сестер. Машины сестёр в семье 6. Машины сестёр у Маши 2 (так как Машина сама является сестрой). \n\nОтвет: 2",
+     "model": "qwen2.5:3b",
+     "prompt_tokens": 74,
+     "output_tokens": 85,
+     "load_s": 0.0,
+     "prompt_s": 0.04,
+     "eval_s": 2.94,
+     "total_s": 2.98,
+     "tok_per_s": 28.9,
+     "done_reason": "stop",
+     "ok": false,
+     "note": "ответ модели: 2"
+    }
+   ],
+   "identical": true,
+   "passed": 0
+  }
+ ],
+ "recheck": {
+  "language": {
+   "ru": "Брисбен",
+   "en": "Canberra"
+  },
+  "hot": {
+   "простой факт": [
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    },
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    },
+    {
+     "ok": false,
+     "answer": "Аделаида"
+    },
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    },
+    {
+     "ok": false,
+     "answer": "Анкара не является столицей Ав"
+    },
+    {
+     "ok": false,
+     "answer": "Аудио"
+    },
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    },
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    },
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    },
+    {
+     "ok": false,
+     "answer": "Брисбен"
+    }
+   ],
+   "логическая ловушка": [
+    {
+     "ok": false,
+     "answer": "4"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    },
+    {
+     "ok": false,
+     "answer": "5"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    },
+    {
+     "ok": false,
+     "answer": "5"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    },
+    {
+     "ok": false,
+     "answer": "2"
+    }
+   ]
+  }
+ },
+ "memory": [
+  {
+   "name": "qwen2.5:3b",
+   "vram_gb": 2.16
+  }
+ ]
+}
