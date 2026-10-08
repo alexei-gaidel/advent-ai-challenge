@@ -71,3 +71,6 @@ venv/
 28-local-rag/index.db*
 28-local-rag/agents.db*
 28-local-rag/custom_roles.json
+29-local-optimization/index.db*
+29-local-optimization/agents.db*
+29-local-optimization/custom_roles.json
