@@ -1,0 +1,384 @@
+{
+ "date": "2026-10-12 12:24",
+ "url": "http://192.168.0.181:8030",
+ "model": "qwen2.5:3b",
+ "ollama": "0.34.4",
+ "limits": {
+  "context": 4096,
+  "max_output": 512,
+  "inflight": 2,
+  "queue": 6,
+  "owner_rpm": 10,
+  "loadtest_rpm": 600
+ },
+ "network": {
+  "health": {
+   "status": 200,
+   "seconds": 0.0,
+   "body": {
+    "status": "ok",
+    "model": "qwen2.5:3b",
+    "ollama": "0.34.4"
+   }
+  },
+  "page": 200,
+  "ollama_lan": "закрыт ([Errno 61] Connection refused)",
+  "ollama_local": "открыт (200)"
+ },
+ "auth": [
+  {
+   "case": "без ключа",
+   "status": 401,
+   "error": "invalid_api_key"
+  },
+  {
+   "case": "чужой ключ",
+   "status": 401,
+   "error": "invalid_api_key"
+  },
+  {
+   "case": "свой ключ",
+   "status": 200,
+   "error": ""
+  },
+  {
+   "case": "/stats без ключа",
+   "status": 401,
+   "error": "invalid_api_key"
+  }
+ ],
+ "load": {
+  "waves": [
+   {
+    "n": 1,
+    "codes": {
+     "200": 1
+    },
+    "ok": 1,
+    "right": 1,
+    "wall_s": 4.64,
+    "p50": 4.64,
+    "p95": 4.64,
+    "max": 4.64,
+    "queue_wait_max": 0.0,
+    "busy_reply_s": null,
+    "tok_per_s": 27.2,
+    "peak_running": 1,
+    "peak_waiting": 0,
+    "rps": 0.22
+   },
+   {
+    "n": 4,
+    "codes": {
+     "200": 4
+    },
+    "ok": 4,
+    "right": 4,
+    "wall_s": 17.43,
+    "p50": 12.97,
+    "p95": 17.42,
+    "max": 17.42,
+    "queue_wait_max": 8.76,
+    "busy_reply_s": null,
+    "tok_per_s": 27.9,
+    "peak_running": 2,
+    "peak_waiting": 2,
+    "rps": 0.23
+   },
+   {
+    "n": 8,
+    "codes": {
+     "200": 8
+    },
+    "ok": 8,
+    "right": 8,
+    "wall_s": 35.39,
+    "p50": 21.87,
+    "p95": 35.39,
+    "max": 35.39,
+    "queue_wait_max": 26.34,
+    "busy_reply_s": null,
+    "tok_per_s": 27.4,
+    "peak_running": 2,
+    "peak_waiting": 6,
+    "rps": 0.23
+   },
+   {
+    "n": 12,
+    "codes": {
+     "200": 8,
+     "503": 4
+    },
+    "ok": 8,
+    "right": 8,
+    "wall_s": 33.83,
+    "p50": 21.19,
+    "p95": 33.83,
+    "max": 33.83,
+    "queue_wait_max": 25.39,
+    "busy_reply_s": 0.01,
+    "tok_per_s": 28.7,
+    "peak_running": 2,
+    "peak_waiting": 6,
+    "rps": 0.24
+   }
+  ],
+  "sequential": {
+   "n": 30,
+   "codes": {
+    "200": 30
+   },
+   "right": 30,
+   "p50": 4.29,
+   "max": 4.43,
+   "first10_mean": 4.28,
+   "last10_mean": 4.27
+  }
+ },
+ "rate": {
+  "rpm": 10,
+  "burst": 3,
+  "rows": [
+   {
+    "i": 1,
+    "t": 0.28,
+    "status": 200,
+    "retry_after": null,
+    "remaining": "2"
+   },
+   {
+    "i": 2,
+    "t": 0.4,
+    "status": 200,
+    "retry_after": null,
+    "remaining": "1"
+   },
+   {
+    "i": 3,
+    "t": 0.51,
+    "status": 200,
+    "retry_after": null,
+    "remaining": "0"
+   },
+   {
+    "i": 4,
+    "t": 0.51,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 5,
+    "t": 0.51,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 6,
+    "t": 0.51,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 7,
+    "t": 0.51,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 8,
+    "t": 0.51,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 9,
+    "t": 0.51,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 10,
+    "t": 0.52,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 11,
+    "t": 0.52,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 12,
+    "t": 0.52,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 13,
+    "t": 0.52,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 14,
+    "t": 0.52,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   },
+   {
+    "i": 15,
+    "t": 0.52,
+    "status": 429,
+    "retry_after": "6",
+    "remaining": null
+   }
+  ],
+  "ok": 3,
+  "limited": 12,
+  "retry_after": 6,
+  "after_wait": 200
+ },
+ "context": {
+  "ollama_direct": {
+   "chars": 18622,
+   "prompt_tokens": 2050,
+   "answer": "Федерация",
+   "found": false,
+   "seconds": 0.24
+  },
+  "gateway_big": {
+   "status": 413,
+   "error": "context_length_exceeded",
+   "seconds": 0.0,
+   "message": "промпт ≈5680 токенов + ответ 20 > окна 4096. Сократите историю или текст (на промпт остаётся ≈4076)"
+  },
+  "gateway_fit": {
+   "status": 200,
+   "estimate": 3773,
+   "real": 3467,
+   "answer": "ФИАЛКА-7392",
+   "found": true,
+   "seconds": 0.51
+  },
+  "max_tokens": {
+   "status": 200,
+   "asked": 5000,
+   "got": 512,
+   "clipped": true,
+   "finish": "length",
+   "seconds": 18.36
+  },
+  "many_messages": {
+   "status": 413,
+   "error": "too_many_messages"
+  },
+  "big_body": {
+   "status": 413,
+   "error": "body_too_large"
+  },
+  "broken_json": {
+   "status": 400,
+   "error": "invalid_json"
+  }
+ },
+ "load_parallel2": {
+  "waves": [
+   {
+    "n": 1,
+    "codes": {
+     "200": 1
+    },
+    "ok": 1,
+    "right": 1,
+    "wall_s": 4.45,
+    "p50": 4.44,
+    "p95": 4.44,
+    "max": 4.44,
+    "queue_wait_max": 0.0,
+    "busy_reply_s": null,
+    "tok_per_s": 28.5,
+    "peak_running": 1,
+    "peak_waiting": 0,
+    "rps": 0.22
+   },
+   {
+    "n": 4,
+    "codes": {
+     "200": 4
+    },
+    "ok": 4,
+    "right": 4,
+    "wall_s": 17.78,
+    "p50": 17.77,
+    "p95": 17.78,
+    "max": 17.78,
+    "queue_wait_max": 8.86,
+    "busy_reply_s": null,
+    "tok_per_s": 13.6,
+    "peak_running": 2,
+    "peak_waiting": 2,
+    "rps": 0.22
+   },
+   {
+    "n": 8,
+    "codes": {
+     "200": 8
+    },
+    "ok": 8,
+    "right": 8,
+    "wall_s": 35.36,
+    "p50": 26.49,
+    "p95": 35.35,
+    "max": 35.35,
+    "queue_wait_max": 26.49,
+    "busy_reply_s": null,
+    "tok_per_s": 13.7,
+    "peak_running": 2,
+    "peak_waiting": 6,
+    "rps": 0.23
+   },
+   {
+    "n": 12,
+    "codes": {
+     "200": 8,
+     "503": 4
+    },
+    "ok": 8,
+    "right": 8,
+    "wall_s": 35.55,
+    "p50": 26.68,
+    "p95": 35.55,
+    "max": 35.55,
+    "queue_wait_max": 26.67,
+    "busy_reply_s": 0.04,
+    "tok_per_s": 13.6,
+    "peak_running": 2,
+    "peak_waiting": 6,
+    "rps": 0.23
+   }
+  ],
+  "sequential": {
+   "n": 30,
+   "codes": {
+    "200": 30
+   },
+   "right": 30,
+   "p50": 4.18,
+   "max": 4.24,
+   "first10_mean": 4.19,
+   "last10_mean": 4.18
+  }
+ }
+}
