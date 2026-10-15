@@ -1,6 +1,7 @@
 """AI-ревью PR: diff → RAG (документация + код) → DeepSeek → комментарий в PR.
 
     python3 review.py --github                    # в GitHub Actions: событие PR → комментарий
+    python3 review.py --warm                      # только эмбеддинги документации в кеш (push в main)
     python3 review.py --base main --head HEAD     # локально: ревью ветки, Markdown в stdout
     python3 review.py --base main --no-rag        # то же без контекста проекта
     python3 review.py --base main --no-pin        # правила CLAUDE.md только через поиск
@@ -58,12 +59,20 @@ def main():
     parser.add_argument("--base")
     parser.add_argument("--head", default="HEAD")
     parser.add_argument("--no-rag", action="store_true")
+    parser.add_argument("--warm", action="store_true",
+                        help="посчитать векторы документации в кеш и выйти, без LLM")
     parser.add_argument("--search", choices=["auto", "embed", "bm25"], default="auto")
     parser.add_argument("--no-pin", action="store_true",
                         help="не закреплять правила CLAUDE.md, только поиск")
     args = parser.parse_args()
 
     log = lambda text: print(text, file=sys.stderr, flush=True)   # stdout — только Markdown
+    if args.warm:
+        # Кеш Actions, сохранённый в ветке PR, другим PR не виден — только кеш из main.
+        # Поэтому main прогревает векторы документации, а PR докладывают лишь свой код.
+        retriever = rag.Retriever(pathlib.Path(args.repo), [], mode="embed", log=log)
+        log(f"прогрев: {retriever.stats}")
+        return 0
     pr = None
     if args.github:
         pr = github.event()

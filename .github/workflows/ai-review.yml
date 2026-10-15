@@ -10,18 +10,28 @@ name: AI-ревью
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
+  # Прогрев кешей в main: кеш, сохранённый в ветке PR, другим PR не виден (scope GitHub),
+  # а кеш из main — виден всем. Без этого каждый новый PR эмбеддит ~400 чанков на CPU ~9 мин.
+  push:
+    branches: [main]
+    paths:
+      - "**/README.md"
+      - "CLAUDE.md"
+      - "31-dev-assistant/docs/**"
+      - "32-code-review/*.py"
+      - ".github/workflows/ai-review.yml"
 
 permissions:
   contents: read
   pull-requests: write
 
 concurrency:
-  group: ai-review-${{ github.event.pull_request.number }}
+  group: ai-review-${{ github.event.pull_request.number || 'main' }}
   cancel-in-progress: true
 
 jobs:
   review:
-    if: github.event.pull_request.draft == false
+    if: github.event_name == 'push' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -53,14 +63,19 @@ jobs:
           ollama pull bge-m3
           ollama list | grep -q '^bge-m3' || { echo "::warning::bge-m3 не скачалась — ревью уйдёт на BM25"; exit 1; }
 
+      - name: Прогрев векторов документации
+        if: github.event_name == 'push'
+        run: python3 32-code-review/review.py --warm
+
       - name: Ревью
+        if: github.event_name == 'pull_request'
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 32-code-review/review.py --github > /dev/null
 
       - name: JSON ревью — артефактом
-        if: always()
+        if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: ai-review-${{ github.event.pull_request.number }}
