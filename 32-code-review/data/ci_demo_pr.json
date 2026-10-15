@@ -1,0 +1,74 @@
+{
+ "pr": {
+  "number": 2,
+  "repo": "alexei-gaidel/advent-ai-challenge",
+  "base": "0f6765bd19e0aaaad180585e76379193fc2fc52e",
+  "head": "ed33659dfda013a1ad72668577ba367174eaf580",
+  "title": "Демо для задания 32: /grep, /explain, /api/summary, fetch_docs",
+  "url": "https://github.com/alexei-gaidel/advent-ai-challenge/pull/2"
+ },
+ "runs": [
+  {
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": null,
+    "key-leak": 1,
+    "timeout-not-caught": 15,
+    "web-boundary": 7,
+    "requests-dep": 5
+   },
+   "extra": {
+    "4": "valid",
+    "6": "valid",
+    "8": "valid",
+    "9": "valid",
+    "10": "valid",
+    "11": "valid",
+    "12": "valid",
+    "13": "valid",
+    "14": "valid",
+    "16": "valid",
+    "17": "valid"
+   },
+   "findings": 17,
+   "search": "bge-m3",
+   "tokens": 10574,
+   "cost": 0.00442,
+   "seconds": 557.1,
+   "line_ok": 17,
+   "run": "38693418693 попытка 1",
+   "embed": "405 из 405 заново, 541 с"
+  },
+  {
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": 13,
+    "key-leak": 1,
+    "timeout-not-caught": 15,
+    "web-boundary": 7,
+    "requests-dep": 5
+   },
+   "extra": {
+    "4": "valid",
+    "6": "valid",
+    "8": "valid",
+    "9": "valid",
+    "10": "valid",
+    "11": "valid",
+    "12": "valid",
+    "14": "valid",
+    "16": "valid"
+   },
+   "findings": 16,
+   "search": "bge-m3",
+   "tokens": 10666,
+   "cost": 0.004521,
+   "seconds": 18.3,
+   "line_ok": 16,
+   "run": "38693418693 попытка 2",
+   "embed": "всё из кеша"
+  }
+ ]
+}
