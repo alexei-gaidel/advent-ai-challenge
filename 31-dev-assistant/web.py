@@ -14,6 +14,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import assistant as dev
+import providers
 
 PORT = 8031
 BOT = None
@@ -198,6 +199,17 @@ class Handler(BaseHTTPRequestHandler):
             payload = json.loads(self.rfile.read(length) or b"{}")
             if not isinstance(payload, dict):
                 raise ValueError("ожидался JSON-объект")
+            if self.path == "/api/summary":
+                question = str(payload.get("text") or "")
+                hits, _ = bot().index.search(question)
+                context = "\n\n".join(h["text"] for h in hits)
+                messages = [{"role": "system", "content": "Кратко перескажи фрагменты."},
+                            {"role": "user", "content": context + "\n\n" + question}]
+                reply = providers.post("https://api.deepseek.com/chat/completions",
+                                       providers.get_api_key("DEEPSEEK_API_KEY"),
+                                       {"model": "deepseek-chat", "messages": messages})
+                self._json({"answer": reply["choices"][0]["message"]["content"]})
+                return
             if self.path != "/api/ask":
                 self._json({"error": "не найдено"}, 404)
                 return

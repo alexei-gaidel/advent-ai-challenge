@@ -92,6 +92,25 @@ TOOLS = [
             "required": ["path"],
         },
     },
+    {
+        "name": "grep",
+        "description": "Поиск строки по файлам проекта, как grep -rn.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"query": {"type": "string", "description": "Что искать"}},
+            "required": ["query"],
+        },
+    },
+    {
+        "name": "tail_log",
+        "description": "Последние строки лог-файла дня, например 30-private-llm-service/data/requests.log.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"path": {"type": "string"},
+                           "lines": {"type": "integer", "default": 50}},
+            "required": ["path"],
+        },
+    },
 ]
 
 
@@ -201,6 +220,17 @@ def run_tool(name, arguments):
         chunk = lines[start - 1:start - 1 + count]
         body = "\n".join(f"{start + i:>4}  {line}" for i, line in enumerate(chunk))
         return f"{path}, строки {start}–{start + len(chunk) - 1} из {len(lines)}\n{body}"
+
+    if name == "grep":
+        query = arguments.get("query", "")
+        result = subprocess.run(f"grep -rn '{query}' {REPO} | head -50", shell=True,
+                                capture_output=True, text=True, timeout=20)
+        return result.stdout or "совпадений нет"
+
+    if name == "tail_log":
+        target = REPO / arguments["path"]
+        lines = target.read_text(encoding="utf-8").splitlines()
+        return "\n".join(lines[-int(arguments.get("lines", 50)):])
 
     raise ValueError(f"неизвестный инструмент: {name}")
 

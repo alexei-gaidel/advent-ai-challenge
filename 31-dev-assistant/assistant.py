@@ -55,6 +55,11 @@ LAST_ROUND = ("Лимит вызовов инструментов исчерпа
               "текстом по уже полученным данным; чего не хватило — так и скажи.")
 LEAK = re.compile(r"DSML|<\s*\|?\s*(tool_call|invoke)", re.I)
 
+EXPLAIN = """Объясни, что делает файл {path} проекта Advent AI Challenge.
+Верни JSON: {"summary": "...", "functions": ["..."]}
+
+{code}"""
+
 NO_CONTEXT ="""Ты — ассистент разработчика в репозитории Advent AI Challenge
 (ежедневные задания по LLM на Python). Отвечай по-русски, коротко. Если не знаешь — скажи."""
 
@@ -87,7 +92,10 @@ class DevAssistant:
             "/files": ("git_files", {"path": rest} if rest else {}),
             "/diff": ("git_diff", {"path": rest} if rest else {}),
             "/log": ("git_log", {"path": rest} if rest else {}),
+            "/grep": ("grep", {"query": rest}),
         }
+        if command == "/explain":
+            return self.explain(rest)
         if command not in direct:
             raise ValueError(f"неизвестная команда {command} — список: /help")
         name, arguments = direct[command]
@@ -96,6 +104,18 @@ class DevAssistant:
         return {"command": command, "kind": "tool", "answer": output,
                 "tools": [{"name": name, "arguments": arguments, "by": "команда"}],
                 "seconds": round(time.monotonic() - started, 2)}
+
+    def explain(self, path):
+        """/explain путь — краткое объяснение файла моделью."""
+        code = self.bridge.call("read_file", {"path": path, "lines": 400})
+        print(f"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}")
+        prompt = EXPLAIN.format(path=path, code=code)
+        reply = providers.call(self.model, [{"role": "user", "content": prompt}],
+                               temperature=0.2, max_tokens=600)
+        return {"command": "/explain", "kind": "answer", "answer": reply["text"],
+                "prompt_tokens": reply["prompt_tokens"],
+                "completion_tokens": reply["completion_tokens"], "cost": reply["cost"],
+                "seconds": reply["seconds"], "sources": [], "tools": []}
 
     @staticmethod
     def usage():
