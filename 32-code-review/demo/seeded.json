@@ -1,0 +1,27 @@
+{
+ "title": "31: команды /grep, /explain, эндпоинт /api/summary и подтяжка внешних доков",
+ "body": "Демо-PR для дня 32: в правку намеренно заложены 7 проблем (список в 32-code-review/demo/seeded.json). PR не мержится — он нужен, чтобы проверить AI-ревью.",
+ "issues": [
+  {"id": "shell-injection", "kind": "bug", "file": "31-dev-assistant/project_server.py",
+   "needle": "shell=True", "rule": false,
+   "what": "grep собирает команду f-строкой из query и запускает с shell=True — инъекция команд оболочки"},
+  {"id": "path-traversal", "kind": "bug", "file": "31-dev-assistant/project_server.py",
+   "needle": "target = REPO / arguments[\"path\"]", "rule": false,
+   "what": "tail_log берёт путь без safe_path: ../ и .env читаются за пределами репо/запретов"},
+  {"id": "format-braces", "kind": "bug", "file": "31-dev-assistant/assistant.py",
+   "needle": "EXPLAIN.format(", "rule": true,
+   "what": "str.format() по шаблону с JSON-примером в фигурных скобках → KeyError (грабли из CLAUDE.md)"},
+  {"id": "key-leak", "kind": "bug", "file": "31-dev-assistant/assistant.py",
+   "needle": "ключ {providers.get_api_key", "rule": true,
+   "what": "API-ключ DeepSeek печатается в лог (CLAUDE.md: ключи не печатать)"},
+  {"id": "timeout-not-caught", "kind": "bug", "file": "31-dev-assistant/fetch_docs.py",
+   "needle": "except urllib.error.URLError", "rule": true,
+   "what": "ловится только URLError, а TimeoutError не его наследник — таймаут уронит скрипт (грабли из CLAUDE.md)"},
+  {"id": "web-boundary", "kind": "architecture", "file": "31-dev-assistant/web.py",
+   "needle": "providers.post(", "rule": true,
+   "what": "web.py сам собирает messages, знает URL провайдера и разбирает его ответ — нарушение архитектурной границы из CLAUDE.md"},
+  {"id": "requests-dep", "kind": "architecture", "file": "31-dev-assistant/fetch_docs.py",
+   "needle": "import requests", "rule": true,
+   "what": "import requests — сторонний пакет, а в проекте только стандартная библиотека (CLAUDE.md, правило 1)"}
+ ]
+}

@@ -1,0 +1,2122 @@
+{
+ "passes": 3,
+ "judge": "openai/gpt-oss-120b",
+ "seeded_lines": {
+  "shell-injection": 226,
+  "path-traversal": 231,
+  "format-braces": 112,
+  "key-leak": 111,
+  "timeout-not-caught": 20,
+  "web-boundary": 208,
+  "requests-dep": 7
+ },
+ "summary": [
+  {
+   "mode": "no-rag",
+   "recall": [
+    5,
+    5,
+    5
+   ],
+   "recall_rule": [
+    3,
+    3,
+    3
+   ],
+   "per_issue": {
+    "shell-injection": 3,
+    "path-traversal": 3,
+    "format-braces": 0,
+    "key-leak": 3,
+    "timeout-not-caught": 0,
+    "web-boundary": 3,
+    "requests-dep": 3
+   },
+   "findings": [
+    14,
+    13,
+    14
+   ],
+   "extra_valid": 26,
+   "extra_wrong": 0,
+   "line_ok": 41,
+   "findings_total": 41,
+   "tokens": 3865,
+   "cost": 0.0068,
+   "seconds": 8.7
+  },
+  {
+   "mode": "bm25",
+   "recall": [
+    5,
+    5,
+    5
+   ],
+   "recall_rule": [
+    3,
+    3,
+    3
+   ],
+   "per_issue": {
+    "shell-injection": 3,
+    "path-traversal": 3,
+    "format-braces": 0,
+    "key-leak": 3,
+    "timeout-not-caught": 0,
+    "web-boundary": 3,
+    "requests-dep": 3
+   },
+   "findings": [
+    14,
+    14,
+    14
+   ],
+   "extra_valid": 27,
+   "extra_wrong": 0,
+   "line_ok": 42,
+   "findings_total": 42,
+   "tokens": 9065,
+   "cost": 0.0115,
+   "seconds": 9.5
+  },
+  {
+   "mode": "bge-m3",
+   "recall": [
+    5,
+    5,
+    5
+   ],
+   "recall_rule": [
+    3,
+    3,
+    3
+   ],
+   "per_issue": {
+    "shell-injection": 3,
+    "path-traversal": 3,
+    "format-braces": 0,
+    "key-leak": 3,
+    "timeout-not-caught": 0,
+    "web-boundary": 3,
+    "requests-dep": 3
+   },
+   "findings": [
+    16,
+    13,
+    14
+   ],
+   "extra_valid": 28,
+   "extra_wrong": 0,
+   "line_ok": 43,
+   "findings_total": 43,
+   "tokens": 8861,
+   "cost": 0.0116,
+   "seconds": 11.1
+  },
+  {
+   "mode": "pinned",
+   "recall": [
+    6,
+    7,
+    7
+   ],
+   "recall_rule": [
+    4,
+    5,
+    5
+   ],
+   "per_issue": {
+    "shell-injection": 3,
+    "path-traversal": 3,
+    "format-braces": 3,
+    "key-leak": 3,
+    "timeout-not-caught": 2,
+    "web-boundary": 3,
+    "requests-dep": 3
+   },
+   "findings": [
+    13,
+    14,
+    15
+   ],
+   "extra_valid": 22,
+   "extra_wrong": 0,
+   "line_ok": 42,
+   "findings_total": 42,
+   "tokens": 10517,
+   "cost": 0.0131,
+   "seconds": 10.9
+  }
+ ],
+ "rows": [
+  {
+   "pass": 1,
+   "mode": "no-rag",
+   "found": {
+    "shell-injection": 1,
+    "path-traversal": 2,
+    "format-braces": null,
+    "key-leak": 3,
+    "timeout-not-caught": null,
+    "web-boundary": 8,
+    "requests-dep": 4
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 14,
+   "extra_valid": 9,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 3859,
+   "cost": 0.002275,
+   "seconds": 8.8,
+   "context": [],
+   "result": {
+    "summary": "PR добавляет команду /explain в ассистента, инструменты grep и tail_log в MCP-сервер, эндпоинт /api/summary в web.py и новый модуль fetch_docs.py. Есть серьёзные проблемы безопасности: shell-инъекция в grep, утечка API-ключа в лог, path traversal в tail_log, а также нарушение правила о стандартной библиотеке.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "severity": "high",
+      "title": "Shell-инъекция в grep через query",
+      "detail": "query подставляется в f-строку и передаётся в subprocess.run(..., shell=True). Значение вида \"'; rm -rf ~; '\" или \"$(curl evil)\" выполнится в шелле. Нужно использовать список аргументов без shell=True: subprocess.run([\"grep\", \"-rn\", query, str(REPO)], ...).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "REPO / arguments[\"path\"] не проверяется на выход за пределы репозитория: path=\"../../etc/passwd\" или абсолютный путь прочитает произвольный файл. Нужно resolve() и проверка, что итоговый путь лежит внутри REPO.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает секрет в лог/консоль. Секреты нельзя логировать — убрать вывод ключа.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "medium",
+      "title": "Зависимость requests вне стандартной библиотеки",
+      "detail": "Модуль импортирует requests, хотя проект ограничен стандартной библиотекой. Заменить на urllib.request (как в fetch) или добавить зависимость в requirements с обоснованием.",
+      "rule": "CLAUDE.md: только стандартная библиотека",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 28,
+      "severity": "medium",
+      "title": "Нет обработки ошибок HTTP в latest_release",
+      "detail": "requests.get без raise_for_status и без обработки исключений: при 404/403/сетевой ошибке data.json() упадёт или вернёт мусор. Также нет проверки кода ответа перед .json().",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Необработанные исключения в /api/summary",
+      "detail": "providers.post и reply[\"choices\"][0] могут бросить исключение (сеть, ошибка API, иная структура ответа) — клиент получит 500 без JSON-ошибки. Обернуть в try/except и вернуть _json({\"error\": ...}, 502).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "severity": "low",
+      "title": "explain не обрабатывает ошибки read_file",
+      "detail": "bridge.call(\"read_file\", ...) может бросить исключение (файл не найден, вне репозитория) — команда /explain упадёт без понятного сообщения. Стоит ловить и возвращать текст ошибки.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Дублирование логики вызова LLM в web.py",
+      "detail": "web.py напрямую формирует messages и вызывает providers.post с хардкодом модели deepseek-chat, дублируя слой assistant/providers. Лучше вынести в метод ассистента (например, summarize), чтобы не размазывать знание о провайдере по HTTP-хендлеру.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Смешение ответственности: fetch_docs вне RAG-пайплайна",
+      "detail": "Модуль тянет README зависимостей, но не интегрирован с индексом/RAG и не вызывается из ассистента — мёртвый код в PR. Либо подключить к индексации, либо не добавлять.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "title": "grep через внешний процесс вместо Python",
+      "detail": "Для поиска по файлам репозитория не нужен subprocess+shell: можно обойтись pathlib/os.walk и re, что убирает инъекцию и зависимость от наличия grep.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 105,
+      "title": "Добавить /explain и /grep в usage()",
+      "detail": "Список команд в usage() не обновлён — пользователь не узнает о новых командах. Добавить строки описания.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "title": "Ограничить размер вывода tail_log",
+      "detail": "lines не валидируется: отрицательное или огромное значение даст неожиданный срез. Проверять int и клампить в разумный диапазон.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 14,
+      "title": "Добавить тесты и таймауты",
+      "detail": "Нет тестов на fetch/fetch_all/latest_release и на обработку сетевых ошибок. Стоит покрыть моками urllib/requests.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Валидировать пустой вопрос",
+      "detail": "Если text пустой, поиск и запрос к LLM бессмысленны — вернуть 400 с понятной ошибкой.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 2373,
+    "completion_tokens": 1486,
+    "cost": 0.002275,
+    "seconds": 8.7,
+    "prompt_chars": 8003
+   }
+  },
+  {
+   "pass": 1,
+   "mode": "bm25",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": null,
+    "key-leak": 1,
+    "timeout-not-caught": null,
+    "web-boundary": 8,
+    "requests-dep": 5
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 14,
+   "extra_valid": 9,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 9132,
+   "cost": 0.003902,
+   "seconds": 10.1,
+   "context": [
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "CLAUDE.md › Жёсткие правила",
+    "31-dev-assistant/assistant.py › строки 166–201 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/docs/architecture.md › Раскладка репозитория",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release",
+    "31-dev-assistant/project_server.py › строки 1–62 · шапка модуля"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain в ассистента, инструменты grep и tail_log в MCP-сервер, эндпоинт /api/summary в веб-интерфейс и новый модуль fetch_docs.py. Есть несколько серьёзных проблем: утечка API-ключа в stdout, command injection в grep, path traversal в tail_log и нарушение правила «только стандартная библиотека» через requests.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает значение секретного ключа в stdout/логи. Это прямое нарушение правила «Ключи не печатать в ответах» и утечка секрета в логи сервера/терминала.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Command injection в grep через shell=True",
+      "detail": "subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True, ...) подставляет query напрямую в shell-строку. Запрос вида `'; rm -rf ~ #` или `$(...)` выполнит произвольную команду. Нужно передавать аргументы списком без shell=True (как в остальных инструментах сервера).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] без проверки, что путь остаётся внутри REPO и не входит в FORBIDDEN (.env, .git). Аргумент вида '../../etc/passwd' или '.env' позволит прочитать произвольный файл, включая ключи. В read_file такая проверка есть (REPO not in target.parents), здесь её нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "target.read_text(...) и int(arguments.get(\"lines\", 50)) не обёрнуты в try/except: отсутствующий файл, нечисловое значение lines или отрицательное число приведут к необработанному исключению вместо понятной ошибки инструмента.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 7,
+      "severity": "high",
+      "title": "Зависимость requests нарушает правило «только стандартная библиотека»",
+      "detail": "import requests и использование requests.get в latest_release противоречат жёсткому правилу проекта. В файле уже импортируется urllib.request — следует использовать его и здесь.",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет. HTTP — urllib.request.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "Нет обработки ошибок сети/JSON в latest_release",
+      "detail": "requests.get(...).json() без проверки статуса и без try/except: при 404/403/сетевой ошибке или не-JSON ответе (rate limit GitHub) функция упадёт с необработанным исключением. fetch() рядом обрабатывает URLError, здесь — нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Необработанные ошибки ответа DeepSeek в /api/summary",
+      "detail": "reply[\"choices\"][0][\"message\"][\"content\"] без проверки структуры ответа: при ошибке API (нет ключа, 4xx/5xx, иная схема) будет KeyError/IndexError. Хотя внешний try/except вернёт 400, пользователь получит неинформативное сообщение, а traceback уйдёт в лог.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "severity": "medium",
+      "title": "Дублирование логики вызова провайдера в web.py",
+      "detail": "Эндпоинт /api/summary напрямую формирует messages и вызывает providers.post с захардкоженным URL и моделью, дублируя логику, которая уже есть в assistant/providers. Лучше вынести в метод ассистента (например, summary(question)), чтобы веб-слой не знал деталей API.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 224,
+      "severity": "medium",
+      "title": "grep и tail_log не следуют контракту остальных инструментов",
+      "detail": "read_file использует safe_path/clamp и проверку REPO/FORBIDDEN, а новые инструменты обходят эти хелперы. Это нарушает единообразие слоя инструментов и создаёт дыры в безопасности. Стоит переиспользовать safe_path и clamp.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидация path в /explain",
+      "detail": "explain(rest) не проверяет, что rest непустой и не начинается с '-'. Пустой path приведёт к вызову read_file с пустым путём и невнятной ошибке. Добавить проверку и понятное сообщение.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 113,
+      "title": "Парсинг JSON-ответа модели в /explain",
+      "detail": "EXPLAIN просит вернуть JSON, но результат отдаётся как сырой текст reply[\"text\"]. Стоит либо парсить JSON и валидировать схему, либо явно документировать, что ответ — свободный текст.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "title": "Ограничение вывода grep",
+      "detail": "head -50 через shell — не переносимо и смешивает логику с оболочкой. Лучше ограничивать количество строк в Python (например, result.stdout.splitlines()[:50]).",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Тесты и документация для fetch_docs",
+      "detail": "Новый модуль не покрыт тестами и не описан в README дня. Стоит добавить хотя бы простой тест на fetch_all с моком urllib и упомянуть модуль в документации.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 200,
+      "title": "Ограничение размера payload в /api/summary",
+      "detail": "question и context передаются в модель без ограничения длины; при большом text можно получить дорогой/падающий запрос. Стоит ограничить длину question и число hits.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 7401,
+    "completion_tokens": 1731,
+    "cost": 0.003902,
+    "seconds": 9.9,
+    "prompt_chars": 26912
+   }
+  },
+  {
+   "pass": 1,
+   "mode": "bge-m3",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": null,
+    "key-leak": 1,
+    "timeout-not-caught": null,
+    "web-boundary": 9,
+    "requests-dep": 5
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 16,
+   "extra_valid": 11,
+   "extra_wrong": 0,
+   "line_ok": 16,
+   "tokens": 9001,
+   "cost": 0.004035,
+   "seconds": 11.6,
+   "context": [
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "CLAUDE.md › Жёсткие правила",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/providers.py › строки 49–62 · def get_api_key",
+    "17-mcp-tool/README.md › Безопасность",
+    "31-dev-assistant/assistant.py › строки 1–64 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain с выводом ключа в stdout, новый модуль fetch_docs.py с зависимостью requests, инструменты grep/tail_log в MCP-сервере и эндпоинт /api/summary в веб-сервере. Есть критичные проблемы безопасности: shell-инъекция в grep, утечка API-ключа в лог и нарушение правила о стандартной библиотеке.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает значение секретного ключа в stdout/логи. Это прямое нарушение правила «Ключи не печатать в ответах» и утечка секрета в логи, консоль и потенциально в ответы веб-сервера.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Shell-инъекция в инструменте grep",
+      "detail": "subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True, ...) подставляет query от LLM в shell-команду. Кавычка в query (например, ' ; rm -rf / #) ломает кавычки и позволяет выполнить произвольную команду. Аргументы инструмента приходят от модели — ненадёжный источник. Нужно передавать список аргументов без shell=True.",
+      "rule": "17-mcp-tool/README.md: Команды собираются списком аргументов, без оболочки, поэтому подставить лишнее невозможно.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "high",
+      "title": "tail_log читает файл вне репозитория",
+      "detail": "target = REPO / arguments[\"path\"] без проверки safe_path и без проверки, что путь внутри REPO. Путь вида ../../etc/passwd или абсолютный путь позволит прочитать произвольный файл на диске. В read_file такая проверка есть (REPO not in target.parents), здесь её нет.",
+      "rule": "17-mcp-tool/README.md: пути не выпускаются за пределы репозитория.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 233,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "target.read_text(...) без try/except: отсутствующий файл, каталог вместо файла или ошибка прав вызовут необработанное исключение и оборвут обработку инструмента. Также int(arguments.get(\"lines\", 50)) упадёт на нечисловом значении от модели.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "high",
+      "title": "Зависимость requests нарушает правило о стандартной библиотеке",
+      "detail": "import requests — сторонний пакет, которого нет в стандартной библиотеке. Проект явно запрещает pip-зависимости. Функция latest_release использует requests.get, тогда как fetch уже использует urllib.request — нужно переписать на urllib.",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет. HTTP — urllib.request.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "latest_release не обрабатывает ошибки сети и HTTP",
+      "detail": "requests.get без проверки статуса и без try/except: при 404/403/сетевой ошибке data.json() упадёт или вернёт неожиданный результат. Также нет проверки, что ответ — JSON-объект.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "/api/summary не ограничивает размер контекста и не обрабатывает ошибки провайдера",
+      "detail": "context собирается из всех hits без ограничения длины, а providers.post может бросить исключение (нет ключа, сеть, не-200). Исключение поймается общим except и вернёт 400 с текстом ошибки, но пользователь не получит осмысленного ответа; кроме того, ответ провайдера не проверяется на структуру (reply[\"choices\"][0] может отсутствовать).",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "title": "Смешение двух HTTP-клиентов в одном модуле",
+      "detail": "Модуль одновременно использует urllib.request (fetch) и requests (latest_release). Это дублирование ответственности и лишняя зависимость; следует оставить только urllib.request.",
+      "rule": "CLAUDE.md: HTTP — urllib.request.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Дублирование логики вызова провайдера в web.py",
+      "detail": "web.py напрямую формирует запрос к api.deepseek.com и собирает messages, тогда как в проекте уже есть providers.call и assistant. Логика вызова модели должна жить в providers/assistant, а не в HTTP-обработчике. Это смешение ответственности и дублирование.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "explain не использует общий _finish и не учитывает LEAK/лимиты",
+      "detail": "Метод explain напрямую вызывает providers.call, минуя общий цикл _finish, не применяет LEAK-фильтр и не ограничивает размер кода (lines=400 может быть больше MAX_FILE_LINES). Стоит переиспользовать общий путь вызова модели.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Добавить /explain в usage()",
+      "detail": "Команда /explain добавлена в handle, но не упомянута в usage() и в docstring модуля — пользователь не узнает о ней из /help.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Проверять пустой path в explain",
+      "detail": "explain(rest) при пустом rest вызовет read_file с пустым path; лучше явно вернуть подсказку об использовании /explain <путь>.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 224,
+      "title": "Ограничить и валидировать query в grep",
+      "detail": "Стоит ограничить длину query, запретить переводы строк и использовать список аргументов subprocess.run([\"grep\", \"-rn\", query, str(REPO)]) без shell.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "title": "Использовать safe_path в tail_log",
+      "detail": "Применить существующий safe_path(arguments, required=True) и проверку REPO in target.parents, как в read_file, чтобы не читать файлы вне репозитория.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Добавить тесты и обработку ошибок",
+      "detail": "Модуль новый и без тестов; стоит покрыть fetch/fetch_all/latest_release тестами с моками urllib и проверкой поведения при сетевых ошибках.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Ограничить размер контекста в /api/summary",
+      "detail": "Обрезать context до разумного лимита символов и проверять структуру ответа провайдера перед обращением к reply[\"choices\"][0].",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 7067,
+    "completion_tokens": 1934,
+    "cost": 0.004035,
+    "seconds": 10.7,
+    "prompt_chars": 25021
+   }
+  },
+  {
+   "pass": 1,
+   "mode": "pinned",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": 11,
+    "key-leak": 1,
+    "timeout-not-caught": null,
+    "web-boundary": 8,
+    "requests-dep": 5
+   },
+   "recall": 6,
+   "recall_rule": 4,
+   "findings": 13,
+   "extra_valid": 7,
+   "extra_wrong": 0,
+   "line_ok": 13,
+   "tokens": 10395,
+   "cost": 0.004223,
+   "seconds": 10.4,
+   "context": [
+    "CLAUDE.md › Жёсткие правила",
+    "CLAUDE.md › Наследование кода",
+    "CLAUDE.md › Грабли, на которые уже наступали",
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/providers.py › строки 49–62 · def get_api_key",
+    "31-dev-assistant/assistant.py › строки 1–64 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release",
+    "31-dev-assistant/project_server.py › строки 158–212 · def run_tool",
+    "01-llm-api-request/README.md › Запуск — веб-интерфейс + Как это работает"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain с печатью ключа, модуль fetch_docs.py с зависимостью requests, инструменты grep/tail_log в MCP-сервере и эндпоинт /api/summary в web.py, который сам собирает messages и ходит в провайдера.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает значение ключа DeepSeek в консоль сервера/логи. Ключ попадает в логи и может быть показан пользователю. Убрать вывод ключа.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Command injection в grep через shell=True",
+      "detail": "subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True) подставляет query из аргументов инструмента (приходит от LLM/пользователя) прямо в shell-строку. Кавычки не экранируются: query вида ' ; rm -rf ~ # или $(...) выполнит произвольную команду. Использовать список аргументов без shell=True.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "tail_log читает файл вне репозитория",
+      "detail": "target = REPO / arguments[\"path\"] без safe_path и без проверки, что target внутри REPO. Путь вида ../../etc/passwd или абсолютный путь позволит прочитать произвольный файл. Использовать safe_path(arguments, required=True) и проверку REPO in target.parents, как в read_file.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "tail_log падает на несуществующем файле и на нечисловом lines",
+      "detail": "target.read_text без try/except бросит FileNotFoundError/IsADirectoryError, а int(arguments.get(\"lines\", 50)) — ValueError при нечисловом значении. Ошибка уйдёт наружу как необработанное исключение. Добавить проверку существования файла и безопасный парсинг lines.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 7,
+      "severity": "high",
+      "title": "Зависимость requests нарушает правило «только стандартная библиотека»",
+      "detail": "import requests и requests.get в latest_release — сторонний пакет, которого нет в requirements (их нет по правилам). Нужно переписать на urllib.request, как в fetch().",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 31,
+      "severity": "medium",
+      "title": "latest_release не обрабатывает сетевые ошибки и неверный JSON",
+      "detail": "requests.get без try/except и без raise_for_status; data.json() упадёт на не-JSON ответе (например, при rate limit GitHub). Обернуть в try/except и проверять статус.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "severity": "medium",
+      "title": "/api/summary не проверяет пустой вопрос и пустой контекст",
+      "detail": "Если question пустой или поиск не дал hits, в модель уйдёт пустой user-контент; ответ может быть бессмысленным. Стоит валидировать question и обрабатывать случай hits == [].",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "web.py собирает messages и знает URL провайдера",
+      "detail": "В /api/summary web.py сам формирует messages, знает URL https://api.deepseek.com/chat/completions и разбирает reply[\"choices\"][0][\"message\"][\"content\"]. Это прямое нарушение архитектурной границы: web.py должен вызывать методы агента и рисовать результат, а логика дня живёт отдельным модулем. Перенести сборку промпта и вызов провайдера в assistant.py (например, метод summarize).",
+      "rule": "CLAUDE.md: web.py не собирает messages, не знает URL провайдеров и не разбирает их ответы.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Новый модуль fetch_docs.py не описан в схеме наследования",
+      "detail": "Модуль добавлен без упоминания в CLAUDE.md и без записи в .gitignore для возможных локальных данных; также он тянет внешние зависимости. Стоит либо встроить функциональность в существующий модуль, либо задокументировать назначение и обновить правила наследования.",
+      "rule": "CLAUDE.md: Наследование кода.",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Убрать отладочный print",
+      "detail": "Строка print(f\"[explain] {path}, ключ ...\") выглядит как отладка. Заменить на логирование без секретов или удалить.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "title": "EXPLAIN.format ломается на фигурных скобках в коде",
+      "detail": "EXPLAIN.format(path=path, code=code) подставит code, но если в code встретятся фигурные скобки — они уже в значении, это безопасно; однако сам шаблон содержит JSON-пример с {…}, что при будущем расширении шаблона легко сломать. По аналогии с правилом проекта про str.format и JSON-примеры лучше подставлять через .replace(\"<<CODE>>\", code).",
+      "rule": "CLAUDE.md: str.format() съедает фигурные скобки JSON-примера.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "title": "Ограничить вывод grep и обработать таймаут",
+      "detail": "subprocess.run с timeout=20 может бросить TimeoutExpired, который не пойман. Стоит ловить и возвращать понятное сообщение, а также ограничивать длину вывода.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Добавить тесты на /api/summary",
+      "detail": "Новый эндпоинт не покрыт тестами: пустой вопрос, отсутствие hits, ошибка провайдера. Добавить проверки, что при ошибке возвращается JSON с error, а не обрыв соединения.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 8689,
+    "completion_tokens": 1706,
+    "cost": 0.004223,
+    "seconds": 9.6,
+    "prompt_chars": 30264
+   }
+  },
+  {
+   "pass": 2,
+   "mode": "no-rag",
+   "found": {
+    "shell-injection": 1,
+    "path-traversal": 2,
+    "format-braces": null,
+    "key-leak": 3,
+    "timeout-not-caught": null,
+    "web-boundary": 8,
+    "requests-dep": 7
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 13,
+   "extra_valid": 8,
+   "extra_wrong": 0,
+   "line_ok": 13,
+   "tokens": 3843,
+   "cost": 0.002258,
+   "seconds": 8.7,
+   "context": [],
+   "result": {
+    "summary": "PR добавляет команду /explain в ассистента, инструменты grep и tail_log в MCP-сервер, новый скрипт fetch_docs.py и эндпоинт /api/summary в web.py. Есть серьёзные проблемы безопасности: shell-инъекция в grep, path traversal в tail_log, утечка API-ключа в лог и лишняя зависимость requests.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "severity": "high",
+      "title": "Shell-инъекция в grep через query",
+      "detail": "query подставляется в shell-команду без экранирования: subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True). Значение вида `'; rm -rf ~ #` или `$(...)` выполнит произвольную команду. Нужно использовать список аргументов без shell=True и/или экранировать через shlex.quote.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] не проверяет, что итоговый путь остаётся внутри REPO. Путь вида ../../etc/passwd или абсолютный путь позволит читать произвольные файлы. Нужно resolve() и проверка is_relative_to(REPO).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает секретный ключ в лог/консоль. Это утечка секрета; строку нужно удалить.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "read_text без try/except: отсутствующий файл или не-UTF8 содержимое выбросит FileNotFoundError/UnicodeDecodeError и уронит обработку инструмента. Также int(arguments.get(\"lines\", 50)) упадёт на нечисловом значении.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 27,
+      "severity": "medium",
+      "title": "requests.get без проверки статуса и без обработки ошибок",
+      "detail": "latest_release не проверяет data.status_code и не ловит requests.RequestException; при 403/404 .json() может вернуть неожиданный объект, а сетевые ошибки не обрабатываются. Также нет User-Agent, GitHub API может отклонить запрос.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Необработанные ошибки providers.post в /api/summary",
+      "detail": "Ответ providers.post индексируется как reply[\"choices\"][0][\"message\"][\"content\"] без проверки структуры и без try/except; при ошибке API клиент получит 500 без внятного сообщения. Стоит валидировать ответ и обрабатывать исключения.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "title": "Лишняя внешняя зависимость requests",
+      "detail": "Проект заявлен как Python + только стандартная библиотека, но fetch_docs.py импортирует requests, тогда как рядом уже используется urllib.request. Следует переписать latest_release на urllib.request, чтобы не тянуть стороннюю зависимость.",
+      "rule": "CLAUDE.md: только стандартная библиотека",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Дублирование логики вызова LLM в web.py",
+      "detail": "web.py напрямую формирует messages и вызывает providers.post с хардкодом модели deepseek-chat, дублируя ответственность assistant.py/providers. Логику обращения к модели стоит вынести в assistant/providers, а web.py оставить тонким HTTP-слоем.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "explain обходит общий путь вызова инструментов",
+      "detail": "Метод explain напрямую вызывает bridge.call и providers.call, минуя общую обработку команд/инструментов и учёт tools. Это дублирует логику и усложняет поддержку; лучше оформить как обычный инструмент/команду в общем пайплайне.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "title": "Ограничить вывод grep и обработать timeout",
+      "detail": "subprocess.run с timeout=20 может выбросить TimeoutExpired, который не обрабатывается. Также стоит ограничивать длину вывода на стороне Python, а не через `| head -50` в shell.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидировать path в explain",
+      "detail": "path передаётся в read_file без проверки; стоит убедиться, что bridge.call сам ограничивает доступ к REPO, иначе /explain станет ещё одним вектором чтения произвольных файлов.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Добавить тесты и документацию",
+      "detail": "Новый модуль не покрыт тестами; стоит добавить тесты на fetch (мок urllib) и latest_release, а также описать назначение в README.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Ограничить размер входного text",
+      "detail": "payload.get(\"text\") не ограничен по длине; стоит валидировать размер, чтобы избежать злоупотребления токенами и больших запросов к API.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 2373,
+    "completion_tokens": 1470,
+    "cost": 0.002258,
+    "seconds": 8.7,
+    "prompt_chars": 8003
+   }
+  },
+  {
+   "pass": 2,
+   "mode": "bm25",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": null,
+    "key-leak": 1,
+    "timeout-not-caught": null,
+    "web-boundary": 9,
+    "requests-dep": 5
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 14,
+   "extra_valid": 9,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 8999,
+   "cost": 0.003756,
+   "seconds": 8.9,
+   "context": [
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "CLAUDE.md › Жёсткие правила",
+    "31-dev-assistant/assistant.py › строки 166–201 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/docs/architecture.md › Раскладка репозитория",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release",
+    "31-dev-assistant/project_server.py › строки 1–62 · шапка модуля"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain с печатью API-ключа, новый модуль fetch_docs.py с зависимостью requests, инструменты grep/tail_log в MCP-сервере и эндпоинт /api/summary в web.py. Есть критичные проблемы: утечка ключа в stdout, shell-инъекция в grep, path traversal в tail_log и нарушение правила «только стандартная библиотека».",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает секретный ключ в лог/консоль. Это прямое нарушение правила «Ключи не печатать в ответах» и утечка секрета в логи сервера/CI.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Shell-инъекция в grep через query",
+      "detail": "subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True) подставляет пользовательский query прямо в shell-строку. Значение вида `'; rm -rf ~ #` или `$(...)` выполнит произвольную команду. Нужно передавать аргументы списком без shell=True и/или экранировать.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] без проверки, что путь внутри REPO и не в FORBIDDEN (.env, .git). Аргумент вида ../../.env или /etc/passwd позволит прочитать произвольный файл. В read_file такая проверка есть (REPO not in target.parents), здесь её нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "target.read_text без try/except: отсутствующий файл, каталог вместо файла или нечитаемый файл приведут к необработанному исключению и падению обработки JSON-RPC. Также int(arguments.get(\"lines\", 50)) упадёт на нечисловом значении.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 7,
+      "severity": "high",
+      "title": "Зависимость requests нарушает правило stdlib-only",
+      "detail": "import requests — сторонний пакет, которого нет в requirements (их вообще нет). Проект требует только стандартную библиотеку; HTTP должен идти через urllib.request, как в fetch().",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет. HTTP — urllib.request.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "latest_release не обрабатывает ошибки сети/HTTP",
+      "detail": "requests.get без проверки статуса и без try/except: при 404/403/сетевой ошибке data.json() упадёт или вернёт мусор. Также нет User-Agent, GitHub API может отдать 403.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Необработанные ошибки ответа DeepSeek в /api/summary",
+      "detail": "reply[\"choices\"][0][\"message\"][\"content\"] без проверки структуры: при ошибке API (нет choices, иной формат) будет KeyError/IndexError. Хотя внешний try ловит, пользователь получит неинформативную ошибку 400.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 7,
+      "title": "Сторонняя зависимость в проекте без пакетного менеджера",
+      "detail": "Модуль тянет requests, тогда как весь проект построен на stdlib. Это ломает воспроизводимость и правило проекта; fetch() уже использует urllib — latest_release должен следовать тому же подходу.",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "title": "Дублирование логики вызова провайдера в web.py",
+      "detail": "web.py напрямую формирует запрос к api.deepseek.com и парсит ответ, дублируя ответственность providers/assistant. Лучше вынести в providers или assistant, чтобы не смешивать HTTP-слой и бизнес-логику.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидировать path в /explain",
+      "detail": "explain(rest) не проверяет, что rest непустой и не начинается с '-'; при пустом rest read_file получит пустой путь. Стоит явно возвращать usage при отсутствии аргумента.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 224,
+      "title": "Ограничить вывод grep и экранировать query",
+      "detail": "Помимо отказа от shell=True, стоит ограничить длину query и использовать фиксированный список аргументов ['grep','-rn','--',query,str(REPO)].",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 230,
+      "title": "Переиспользовать safe_path для tail_log",
+      "detail": "В read_file уже есть проверка safe_path/REPO.parents — tail_log должен использовать ту же функцию, чтобы не дублировать и не терять защиту.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Добавить тесты/документацию для fetch_docs",
+      "detail": "Новый модуль без тестов и без упоминания в README дня; стоит описать назначение и поведение при недоступной сети.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Ограничить размер тела запроса",
+      "detail": "Content-Length читается без верхней границы — большой payload может исчерпать память. Стоит ограничить длину, например 1 МБ.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 7401,
+    "completion_tokens": 1598,
+    "cost": 0.003756,
+    "seconds": 8.8,
+    "prompt_chars": 26912
+   }
+  },
+  {
+   "pass": 2,
+   "mode": "bge-m3",
+   "found": {
+    "shell-injection": 1,
+    "path-traversal": 3,
+    "format-braces": null,
+    "key-leak": 2,
+    "timeout-not-caught": null,
+    "web-boundary": 8,
+    "requests-dep": 5
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 13,
+   "extra_valid": 8,
+   "extra_wrong": 0,
+   "line_ok": 13,
+   "tokens": 8810,
+   "cost": 0.003825,
+   "seconds": 10.6,
+   "context": [
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "CLAUDE.md › Жёсткие правила",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/providers.py › строки 49–62 · def get_api_key",
+    "17-mcp-tool/README.md › Безопасность",
+    "31-dev-assistant/assistant.py › строки 1–64 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain, инструменты grep/tail_log в MCP-сервер, эндпоинт /api/summary и новый модуль fetch_docs.py. Есть серьёзные проблемы безопасности (shell-инъекция в grep, утечка API-ключа в stdout, path traversal в tail_log) и нарушение правила «только стандартная библиотека» из-за requests.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Shell-инъекция в grep через f-строку с shell=True",
+      "detail": "Запрос приходит от LLM (ненадёжный источник) и подставляется прямо в shell-команду: f\"grep -rn '{query}' {REPO} | head -50\" с shell=True. Кавычка в query (например `'; rm -rf / #`) ломает команду и позволяет выполнить произвольный код. Это прямо противоречит правилу безопасности из 17-mcp-tool/README.md: «Команды собираются списком аргументов, без оболочки». Нужно subprocess.run([\"grep\", \"-rn\", query, str(REPO)], ...) без shell.",
+      "rule": "17-mcp-tool/README.md: Безопасность — команды собираются списком аргументов, без оболочки",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 111,
+      "severity": "high",
+      "title": "Печать API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") выводит секретный ключ в лог/консоль. Прямо нарушает правило «Ключи не печатать в ответах» и утекает в логи сервера/терминала.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] без проверки, что путь остаётся внутри REPO (в отличие от read_file, где есть safe_path и проверка REPO in target.parents). Аргумент `../../etc/passwd` или абсолютный путь позволит прочитать произвольный файл. Нужно использовать safe_path и проверку принадлежности REPO.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 233,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "target.read_text без try/except: отсутствующий файл, каталог вместо файла или нечитаемый файл приведут к необработанному исключению (FileNotFoundError/IsADirectoryError/PermissionError) вместо понятного ValueError. Также int(arguments.get(\"lines\", 50)) упадёт на нечисловом значении.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "high",
+      "title": "Импорт requests — нарушение правила «только стандартная библиотека»",
+      "detail": "Модуль импортирует requests (сторонний пакет), что прямо запрещено: «Только стандартная библиотека Python. Никакого pip, requirements.txt нет. HTTP — urllib.request». При этом в этом же файле уже используется urllib.request — requests избыточен. latest_release тоже использует requests.get.",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "latest_release не обрабатывает ошибки сети и HTTP",
+      "detail": "requests.get без try/except и без проверки status_code: при недоступности сети, 404 или rate-limit GitHub вызовет исключение или вернёт не-JSON, а data.json() упадёт. В fetch() аналогичная обработка есть, здесь — нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Необработанные ошибки в /api/summary",
+      "detail": "reply[\"choices\"][0][\"message\"][\"content\"] и providers.post могут бросить KeyError/IndexError/HTTPError; они попадут в общий except и вернут 400 с текстом ошибки, но без понятного сообщения. Также нет проверки, что question непустой — пустой запрос уйдёт в API.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "severity": "medium",
+      "title": "Дублирование логики RAG+LLM в web.py вместо assistant.py",
+      "detail": "Эндпоинт /api/summary сам собирает hits, context и вызывает providers.post напрямую, дублируя ответственность DevAssistant (RAG + вызов модели). Логичнее добавить метод в assistant.py (например, summary) и вызывать его из web.py, чтобы не размазывать работу с моделью по слоям.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "severity": "low",
+      "title": "Новый модуль не интегрирован в проект",
+      "detail": "fetch_docs.py не вызывается ни из assistant.py, ни из index.py, ни из CLI — это «висячий» модуль. Если он нужен для RAG, стоит подключить его к пайплайну индексации или явно задокументировать как отдельную утилиту.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидация path в /explain",
+      "detail": "explain(rest) не проверяет, что path непустой и не выходит за пределы репозитория — проверка есть только в read_file на стороне сервера. Стоит явно отклонять пустой путь и возвращать понятную ошибку.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 113,
+      "title": "Обработка ошибок providers.call в explain",
+      "detail": "reply[\"text\"] и остальные поля берутся без проверки; при ошибке API пользователь получит необработанное исключение. Стоит обернуть в try/except и вернуть структурированную ошибку, как в других командах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 224,
+      "title": "Ограничение вывода grep",
+      "detail": "head -50 через shell — часть той же инъекции; после перехода на список аргументов стоит ограничивать вывод в Python (например, result.stdout.splitlines()[:50]), а не через shell-пайп.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 15,
+      "title": "Тесты и документация для fetch_docs",
+      "detail": "Новый модуль без тестов и без упоминания в README/CLAUDE.md. Стоит добавить хотя бы простой тест на fetch_all с моком urllib и описать назначение модуля.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 7067,
+    "completion_tokens": 1743,
+    "cost": 0.003825,
+    "seconds": 9.8,
+    "prompt_chars": 25021
+   }
+  },
+  {
+   "pass": 2,
+   "mode": "pinned",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": 11,
+    "key-leak": 1,
+    "timeout-not-caught": 13,
+    "web-boundary": 7,
+    "requests-dep": 5
+   },
+   "recall": 7,
+   "recall_rule": 5,
+   "findings": 14,
+   "extra_valid": 7,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 10466,
+   "cost": 0.004301,
+   "seconds": 10.3,
+   "context": [
+    "CLAUDE.md › Жёсткие правила",
+    "CLAUDE.md › Наследование кода",
+    "CLAUDE.md › Грабли, на которые уже наступали",
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/providers.py › строки 49–62 · def get_api_key",
+    "31-dev-assistant/assistant.py › строки 1–64 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release",
+    "31-dev-assistant/project_server.py › строки 158–212 · def run_tool",
+    "01-llm-api-request/README.md › Запуск — веб-интерфейс + Как это работает"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain, инструменты grep/tail_log в MCP-сервер, эндпоинт /api/summary в web.py и новый модуль fetch_docs.py. Есть несколько серьёзных проблем: утечка API-ключа в stdout, command injection в grep, path traversal в tail_log и нарушение правила «только стандартная библиотека» (requests).",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "API-ключ печатается в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") выводит значение ключа DEEPSEEK_API_KEY в консоль сервера/логи. Это прямая утечка секрета.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "severity": "high",
+      "title": "Command injection в grep через shell=True",
+      "detail": "query подставляется в f\"grep -rn '{query}' {REPO} | head -50\" и выполняется с shell=True. Значение приходит из аргументов инструмента, которые формирует LLM (и, через /grep, пользователь). Кавычка/`;`/`$()` в query позволяют выполнить произвольную команду. Нужно передавать список аргументов без shell или экранировать.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] без проверки, что итоговый путь внутри REPO. Путь вида ../../etc/passwd или абсолютный путь читает произвольный файл. В read_file такая проверка есть (REPO not in target.parents), здесь её нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 233,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "target.read_text(...) и int(arguments.get(\"lines\", 50)) не обёрнуты в try: отсутствие файла, нечисловое lines или отрицательное значение приведут к необработанному исключению и падению обработки инструмента.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "high",
+      "title": "Использование сторонней библиотеки requests",
+      "detail": "Модуль импортирует requests, что нарушает правило «только стандартная библиотека Python». В проекте уже есть urllib.request (используется в этом же файле в fetch).",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "requests.get без обработки ошибок и без User-Agent",
+      "detail": "latest_release не ловит сетевые ошибки и не проверяет status_code; data.json() упадёт на не-JSON ответе. Также нет User-Agent — по граблям проекта GitHub/Cloudflare может отдать 403.",
+      "rule": "CLAUDE.md: 403 error code 1010 от Groq — передавать свой User-Agent.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "severity": "medium",
+      "title": "/api/summary обходит агента и собирает messages в web.py",
+      "detail": "Эндпоинт сам формирует messages, знает URL провайдера и разбирает ответ choices[0].message.content — это нарушение архитектурной границы: web.py не должен собирать messages и знать URL провайдеров. Логику стоит вынести в метод агента.",
+      "rule": "CLAUDE.md: web.py не собирает messages, не знает URL провайдеров и не разбирает их ответы.",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Дублирование логики вызова провайдера в web.py",
+      "detail": "Прямой вызов providers.post с хардкодом URL и модели дублирует то, что уже инкапсулировано в assistant/providers. Следует добавить метод агента (например, summarize) и вызывать его из web.py.",
+      "rule": "CLAUDE.md: Логика дня живёт отдельным модулем; web.py вызывает методы агента и рисует результат.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Новый модуль вне описанной структуры дня",
+      "detail": "fetch_docs.py не входит в перечень модулей наследования (providers/toon/storage/memory/profiles/taskstate/agent/web/make_cast) и тянет внешнюю зависимость. Стоит либо согласовать добавление, либо реализовать на stdlib и явно описать в README дня.",
+      "rule": "CLAUDE.md: Наследование кода — перечень модулей дня.",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидация пути в /explain",
+      "detail": "explain(rest) не проверяет, что rest непустой и что это путь внутри репозитория; пустой rest уйдёт в read_file и вернёт ошибку инструмента. Стоит явно проверять и возвращать понятное сообщение.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 113,
+      "title": "EXPLAIN.format съедает фигурные скобки JSON-примера",
+      "detail": "В EXPLAIN есть {\"summary\": ...} — str.format() подставит туда path/code и сломает JSON-пример (грабли проекта с KeyError '\"layer\"'). Лучше использовать .replace(\"<<PATH>>\", …) / .replace(\"<<CODE>>\", …).",
+      "rule": "CLAUDE.md: str.format() съедает фигурные скобки JSON-примера.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "title": "Ограничение вывода grep",
+      "detail": "head -50 через shell — не переносимо и смешивает логику. Лучше выполнять grep без shell и обрезать результат в Python, а также ограничивать длину строки запроса.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 15,
+      "title": "Обработка TimeoutError",
+      "detail": "urllib.request.urlopen может бросить TimeoutError, который не наследник URLError — стоит ловить отдельно, как описано в граблях проекта.",
+      "rule": "CLAUDE.md: Таймаут не ловится except URLError — ловить отдельно.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Тесты и документация для новых эндпоинтов",
+      "detail": "Добавлены /api/summary, /grep, /explain, /tail_log — стоит покрыть их тестами и описать в README дня, включая ограничения (лимиты, безопасность путей).",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 8689,
+    "completion_tokens": 1777,
+    "cost": 0.004301,
+    "seconds": 9.5,
+    "prompt_chars": 30264
+   }
+  },
+  {
+   "pass": 3,
+   "mode": "no-rag",
+   "found": {
+    "shell-injection": 1,
+    "path-traversal": 2,
+    "format-braces": null,
+    "key-leak": 3,
+    "timeout-not-caught": null,
+    "web-boundary": 8,
+    "requests-dep": 5
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 14,
+   "extra_valid": 9,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 3892,
+   "cost": 0.002312,
+   "seconds": 8.6,
+   "context": [],
+   "result": {
+    "summary": "PR добавляет команду /explain в ассистента, инструменты grep и tail_log в MCP-сервер, новый скрипт fetch_docs.py и эндпоинт /api/summary в web.py. Есть серьёзные проблемы безопасности: shell-инъекция в grep, утечка API-ключа в лог, path traversal в tail_log, а также нарушение правила «только стандартная библиотека» зависимостью requests.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "severity": "high",
+      "title": "Shell-инъекция в инструменте grep",
+      "detail": "query подставляется в f-строку и передаётся в subprocess.run(..., shell=True). Значение вида `'; rm -rf / #` или `$(...)` выполнит произвольную команду. Нужно использовать список аргументов без shell=True: subprocess.run([\"grep\", \"-rn\", query, str(REPO)], ...).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] не проверяет, что итоговый путь остаётся внутри REPO. Путь вида ../../etc/passwd или абсолютный путь позволит читать произвольные файлы. Нужно resolve() и проверка is_relative_to(REPO).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает секретный ключ в лог/консоль. Секреты нельзя логировать.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "Необработанные исключения при чтении файла",
+      "detail": "target.read_text без try/except: отсутствующий файл, каталог или бинарный файл приведут к необработанному исключению и падению инструмента. Также int(arguments.get(\"lines\", 50)) упадёт на нечисловом значении.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "medium",
+      "title": "Зависимость requests вне стандартной библиотеки",
+      "detail": "Импорт requests нарушает правило проекта «только стандартная библиотека». Тот же запрос можно сделать через urllib.request, который уже импортирован.",
+      "rule": "CLAUDE.md: только стандартная библиотека",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "Нет обработки ошибок HTTP в latest_release",
+      "detail": "requests.get без проверки status_code и без try/except: при 404/403/сетевой ошибке data.json() упадёт или вернёт неожиданный результат. Также нет проверки, что ответ — JSON-объект.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Необработанные ошибки при вызове providers.post",
+      "detail": "Ответ providers.post индексируется как reply[\"choices\"][0][\"message\"][\"content\"] без проверки структуры и без обработки исключений сети/API. При ошибке API клиент получит 500 без понятного сообщения.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Дублирование логики вызова LLM в web.py",
+      "detail": "Эндпоинт /api/summary напрямую вызывает providers.post с хардкодом URL и модели, дублируя логику assistant/providers. Стоит вынести в метод ассистента, чтобы не размазывать ответственность и не хардкодить модель в HTTP-слое.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "explain смешивает I/O, промпт и вызов модели",
+      "detail": "Метод explain сам читает файл через bridge, печатает отладку и формирует ответ. Логичнее переиспользовать существующий механизм инструментов/промптов, а не плодить отдельный путь.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Новый скрипт вне структуры проекта",
+      "detail": "fetch_docs.py добавляет внешнюю зависимость и отдельный источник данных, не интегрированный с RAG-индексом. Стоит либо встроить в существующий пайплайн индексации, либо явно задокументировать его роль.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Убрать отладочный print",
+      "detail": "Печать ключа и пути — отладочный код, который не должен попадать в PR. Заменить на logging без секретов или удалить.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 226,
+      "title": "Ограничить вывод grep и обработать таймаут",
+      "detail": "subprocess.run с timeout=20 может бросить TimeoutExpired — стоит обернуть в try/except и вернуть понятное сообщение. Также head -50 через shell избыточен, если убрать shell=True.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 20,
+      "title": "Добавить тесты и обработку ошибок",
+      "detail": "Для fetch/fetch_all/latest_release нет тестов; стоит покрыть случаи сетевой ошибки, не-200 ответа и невалидного JSON.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Валидировать вход /api/summary",
+      "detail": "question берётся из payload без ограничения длины и без проверки на пустоту — стоит добавить базовую валидацию и лимит.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 2373,
+    "completion_tokens": 1519,
+    "cost": 0.002312,
+    "seconds": 8.5,
+    "prompt_chars": 8003
+   }
+  },
+  {
+   "pass": 3,
+   "mode": "bm25",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": null,
+    "key-leak": 1,
+    "timeout-not-caught": null,
+    "web-boundary": 10,
+    "requests-dep": 5
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 14,
+   "extra_valid": 9,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 9064,
+   "cost": 0.003828,
+   "seconds": 9.6,
+   "context": [
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "CLAUDE.md › Жёсткие правила",
+    "31-dev-assistant/assistant.py › строки 166–201 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/docs/architecture.md › Раскладка репозитория",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release",
+    "31-dev-assistant/project_server.py › строки 1–62 · шапка модуля"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain в ассистента, инструменты grep и tail_log в MCP-сервер, эндпоинт /api/summary в веб-интерфейс и новый модуль fetch_docs.py. Есть несколько серьёзных проблем: утечка API-ключа в stdout, command injection в grep, отсутствие проверки пути в tail_log и нарушение правила «только стандартная библиотека» через requests.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 111,
+      "severity": "high",
+      "title": "Утечка API-ключа в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") печатает значение секретного ключа в stdout/логи. Это прямое нарушение правила «Ключи не печатать в ответах» и утечка секрета в логи, консоль и потенциально в веб-ответы.",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Command injection в grep через shell=True",
+      "detail": "subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True, ...) подставляет query напрямую в shell-команду. Значение вида `'; rm -rf ~ #` или `$(...)` выполнит произвольную команду. Нужно передавать аргументы списком без shell=True и/или экранировать.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "tail_log читает произвольный путь без проверки",
+      "detail": "target = REPO / arguments[\"path\"] без resolve() и проверки, что путь внутри REPO и не в FORBIDDEN (.env, .git). Через `../.env` или абсолютный путь можно прочитать ключи и любые файлы системы. В read_file такая проверка есть — здесь её нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "tail_log не обрабатывает отсутствие файла и отрицательные lines",
+      "detail": "target.read_text(...) бросит FileNotFoundError/IsADirectoryError, а int(arguments.get(\"lines\", 50)) при отрицательном значении вернёт хвост с неожиданной семантикой (lines[-(-5):] = lines[5:]). Нужны проверки существования файла и границ lines.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 7,
+      "severity": "high",
+      "title": "Использование сторонней библиотеки requests",
+      "detail": "import requests нарушает жёсткое правило проекта «Только стандартная библиотека Python. Никакого pip». В fetch() уже используется urllib.request — latest_release тоже должен использовать urllib.request.",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 31,
+      "severity": "medium",
+      "title": "latest_release не обрабатывает сетевые ошибки и неверный JSON",
+      "detail": "requests.get без try/except: при недоступности сети или не-JSON ответе (например, rate limit GitHub) упадёт исключение. Также нет проверки status_code. fetch() рядом обрабатывает URLError — здесь этого нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "/api/summary не проверяет пустой вопрос и ответ API",
+      "detail": "question может быть пустой строкой — тогда context+question уйдёт в API впустую. Также reply[\"choices\"][0][\"message\"][\"content\"] упадёт с KeyError/IndexError, если API вернёт ошибку в другом формате. Стоит валидировать question и ответ.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 7,
+      "title": "Смешение urllib и requests в одном модуле",
+      "detail": "Модуль одновременно использует urllib.request (fetch) и requests (latest_release). Даже если бы requests был разрешён, дублирование HTTP-клиентов в одном файле — плохая практика. Следует унифицировать на urllib.request.",
+      "rule": "CLAUDE.md: HTTP — urllib.request.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "explain дублирует логику вызова провайдера",
+      "detail": "Метод explain вручную собирает ответ (prompt_tokens, completion_tokens, cost, seconds), дублируя структуру, которую формирует _finish/help. Лучше переиспользовать общий хелпер для вызова модели и сборки результата.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "/api/summary обходит DevAssistant и обращается к providers напрямую",
+      "detail": "Эндпоинт сам вызывает providers.post и формирует сообщения, минуя DevAssistant. Это размывает ответственность: логика работы с моделью должна жить в assistant.py, а web.py — только транспорт.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидировать path в /explain",
+      "detail": "explain не проверяет, что path непустой и не выходит за пределы репозитория. read_file в project_server это делает, но стоит явно отклонять пустой path с понятной ошибкой.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "title": "Ограничить вывод grep и обработать таймаут",
+      "detail": "subprocess.run с timeout=20 может бросить TimeoutExpired — стоит ловить и возвращать понятное сообщение. Также head -50 через shell можно заменить на срез в Python.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 29,
+      "title": "Добавить тесты/селфтест для fetch_docs",
+      "detail": "Модуль без тестов и без --selftest, в отличие от project_server.py. Стоит добавить проверку парсинга ответов и обработки ошибок сети.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 199,
+      "title": "Ограничить размер тела запроса",
+      "detail": "int(self.headers.get(\"Content-Length\") or 0) без верхней границы позволяет отправить огромный payload и исчерпать память. Стоит ограничить максимальный размер тела.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 7401,
+    "completion_tokens": 1663,
+    "cost": 0.003828,
+    "seconds": 9.5,
+    "prompt_chars": 26912
+   }
+  },
+  {
+   "pass": 3,
+   "mode": "bge-m3",
+   "found": {
+    "shell-injection": 1,
+    "path-traversal": 2,
+    "format-braces": null,
+    "key-leak": 3,
+    "timeout-not-caught": null,
+    "web-boundary": 9,
+    "requests-dep": 8
+   },
+   "recall": 5,
+   "recall_rule": 3,
+   "findings": 14,
+   "extra_valid": 9,
+   "extra_wrong": 0,
+   "line_ok": 14,
+   "tokens": 8771,
+   "cost": 0.003782,
+   "seconds": 11.0,
+   "context": [
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "CLAUDE.md › Жёсткие правила",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/providers.py › строки 49–62 · def get_api_key",
+    "17-mcp-tool/README.md › Безопасность",
+    "31-dev-assistant/assistant.py › строки 1–64 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain, инструменты grep и tail_log в MCP-сервер, эндпоинт /api/summary в веб-сервере и новый модуль fetch_docs.py. Есть серьёзные проблемы безопасности (shell-инъекция в grep, отсутствие проверки пути в tail_log, утечка API-ключа в лог) и нарушение правила о стандартной библиотеке.",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Shell-инъекция в инструменте grep",
+      "detail": "Запрос от модели подставляется в f-строку и выполняется через shell=True: `grep -rn '{query}' {REPO} | head -50`. Кавычка в query (например `'; rm -rf / #`) ломает команду и позволяет выполнить произвольный код. Аргументы инструмента приходят от LLM — ненадёжного источника. Нужно передавать список аргументов без shell, как это сделано в остальных инструментах проекта.",
+      "rule": "17-mcp-tool/README.md: «Команды собираются списком аргументов, без оболочки, поэтому подставить лишнее невозможно»",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "tail_log читает файл без проверки пути",
+      "detail": "`target = REPO / arguments['path']` не проверяется через safe_path и не проверяется на выход за пределы REPO. Путь вида `../../etc/passwd` или абсолютный путь позволит прочитать произвольный файл. В read_file такая проверка есть (`if REPO not in target.parents`), здесь её нет.",
+      "rule": "17-mcp-tool/README.md: «пути не выпускаются за пределы репозитория»",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 111,
+      "severity": "high",
+      "title": "API-ключ печатается в stdout",
+      "detail": "`print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\")` выводит секретный ключ в лог/консоль. Это прямая утечка секрета, к тому же ключ не нужен для работы explain — providers.call сам его достаёт.",
+      "rule": "CLAUDE.md: «Ключи не печатать в ответах»",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "tail_log падает на несуществующем файле",
+      "detail": "`target.read_text(...)` без try/except: если файла нет или это каталог, вылетит необработанное FileNotFoundError/IsADirectoryError вместо понятного ValueError, как в read_file.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 233,
+      "severity": "medium",
+      "title": "tail_log: отрицательный lines даёт неверный срез",
+      "detail": "`int(arguments.get('lines', 50))` не ограничивается снизу. При lines=-1 срез `lines[-(-1):]` = `lines[1:]` вернёт почти весь файл вместо последней строки. Нужен clamp как у read_file.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "severity": "medium",
+      "title": "/explain без аргумента читает пустой путь",
+      "detail": "`self.explain(rest)` вызывается даже когда rest пустой; read_file получит path='' и вернёт ошибку от MCP. Стоит проверять пустой путь и возвращать usage.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "/api/summary не ограничивает размер ответа и не проверяет пустой вопрос",
+      "detail": "question может быть пустой строкой, тогда в модель уйдёт только контекст; также нет ограничения на длину context — при большом числе хитов запрос может превысить лимит токенов и упасть с 400. Стоит валидировать question и обрезать context.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "high",
+      "title": "Использование requests вместо стандартной библиотеки",
+      "detail": "Модуль импортирует `requests`, что нарушает жёсткое правило проекта: только стандартная библиотека, никакого pip. В том же файле уже используется urllib.request — latest_release тоже должен быть на urllib.",
+      "rule": "CLAUDE.md: «Только стандартная библиотека Python. Никакого pip, requirements.txt нет»",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "severity": "medium",
+      "title": "Дублирование логики вызова DeepSeek в web.py",
+      "detail": "web.py напрямую формирует запрос к api.deepseek.com и дёргает providers.post, тогда как в проекте есть providers.call и DevAssistant. Логика вызова модели дублируется и обходит единый слой providers, что усложняет поддержку (модель, температура, обработка ошибок).",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "severity": "low",
+      "title": "explain смешивает MCP-вызов, печать и вызов модели",
+      "detail": "Метод explain сам читает файл через bridge, печатает в stdout и вызывает провайдера — смешение ответственности. Логичнее вынести чтение/вызов в отдельные шаги, как в help/_finish.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Добавить /explain в usage()",
+      "detail": "Команда /explain не упомянута в usage() и в docstring модуля — пользователь не узнает о ней из /help.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "title": "Ограничить вывод grep и экранировать запрос",
+      "detail": "Даже после перехода на список аргументов стоит ограничивать длину query и объём вывода, чтобы модель не забивала контекст.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 29,
+      "title": "Обработать ошибки HTTP в latest_release",
+      "detail": "requests.get без проверки status_code и без try/except: при 404/403 вернётся JSON без tag_name, а при сетевой ошибке — исключение. Стоит обрабатывать ошибки и проверять статус.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 209,
+      "title": "Покрыть /api/summary тестами",
+      "detail": "Новый эндпоинт не покрыт тестами; стоит добавить проверки на пустой вопрос, отсутствие ключа и ошибку провайдера.",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 7067,
+    "completion_tokens": 1704,
+    "cost": 0.003782,
+    "seconds": 10.1,
+    "prompt_chars": 25021
+   }
+  },
+  {
+   "pass": 3,
+   "mode": "pinned",
+   "found": {
+    "shell-injection": 2,
+    "path-traversal": 3,
+    "format-braces": 12,
+    "key-leak": 1,
+    "timeout-not-caught": 14,
+    "web-boundary": 7,
+    "requests-dep": 5
+   },
+   "recall": 7,
+   "recall_rule": 5,
+   "findings": 15,
+   "extra_valid": 8,
+   "extra_wrong": 0,
+   "line_ok": 15,
+   "tokens": 10690,
+   "cost": 0.004547,
+   "seconds": 11.9,
+   "context": [
+    "CLAUDE.md › Жёсткие правила",
+    "CLAUDE.md › Наследование кода",
+    "CLAUDE.md › Грабли, на которые уже наступали",
+    "31-dev-assistant/assistant.py › строки 67–118 · class DevAssistant",
+    "31-dev-assistant/fetch_docs.py › строки 1–12 · шапка модуля",
+    "31-dev-assistant/project_server.py › строки 63–114 · шапка модуля",
+    "31-dev-assistant/web.py › строки 169–221 · class Handler",
+    "31-dev-assistant/assistant.py › строки 119–165 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 15–22 · def fetch",
+    "31-dev-assistant/project_server.py › строки 213–238 · шапка модуля",
+    "31-dev-assistant/providers.py › строки 49–62 · def get_api_key",
+    "31-dev-assistant/assistant.py › строки 1–64 · шапка модуля",
+    "31-dev-assistant/fetch_docs.py › строки 29–35 · def latest_release",
+    "31-dev-assistant/project_server.py › строки 158–212 · def run_tool",
+    "01-llm-api-request/README.md › Запуск — веб-интерфейс + Как это работает"
+   ],
+   "result": {
+    "summary": "PR добавляет команду /explain, инструменты grep/tail_log в MCP-сервер, эндпоинт /api/summary в web.py и новый модуль fetch_docs.py. Есть несколько серьёзных проблем: утечка API-ключа в stdout, command injection в grep, path traversal в tail_log и нарушение правила «только стандартная библиотека» (requests).",
+    "bugs": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 110,
+      "severity": "high",
+      "title": "API-ключ печатается в stdout",
+      "detail": "print(f\"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}\") выводит значение ключа DEEPSEEK_API_KEY в консоль сервера/логи. Это прямая утечка секрета, нарушающая правило «Ключи не печатать в ответах».",
+      "rule": "CLAUDE.md: Ключи только в корневом .env … Ключи не печатать в ответах.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "severity": "high",
+      "title": "Command injection в grep через shell=True",
+      "detail": "subprocess.run(f\"grep -rn '{query}' {REPO} | head -50\", shell=True) подставляет query из аргументов инструмента (а туда попадает пользовательский ввод через /grep и function calling модели) прямо в shell-команду. Кавычка, ;, $() и т.п. позволяют выполнить произвольную команду. Нужно передавать аргументы списком без shell=True.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 231,
+      "severity": "high",
+      "title": "Path traversal в tail_log",
+      "detail": "target = REPO / arguments[\"path\"] без проверки через safe_path и без проверки, что итоговый путь внутри REPO. Путь вида ../../etc/passwd или абсолютный путь позволит читать произвольные файлы. В read_file такая проверка есть (REPO not in target.parents), здесь её нет.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 232,
+      "severity": "medium",
+      "title": "Необработанные исключения в tail_log",
+      "detail": "target.read_text(...) и int(arguments.get(\"lines\", 50)) не обёрнуты в try: отсутствие файла, нечисловое lines или отрицательное значение приведут к необработанному исключению и падению обработки инструмента. Стоит валидировать lines (clamp) и ловить OSError.",
+      "rule": "",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 6,
+      "severity": "high",
+      "title": "Использование сторонней библиотеки requests",
+      "detail": "import requests нарушает жёсткое правило «Только стандартная библиотека Python. Никакого pip». В проекте HTTP делается через urllib.request (что и используется в fetch()). latest_release тоже использует requests — заменить на urllib.request.",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python. Никакого pip, requirements.txt нет. HTTP — urllib.request.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 30,
+      "severity": "medium",
+      "title": "latest_release не обрабатывает ошибки сети и JSON",
+      "detail": "requests.get(...).json() без try/except: при недоступности сети, не-200 ответе или не-JSON теле получим необработанное исключение. Также нет User-Agent, что для api.github.com может привести к 403.",
+      "rule": "CLAUDE.md: 403 error code 1010 … Передавать свой User-Agent в заголовках.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "severity": "medium",
+      "title": "/api/summary обходит агента и дублирует логику провайдера",
+      "detail": "Эндпоинт напрямую собирает messages, знает URL DeepSeek и разбирает ответ reply[\"choices\"][0][\"message\"][\"content\"]. Это нарушает архитектурную границу: web.py не должен собирать messages, знать URL провайдеров и разбирать их ответы — он должен вызывать методы агента.",
+      "rule": "CLAUDE.md: web.py не собирает messages, не знает URL провайдеров и не разбирает их ответы.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 205,
+      "severity": "low",
+      "title": "Пустой контекст при отсутствии хитов",
+      "detail": "Если index.search вернёт пустой список, context будет пустой строкой и модель получит только вопрос без фрагментов. Стоит явно обрабатывать случай отсутствия релевантных фрагментов.",
+      "rule": "",
+      "check": "ok"
+     }
+    ],
+    "architecture": [
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Логика дня протекает в web.py",
+      "detail": "Новый эндпоинт /api/summary реализует сборку промпта, вызов провайдера и разбор ответа прямо в web.py. По правилам проекта логика должна жить в отдельном модуле (например, метод агента), а web.py — только вызывать и рисовать.",
+      "rule": "CLAUDE.md: Архитектурная граница, которую нельзя ломать: web.py не собирает messages, не знает URL провайдеров и не разбирает их ответы.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 1,
+      "title": "Новый модуль с внешней зависимостью",
+      "detail": "fetch_docs.py тянет requests, что ломает принцип «только стандартная библиотека» и создаёт прецедент. Если функциональность нужна, реализовать на urllib.request, как в fetch().",
+      "rule": "CLAUDE.md: Только стандартная библиотека Python.",
+      "check": "ok"
+     }
+    ],
+    "recommendations": [
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 108,
+      "title": "Валидация пути в /explain",
+      "detail": "explain() передаёт path в read_file без проверки на пустую строку. При пустом rest вызов read_file с пустым path даст невнятную ошибку — стоит явно требовать путь и возвращать подсказку.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/assistant.py",
+      "line": 113,
+      "title": "EXPLAIN.format съедает фигурные скобки JSON-примера",
+      "detail": "В EXPLAIN есть JSON-пример {\"summary\": ...}, а подстановка идёт через .format(path=..., code=...). Фигурные скобки в шаблоне нужно экранировать ({{ }}) или подставлять через .replace, иначе получим KeyError/ValueError. Это известные грабли проекта.",
+      "rule": "CLAUDE.md: KeyError: '\"layer\"' в промпте — str.format() съедает фигурные скобки JSON-примера.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/project_server.py",
+      "line": 225,
+      "title": "Ограничение вывода grep",
+      "detail": "head -50 через shell-пайп — плохая практика; лучше ограничивать число строк в Python после subprocess.run без shell, чтобы не зависеть от наличия head и не смешивать shell-конвейер с аргументами пользователя.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/fetch_docs.py",
+      "line": 15,
+      "title": "Логирование ошибок сети",
+      "detail": "fetch() ловит только URLError; TimeoutError не является наследником URLError и не будет пойман. Стоит ловить отдельно, как указано в граблях проекта.",
+      "rule": "CLAUDE.md: Таймаут не ловится except URLError — TimeoutError не наследник URLError — ловить отдельно.",
+      "check": "ok"
+     },
+     {
+      "file": "31-dev-assistant/web.py",
+      "line": 202,
+      "title": "Тесты для новых эндпоинтов и инструментов",
+      "detail": "Добавлены /api/summary, /grep, /tail_log, /explain — стоит покрыть их тестами, включая негативные сценарии (пустой query, отсутствующий файл, path traversal).",
+      "check": "ok"
+     }
+    ],
+    "cut": [],
+    "prompt_tokens": 8689,
+    "completion_tokens": 2001,
+    "cost": 0.004547,
+    "seconds": 11.1,
+    "prompt_chars": 30264
+   }
+  }
+ ],
+ "minutes": 3.7
+}

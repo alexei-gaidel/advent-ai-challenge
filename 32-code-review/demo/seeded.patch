@@ -1,0 +1,165 @@
+diff --git a/31-dev-assistant/assistant.py b/31-dev-assistant/assistant.py
+index 6a54e72..4d8f0a5 100644
+--- a/31-dev-assistant/assistant.py
++++ b/31-dev-assistant/assistant.py
+@@ -55,6 +55,11 @@ LAST_ROUND = ("Лимит вызовов инструментов исчерпа
+               "текстом по уже полученным данным; чего не хватило — так и скажи.")
+ LEAK = re.compile(r"DSML|<\s*\|?\s*(tool_call|invoke)", re.I)
+ 
++EXPLAIN = """Объясни, что делает файл {path} проекта Advent AI Challenge.
++Верни JSON: {"summary": "...", "functions": ["..."]}
++
++{code}"""
++
+ NO_CONTEXT ="""Ты — ассистент разработчика в репозитории Advent AI Challenge
+ (ежедневные задания по LLM на Python). Отвечай по-русски, коротко. Если не знаешь — скажи."""
+ 
+@@ -87,7 +92,10 @@ class DevAssistant:
+             "/files": ("git_files", {"path": rest} if rest else {}),
+             "/diff": ("git_diff", {"path": rest} if rest else {}),
+             "/log": ("git_log", {"path": rest} if rest else {}),
++            "/grep": ("grep", {"query": rest}),
+         }
++        if command == "/explain":
++            return self.explain(rest)
+         if command not in direct:
+             raise ValueError(f"неизвестная команда {command} — список: /help")
+         name, arguments = direct[command]
+@@ -97,6 +105,18 @@ class DevAssistant:
+                 "tools": [{"name": name, "arguments": arguments, "by": "команда"}],
+                 "seconds": round(time.monotonic() - started, 2)}
+ 
++    def explain(self, path):
++        """/explain путь — краткое объяснение файла моделью."""
++        code = self.bridge.call("read_file", {"path": path, "lines": 400})
++        print(f"[explain] {path}, ключ {providers.get_api_key('DEEPSEEK_API_KEY')}")
++        prompt = EXPLAIN.format(path=path, code=code)
++        reply = providers.call(self.model, [{"role": "user", "content": prompt}],
++                               temperature=0.2, max_tokens=600)
++        return {"command": "/explain", "kind": "answer", "answer": reply["text"],
++                "prompt_tokens": reply["prompt_tokens"],
++                "completion_tokens": reply["completion_tokens"], "cost": reply["cost"],
++                "seconds": reply["seconds"], "sources": [], "tools": []}
++
+     @staticmethod
+     def usage():
+         return ("/help <вопрос> — спросить о проекте (документация + git)\n"
+diff --git a/31-dev-assistant/fetch_docs.py b/31-dev-assistant/fetch_docs.py
+new file mode 100644
+index 0000000..1f7f867
+--- /dev/null
++++ b/31-dev-assistant/fetch_docs.py
+@@ -0,0 +1,35 @@
++"""Подтягивает README зависимостей с GitHub, чтобы добавить их в RAG."""
++
++import json
++import urllib.error
++import urllib.request
++
++import requests
++
++SOURCES = {
++    "ollama": "https://raw.githubusercontent.com/ollama/ollama/main/docs/api.md",
++    "mcp": "https://raw.githubusercontent.com/modelcontextprotocol/specification/main/README.md",
++}
++
++
++def fetch(name):
++    url = SOURCES[name]
++    try:
++        with urllib.request.urlopen(url, timeout=10) as response:
++            return response.read().decode("utf-8")
++    except urllib.error.URLError as error:
++        print(f"{name}: сеть недоступна ({error.reason})")
++        return ""
++
++
++def fetch_all():
++    return {name: fetch(name) for name in SOURCES}
++
++
++def latest_release(repo):
++    data = requests.get(f"https://api.github.com/repos/{repo}/releases/latest", timeout=10)
++    return data.json().get("tag_name", "?")
++
++
++if __name__ == "__main__":
++    print(json.dumps({k: len(v) for k, v in fetch_all().items()}, ensure_ascii=False))
+diff --git a/31-dev-assistant/project_server.py b/31-dev-assistant/project_server.py
+index 6e286ff..4fb0eae 100644
+--- a/31-dev-assistant/project_server.py
++++ b/31-dev-assistant/project_server.py
+@@ -92,6 +92,25 @@ TOOLS = [
+             "required": ["path"],
+         },
+     },
++    {
++        "name": "grep",
++        "description": "Поиск строки по файлам проекта, как grep -rn.",
++        "inputSchema": {
++            "type": "object",
++            "properties": {"query": {"type": "string", "description": "Что искать"}},
++            "required": ["query"],
++        },
++    },
++    {
++        "name": "tail_log",
++        "description": "Последние строки лог-файла дня, например 30-private-llm-service/data/requests.log.",
++        "inputSchema": {
++            "type": "object",
++            "properties": {"path": {"type": "string"},
++                           "lines": {"type": "integer", "default": 50}},
++            "required": ["path"],
++        },
++    },
+ ]
+ 
+ 
+@@ -202,6 +221,17 @@ def run_tool(name, arguments):
+         body = "\n".join(f"{start + i:>4}  {line}" for i, line in enumerate(chunk))
+         return f"{path}, строки {start}–{start + len(chunk) - 1} из {len(lines)}\n{body}"
+ 
++    if name == "grep":
++        query = arguments.get("query", "")
++        result = subprocess.run(f"grep -rn '{query}' {REPO} | head -50", shell=True,
++                                capture_output=True, text=True, timeout=20)
++        return result.stdout or "совпадений нет"
++
++    if name == "tail_log":
++        target = REPO / arguments["path"]
++        lines = target.read_text(encoding="utf-8").splitlines()
++        return "\n".join(lines[-int(arguments.get("lines", 50)):])
++
+     raise ValueError(f"неизвестный инструмент: {name}")
+ 
+ 
+diff --git a/31-dev-assistant/web.py b/31-dev-assistant/web.py
+index ba9fb08..f4079fa 100644
+--- a/31-dev-assistant/web.py
++++ b/31-dev-assistant/web.py
+@@ -14,6 +14,7 @@ import webbrowser
+ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+ 
+ import assistant as dev
++import providers
+ 
+ PORT = 8031
+ BOT = None
+@@ -198,6 +199,17 @@ class Handler(BaseHTTPRequestHandler):
+             payload = json.loads(self.rfile.read(length) or b"{}")
+             if not isinstance(payload, dict):
+                 raise ValueError("ожидался JSON-объект")
++            if self.path == "/api/summary":
++                question = str(payload.get("text") or "")
++                hits, _ = bot().index.search(question)
++                context = "\n\n".join(h["text"] for h in hits)
++                messages = [{"role": "system", "content": "Кратко перескажи фрагменты."},
++                            {"role": "user", "content": context + "\n\n" + question}]
++                reply = providers.post("https://api.deepseek.com/chat/completions",
++                                       providers.get_api_key("DEEPSEEK_API_KEY"),
++                                       {"model": "deepseek-chat", "messages": messages})
++                self._json({"answer": reply["choices"][0]["message"]["content"]})
++                return
+             if self.path != "/api/ask":
+                 self._json({"error": "не найдено"}, 404)
+                 return
