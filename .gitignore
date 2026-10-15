@@ -83,3 +83,8 @@ venv/
 32-code-review/data/last_review.json
 32-code-review/agents.db*
 32-code-review/custom_roles.json
+33-support-assistant/index.db*
+33-support-assistant/data/crm_live.json
+33-support-assistant/data/crm_live.tmp
+33-support-assistant/agents.db*
+33-support-assistant/custom_roles.json

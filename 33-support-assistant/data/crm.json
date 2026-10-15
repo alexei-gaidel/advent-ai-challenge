@@ -1,0 +1,118 @@
+{
+ "users": [
+  {"id": "u-01", "name": "Анна Ковалёва", "email": "anna@kovaleva.dev", "plan": "Личный",
+   "network": "домашняя сеть", "since": "2026-09-02",
+   "keys": [{"name": "anna-laptop", "key": "sk-local-3f9a…b21", "rpm": 10, "status": "отозван",
+             "changed": "2026-10-10", "reason": "ключ найден в публичном репозитории на GitHub"}]},
+  {"id": "u-02", "name": "Борис Лим", "email": "boris@lim.studio", "plan": "Команда",
+   "network": "домашняя сеть", "since": "2026-09-15",
+   "keys": [{"name": "boris-bot", "key": "sk-local-77c2…e04", "rpm": 60, "status": "активен",
+             "changed": "2026-09-15", "reason": ""}]},
+  {"id": "u-03", "name": "Вера Орлова", "email": "vera.orlova@mail.example", "plan": "Личный",
+   "network": "домашняя сеть", "since": "2026-09-20",
+   "keys": [{"name": "vera-notebook", "key": "sk-local-a1d0…9fe", "rpm": 10, "status": "активен",
+             "changed": "2026-09-20", "reason": ""}]},
+  {"id": "u-04", "name": "Глеб Тихонов", "email": "gleb@tikhonov.pro", "plan": "Команда",
+   "network": "домашняя сеть", "since": "2026-09-05",
+   "keys": [{"name": "gleb-summarizer", "key": "sk-local-5b6e…c11", "rpm": 60, "status": "активен",
+             "changed": "2026-09-05", "reason": ""}]},
+  {"id": "u-05", "name": "Дина Сафина", "email": "dina@safina.team", "plan": "Команда",
+   "network": "домашняя сеть", "since": "2026-09-28",
+   "keys": [{"name": "dina-chat", "key": "sk-local-0e44…7a2", "rpm": 60, "status": "активен",
+             "changed": "2026-09-28", "reason": ""}]},
+  {"id": "u-06", "name": "Егор Мельников", "email": "egor@melnikov.work", "plan": "Личный",
+   "network": "офис, вне домашней сети", "since": "2026-10-01",
+   "keys": [{"name": "egor-office", "key": "sk-local-c3a8…512", "rpm": 10, "status": "активен",
+             "changed": "2026-10-01", "reason": ""}]},
+  {"id": "u-07", "name": "Жанна Ли", "email": "zhanna@qa-lab.example", "plan": "Нагрузочный",
+   "network": "домашняя сеть", "since": "2026-10-03",
+   "keys": [{"name": "loadtest", "key": "sk-local-9d1f…0bb", "rpm": 600, "status": "активен",
+             "changed": "2026-10-03", "reason": ""}]},
+  {"id": "u-08", "name": "Захар Белов", "email": "zakhar@belov.dev", "plan": "Личный",
+   "network": "домашняя сеть", "since": "2026-10-06",
+   "keys": [{"name": "zakhar-old", "key": "sk-local-46b2…d7e", "rpm": 10, "status": "заменён",
+             "changed": "2026-10-12", "reason": "плановая ротация, новый ключ выдан на почту"},
+            {"name": "zakhar-new", "key": "sk-local-e815…3c9", "rpm": 10, "status": "активен",
+             "changed": "2026-10-12", "reason": ""}]}
+ ],
+ "events": {
+  "u-01": [
+   {"time": "2026-10-09 18:02", "key": "anna-laptop", "path": "/v1/chat/completions", "status": 200},
+   {"time": "2026-10-14 09:11", "key": "-", "path": "/v1/chat/completions", "status": 401, "error": "invalid_api_key"},
+   {"time": "2026-10-14 09:12", "key": "-", "path": "/v1/chat/completions", "status": 401, "error": "invalid_api_key"}
+  ],
+  "u-02": [
+   {"time": "2026-10-14 12:40", "key": "boris-bot", "path": "/v1/chat/completion", "status": 404, "error": "not_found"},
+   {"time": "2026-10-14 12:41", "key": "boris-bot", "path": "/v1/chat/completion", "status": 404, "error": "not_found"}
+  ],
+  "u-03": [
+   {"time": "2026-10-14 20:15:01", "key": "vera-notebook", "path": "/v1/chat/completions", "status": 200},
+   {"time": "2026-10-14 20:15:02", "key": "vera-notebook", "path": "/v1/chat/completions", "status": 200},
+   {"time": "2026-10-14 20:15:02", "key": "vera-notebook", "path": "/v1/chat/completions", "status": 200},
+   {"time": "2026-10-14 20:15:03", "key": "vera-notebook", "path": "/v1/chat/completions", "status": 429, "error": "rate_limit_exceeded"},
+   {"time": "2026-10-14 20:15:03", "key": "vera-notebook", "path": "/v1/chat/completions", "status": 429, "error": "rate_limit_exceeded"},
+   {"time": "2026-10-14 20:15:04", "key": "vera-notebook", "path": "/v1/chat/completions", "status": 429, "error": "rate_limit_exceeded"}
+  ],
+  "u-04": [
+   {"time": "2026-10-13 11:20", "key": "gleb-summarizer", "path": "/v1/chat/completions", "status": 200, "max_tokens": 2000, "clipped": true, "finish_reason": "length"},
+   {"time": "2026-10-13 11:24", "key": "gleb-summarizer", "path": "/v1/chat/completions", "status": 200, "max_tokens": 2000, "clipped": true, "finish_reason": "length"}
+  ],
+  "u-05": [
+   {"time": "2026-10-14 16:05", "key": "dina-chat", "path": "/v1/chat/completions", "status": 200, "estimate": 3310, "max_tokens": 512},
+   {"time": "2026-10-14 16:09", "key": "dina-chat", "path": "/v1/chat/completions", "status": 413, "error": "context_length_exceeded", "estimate": 3702, "max_tokens": 512}
+  ],
+  "u-06": [],
+  "u-07": [
+   {"time": "2026-10-14 14:00:10", "key": "loadtest", "path": "/v1/chat/completions", "status": 200, "concurrent": 12},
+   {"time": "2026-10-14 14:00:10", "key": "loadtest", "path": "/v1/chat/completions", "status": 503, "error": "server_busy", "concurrent": 12},
+   {"time": "2026-10-14 14:00:10", "key": "loadtest", "path": "/v1/chat/completions", "status": 503, "error": "server_busy", "concurrent": 12}
+  ],
+  "u-08": [
+   {"time": "2026-10-11 10:00", "key": "zakhar-old", "path": "/v1/chat/completions", "status": 200},
+   {"time": "2026-10-14 10:30", "key": "-", "path": "/v1/chat/completions", "status": 401, "error": "invalid_api_key"}
+  ]
+ },
+ "tickets": [
+  {"id": "T-101", "user_id": "u-01", "status": "новый", "created": "2026-10-14 09:20",
+   "subject": "Почему не работает авторизация?",
+   "text": "Почему не работает авторизация? Ещё на прошлой неделе всё было нормально, теперь на любой запрос 401.",
+   "attachment": "", "notes": []},
+  {"id": "T-102", "user_id": "u-03", "status": "новый", "created": "2026-10-14 20:20",
+   "subject": "Почему не работает авторизация?",
+   "text": "Почему не работает авторизация? Скрипт делает несколько запросов, и после третьего сервис перестаёт меня пускать. Ключ правильный.",
+   "attachment": "for q in questions: post('/v1/chat/completions', headers={'Authorization': 'Bearer sk-local-a1d0…'}, json=…)",
+   "notes": []},
+  {"id": "T-103", "user_id": "u-08", "status": "новый", "created": "2026-10-14 10:40",
+   "subject": "Почему не работает авторизация?",
+   "text": "Почему не работает авторизация? Ничего не менял в настройках, ключ тот же, что и был.",
+   "attachment": "", "notes": []},
+  {"id": "T-104", "user_id": "u-02", "status": "новый", "created": "2026-10-14 12:45",
+   "subject": "Бот перестал отвечать",
+   "text": "Перенёс бота на новый сервер, и он перестал получать ответы, хотя ключ и адрес те же.",
+   "attachment": "url = 'http://192.168.0.181:8030/v1/chat/completion'", "notes": []},
+  {"id": "T-105", "user_id": "u-04", "status": "в работе", "created": "2026-10-13 11:30",
+   "subject": "Ответы обрываются",
+   "text": "Пересказы длинных статей обрываются на середине предложения, хотя я прошу до 2000 токенов. Ошибки нет.",
+   "attachment": "", "notes": [{"time": "2026-10-13 12:00", "author": "оператор", "text": "Попросили пример запроса."}]},
+  {"id": "T-106", "user_id": "u-05", "status": "новый", "created": "2026-10-14 16:15",
+   "subject": "Ошибка 413",
+   "text": "В длинном чате после нескольких часов работы стала приходить ошибка 413. Что это и что делать?",
+   "attachment": "", "notes": []},
+  {"id": "T-107", "user_id": "u-06", "status": "новый", "created": "2026-10-14 09:05",
+   "subject": "Сервис не открывается",
+   "text": "Получил ключ, но сервис вообще не открывается — браузер долго грузит и пишет, что сайт недоступен.",
+   "attachment": "", "notes": []},
+  {"id": "T-108", "user_id": "u-07", "status": "новый", "created": "2026-10-14 14:10",
+   "subject": "Ошибки при нагрузке",
+   "text": "Гоняю нагрузочный тест, часть запросов сразу падает с 503. Лимит же 600 в минуту, почему?",
+   "attachment": "", "notes": []},
+  {"id": "T-109", "user_id": "u-02", "status": "новый", "created": "2026-10-14 13:00",
+   "subject": "Подключение через SDK",
+   "text": "Как подключить сервис к OpenAI SDK на Python и какую модель указывать?",
+   "attachment": "", "notes": []},
+  {"id": "T-110", "user_id": "u-05", "status": "закрыт", "created": "2026-10-02 10:00",
+   "subject": "Сменить тариф",
+   "text": "Хочу перейти с личного тарифа на командный.",
+   "attachment": "", "notes": [{"time": "2026-10-02 11:00", "author": "оператор", "text": "Тариф изменён на «Команда», лимит 60/мин для того же ключа."}]}
+ ]
+}
