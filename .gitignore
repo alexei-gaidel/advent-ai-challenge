@@ -79,3 +79,7 @@ venv/
 31-dev-assistant/index.db*
 31-dev-assistant/agents.db*
 31-dev-assistant/custom_roles.json
+32-code-review/data/embed_cache.db*
+32-code-review/data/last_review.json
+32-code-review/agents.db*
+32-code-review/custom_roles.json

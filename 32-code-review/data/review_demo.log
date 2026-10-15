@@ -1,0 +1,25 @@
+подсажено: shell-injection@226, path-traversal@231, format-braces@112, key-leak@111, timeout-not-caught@20, web-boundary@208, requests-dep@7
+[1] без RAG       найдено 5/7 (правила 3/5) · замечаний 14, сверх: по делу 9, ложных 0 · 3859 ток · 8.8 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[1] RAG · BM25    найдено 5/7 (правила 3/5) · замечаний 14, сверх: по делу 9, ложных 0 · 9132 ток · 10.1 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[1] RAG · bge-m3  найдено 5/7 (правила 3/5) · замечаний 16, сверх: по делу 11, ложных 0 · 9001 ток · 11.6 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[1] bge-m3 + правила найдено 6/7 (правила 4/5) · замечаний 13, сверх: по делу 7, ложных 0 · 10395 ток · 10.4 с · shell-injection path-traversal format-braces key-leak web-boundary requests-dep
+[2] без RAG       найдено 5/7 (правила 3/5) · замечаний 13, сверх: по делу 8, ложных 0 · 3843 ток · 8.7 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[2] RAG · BM25    найдено 5/7 (правила 3/5) · замечаний 14, сверх: по делу 9, ложных 0 · 8999 ток · 8.9 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[2] RAG · bge-m3  найдено 5/7 (правила 3/5) · замечаний 13, сверх: по делу 8, ложных 0 · 8810 ток · 10.6 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[2] bge-m3 + правила найдено 7/7 (правила 5/5) · замечаний 14, сверх: по делу 7, ложных 0 · 10466 ток · 10.3 с · shell-injection path-traversal format-braces key-leak timeout-not-caught web-boundary requests-dep
+[3] без RAG       найдено 5/7 (правила 3/5) · замечаний 14, сверх: по делу 9, ложных 0 · 3892 ток · 8.6 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[3] RAG · BM25    найдено 5/7 (правила 3/5) · замечаний 14, сверх: по делу 9, ложных 0 · 9064 ток · 9.6 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[3] RAG · bge-m3  найдено 5/7 (правила 3/5) · замечаний 14, сверх: по делу 9, ложных 0 · 8771 ток · 11.0 с · shell-injection path-traversal key-leak web-boundary requests-dep
+[3] bge-m3 + правила найдено 7/7 (правила 5/5) · замечаний 15, сверх: по делу 8, ложных 0 · 10690 ток · 11.9 с · shell-injection path-traversal format-braces key-leak timeout-not-caught web-boundary requests-dep
+
+Итог за 3 прохода:
+без RAG       найдено [5, 5, 5] из 7 · правила [3, 3, 3] из 5 · сверх по делу 26, ложных 0 · строки в изменениях 41/41 · 3865 ток/ревью · 8.7 с
+   shell-injection 3/3, path-traversal 3/3, format-braces 0/3, key-leak 3/3, timeout-not-caught 0/3, web-boundary 3/3, requests-dep 3/3
+RAG · BM25    найдено [5, 5, 5] из 7 · правила [3, 3, 3] из 5 · сверх по делу 27, ложных 0 · строки в изменениях 42/42 · 9065 ток/ревью · 9.5 с
+   shell-injection 3/3, path-traversal 3/3, format-braces 0/3, key-leak 3/3, timeout-not-caught 0/3, web-boundary 3/3, requests-dep 3/3
+RAG · bge-m3  найдено [5, 5, 5] из 7 · правила [3, 3, 3] из 5 · сверх по делу 28, ложных 0 · строки в изменениях 43/43 · 8861 ток/ревью · 11.1 с
+   shell-injection 3/3, path-traversal 3/3, format-braces 0/3, key-leak 3/3, timeout-not-caught 0/3, web-boundary 3/3, requests-dep 3/3
+bge-m3 + правила найдено [6, 7, 7] из 7 · правила [4, 5, 5] из 5 · сверх по делу 22, ложных 0 · строки в изменениях 42/42 · 10517 ток/ревью · 10.9 с
+   shell-injection 3/3, path-traversal 3/3, format-braces 3/3, key-leak 3/3, timeout-not-caught 2/3, web-boundary 3/3, requests-dep 3/3
+
+→ data/review_result.json за 3.7 мин

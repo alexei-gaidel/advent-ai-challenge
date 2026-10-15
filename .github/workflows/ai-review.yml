@@ -1,0 +1,67 @@
+# AI-ревью pull request'а (задание 32): diff → RAG по документации и коду → DeepSeek →
+# один комментарий в PR (на новый пуш он переписывается) + копия в Job Summary.
+#
+# Секрет: DEEPSEEK_API_KEY в Settings → Secrets and variables → Actions.
+# Эмбеддинги — bge-m3 в Ollama прямо на раннере; модель и векторы кешируются между
+# прогонами. Не поднялась Ollama — ревью всё равно выйдет, с поиском BM25.
+
+name: AI-ревью
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # нужен base-коммит, чтобы посчитать base...head
+
+      - name: Кеш модели bge-m3
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama-models
+          key: ollama-bge-m3-v1
+
+      - name: Кеш векторов
+        uses: actions/cache@v4
+        with:
+          path: 32-code-review/data/embed_cache.db
+          key: embed-cache-${{ github.run_id }}
+          restore-keys: embed-cache-
+
+      - name: Ollama + bge-m3
+        continue-on-error: true
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          sudo systemctl stop ollama 2>/dev/null || true
+          mkdir -p ~/.ollama-models
+          OLLAMA_MODELS=$HOME/.ollama-models nohup ollama serve > /tmp/ollama.log 2>&1 &
+          for i in $(seq 30); do curl -sf localhost:11434/api/tags >/dev/null && break; sleep 1; done
+          ollama pull bge-m3
+
+      - name: Ревью
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 32-code-review/review.py --github > /dev/null
+
+      - name: JSON ревью — артефактом
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-review-${{ github.event.pull_request.number }}
+          path: 32-code-review/data/last_review.json
+          if-no-files-found: ignore
