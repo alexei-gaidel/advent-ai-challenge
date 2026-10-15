@@ -1,0 +1,1858 @@
+{
+ "passes": 3,
+ "judge": "openai/gpt-oss-120b",
+ "rows": [
+  {
+   "pass": 1,
+   "id": "mcp-client",
+   "kind": "docs",
+   "question": "Где в проекте лежит MCP-клиент и какие транспорты он поддерживает?",
+   "needles": [
+    "16-mcp-client",
+    "stdio",
+    "HTTP"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории MCP-клиента нет — я его не вижу. Уточни путь или название файла, если он всё-таки есть.",
+     "found": false,
+     "tools": [],
+     "tokens": 112,
+     "cost": 6e-05,
+     "seconds": 1.2,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "MCP-клиент лежит в папке `16-mcp-client/` [1][2]. Он поддерживает два транспорта: Streamable HTTP (POST с JSON-RPC, ответ JSON или поток SSE) и stdio (дочерний процесс, JSON построчно в stdin/stdout) [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 1499,
+     "cost": 0.00046,
+     "seconds": 1.19,
+     "judge": 1
+    },
+    "full": {
+     "answer": "MCP-клиент лежит в папке `16-mcp-client/` [2]. Он поддерживает два транспорта: Streamable HTTP (POST с JSON-RPC, ответ JSON или поток SSE) и stdio (дочерний процесс, JSON построчно в stdin/stdout) [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2399,
+     "cost": 0.000701,
+     "seconds": 1.1,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 798
+  },
+  {
+   "pass": 1,
+   "id": "port-23",
+   "kind": "docs",
+   "question": "На каком порту поднимается веб-интерфейс дня 23?",
+   "needles": [
+    "8023"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет информации о дне 23 и его веб-интерфейсе. Уточни путь к файлу/папке дня 23, и я посмотрю.",
+     "found": false,
+     "tools": [],
+     "tokens": 126,
+     "cost": 7.6e-05,
+     "seconds": 1.17,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Веб-интерфейс дня 23 (`23-rerank-filter/web.py`) поднимается на порту **8023** — `http://localhost:8023` [1][3].",
+     "found": true,
+     "tools": [],
+     "tokens": 2377,
+     "cost": 0.000678,
+     "seconds": 1.13,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Порт 8023 — по правилу «8000 + номер дня» [1], файл `23-rerank-filter/web.py` [1][4].",
+     "found": true,
+     "tools": [],
+     "tokens": 3270,
+     "cost": 0.000912,
+     "seconds": 1.18,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 581
+  },
+  {
+   "pass": 1,
+   "id": "embedder",
+   "kind": "docs",
+   "question": "Какой моделью в проекте считаются эмбеддинги и где она работает?",
+   "needles": [
+    "bge-m3",
+    "Ollama"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В проекте эмбеддинги считает модель **`intfloat/multilingual-e5-small`** (через `sentence-transformers`).\n\nРаботает она **локально** — на CPU, без обращения к внешним API.",
+     "found": false,
+     "tools": [],
+     "tokens": 128,
+     "cost": 7.9e-05,
+     "seconds": 1.06,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Эмбеддинги считает модель **bge-m3**, работающая через **Ollama на `localhost:11434`** [2]. Она используется в днях 21–25, 28, 29 и 31 [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 4466,
+     "cost": 0.001251,
+     "seconds": 1.23,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Эмбеддинги считает модель **bge-m3**, запущенная в **Ollama на `localhost:11434`** [2]. Она используется во всех RAG-днях: 21–25, 28, 29, 31 [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 5375,
+     "cost": 0.001502,
+     "seconds": 1.26,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 681
+  },
+  {
+   "pass": 1,
+   "id": "schema",
+   "kind": "docs",
+   "question": "Какие колонки у таблицы chunks в индексе Конституции дня 25?",
+   "needles": [
+    "article",
+    "amended"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет информации о таблице `chunks` в индексе Конституции дня 25. Уточни файл/схему или дай содержимое репозитория.",
+     "found": false,
+     "tools": [],
+     "tokens": 126,
+     "cost": 7.6e-05,
+     "seconds": 1.22,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В дне 25 (`25-rag-chat/index.py`) используется **вариант 2** схемы `chunks` [1]:\n\n- `chunk_id` — PK, вида `ст.81` или `ст.72#2`\n- `article` — номер статьи (`81`, `67.1`, `ЗП`)\n- `chapter` — глава, напр. «Глава 4. Президент Российской Федерации»\n- `parts` — какие части внутри: «1–3» или «весь текст»\n- `amended` — 1, если статья затронута поправками 2020\n- `text`, `n_chars`\n- `vector` — BLOB, float32 × 1024, L2-нормирован\n\nЭто та же схема, что в днях 22, 23, 24, 28, 29 [1]; вариант 1 (со `strategy`, `source`, `title`, `section`, `start_char`, `end_char`) — только в дне 21 [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3051,
+     "cost": 0.001019,
+     "seconds": 1.66,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Согласно документации, у таблицы `chunks` в индексе Конституции (дни 22–25, 28, 29) такие колонки [1][3]:\n\n- `chunk_id` TEXT PRIMARY KEY — например `ст.81` или `ст.72#2`\n- `article` TEXT — номер статьи: `81`, `67.1`, `ЗП`\n- `chapter` TEXT — глава, например «Глава 4. Президент Российской Федерации»\n- `parts` TEXT — какие части статьи внутри: «1–3», «весь текст»\n- `amended` INTEGER — 1, если статья затронута поправками 2020\n- `text` TEXT\n- `n_chars` INTEGER\n- `vector` BLOB — float32 × 1024, L2-нормирован\n\nЭто вариант 2 схемы; вариант 1 (со `strategy`, `source`, `title`, `section`, `start_char`/`end_char`) используется только в дне 21 [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 3951,
+     "cost": 0.00126,
+     "seconds": 1.77,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 887
+  },
+  {
+   "pass": 1,
+   "id": "weather",
+   "kind": "docs",
+   "question": "Какие инструменты у MCP-сервера погоды и в каком порядке их вызывать?",
+   "needles": [
+    "search",
+    "forecast"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории MCP-сервера погоды нет — я его не вижу. Уточни, о каком проекте речь (путь/файл), и я посмотрю список инструментов и порядок вызова.",
+     "found": false,
+     "tools": [],
+     "tokens": 131,
+     "cost": 8e-05,
+     "seconds": 1.15,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "У сервера погоды (`20-mcp-orchestration/weather_server.py`) два инструмента [2]:\n\n1. **`search`** — параметр `query: string`; ищет город по названию и возвращает кандидатов с `place_id`, регионом и страной.\n2. **`forecast`** — параметры `place_id: string`, `date: string`; даёт прогноз на один день (температура, осадки, ветер) и возвращает `forecast_id`.\n\nПорядок вызова: сначала `search`, чтобы получить `place_id`, затем `forecast` с этим `place_id` и датой `YYYY-MM-DD` (не дальше 15 дней вперёд) [2]. В общем каталоге реестра они видны как `weather__search` и `weather__forecast` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 1943,
+     "cost": 0.000688,
+     "seconds": 1.85,
+     "judge": 2
+    },
+    "full": {
+     "answer": "У сервера погоды `20-mcp-orchestration/weather_server.py` два инструмента [2]:\n\n1. **`search`** — параметр `query: string`; ищет город по названию и возвращает кандидатов с `place_id`, регионом и страной.\n2. **`forecast`** — параметры `place_id: string`, `date: string`; даёт прогноз на день (температура, осадки, ветер) и возвращает `forecast_id`.\n\nПорядок: сначала `search`, чтобы получить `place_id`, затем `forecast` с этим `place_id` и датой `YYYY-MM-DD` (не дальше 15 дней вперёд) [2]. В общем каталоге реестра они видны как `weather__search` и `weather__forecast` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2842,
+     "cost": 0.000928,
+     "seconds": 1.56,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 775
+  },
+  {
+   "pass": 1,
+   "id": "groq-403",
+   "kind": "docs",
+   "question": "Groq отвечает 403 error code 1010 — в чём причина и как лечить?",
+   "needles": [
+    "User-Agent"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "403 + код **1010** — это не ошибка Groq API, а блокировка на уровне **Cloudflare** (WAF). Cloudflare так отвечает, когда запрос выглядит подозрительно.\n\nЧастые причины:\n- **Запрос идёт не из браузера/обычного клиента** — например, `curl`/`requests` без нормальных заголовков, или из дата-центра/VPS/облака (Cloudflare режет по ASN).\n- **VPN/прокси/страна** — трафик из региона, который Cloudflare блокирует для этого сайта.\n- **User-Agent** пустой или «ботовый» (`python-requests/2.x`).\n- **Слишком частые запросы** с одного IP → временный бан.\n\nКак лечить:\n1. **Проверь, что бьёшь в правильный хост**: `https://api.groq.com/openai/v1/...`, а не в веб-морду `console.groq.com`.\n2. **Заголовки**: обязательно `Authorization: Bearer <KEY>`, `Content-Type: application/json`, осмысленный `User-Agent`.\n3. **Смени сеть**: выключи VPN/прокси, попробуй с домашнего интернета или мобильного. Если работаешь с VPS — Cloudflare часто банит такие IP, используй локальную машину.\n4. **Проверь ключ**: `curl https://api.groq.com/openai/v1/models -H \"Authorization: Bearer $GROQ_API_KEY\"` — если тут 1010, дело точно в сети/Cloudflare, а не в ключе.\n5. **Подожди** 15–60 минут, если это rate-limit бан.\n\nЕсли 1010 стабильно воспроизводится с домашнего IP без VPN — напиши, посмотрим на конкретный запрос.",
+     "found": true,
+     "tools": [],
+     "tokens": 504,
+     "cost": 0.000491,
+     "seconds": 2.72,
+     "judge": 1
+    },
+    "rag": {
+     "answer": "Причина — Cloudflare банит стандартный `Python-urllib` по User-Agent, поэтому запросы из стандартной библиотеки получают `403 error code 1010`, хотя тот же запрос через `curl` проходит [1][2]. Лечится одной строкой: передать свой `User-Agent` в заголовках запроса [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 2440,
+     "cost": 0.000725,
+     "seconds": 1.28,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Причина — Cloudflare банит стандартный `Python-urllib` по User-Agent, поэтому запросы из stdlib получают `403 error code 1010`, хотя тот же запрос через `curl` проходит [1][2]. Лечится одной строкой: передать свой `User-Agent` в заголовках запроса [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3340,
+     "cost": 0.000967,
+     "seconds": 1.24,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 1455
+  },
+  {
+   "pass": 1,
+   "id": "keys",
+   "kind": "docs",
+   "question": "Где хранятся API-ключи и как скрипты их находят?",
+   "needles": [
+    ".env",
+    "find_env_file"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории ключи не хранятся в коде — они берутся из переменных окружения (обычно через `.env`-файл, который в `.gitignore`).\n\nКак это работает:\n- В корне лежит `.env` (или `.env.example` как шаблон) с переменными вида `OPENAI_API_KEY=...`.\n- Скрипты читают их через `os.environ` / `os.getenv(\"OPENAI_API_KEY\")`, часто с `python-dotenv` (`load_dotenv()`), который подгружает `.env` в окружение.\n- Иногда есть общий модуль-хелпер (типа `config.py` / `utils.py`), который централизованно загружает `.env` и отдаёт ключ.\n\nТочные имена файлов и переменных я не проверял — посмотри `.env.example` и `grep -r \"getenv\\|load_dotenv\" .` в репозитории, там будет видно конкретику.",
+     "found": false,
+     "tools": [],
+     "tokens": 303,
+     "cost": 0.000272,
+     "seconds": 1.68,
+     "judge": 1
+    },
+    "rag": {
+     "answer": "API-ключ лежит в файле `.env` в корне репозитория и подхватывается всеми заданиями [5]; `.gitignore` там же [1]. Конкретный механизм загрузки (какая функция/библиотека читает `.env`) во фрагментах не описан — в `main.py` ключ передаётся в заголовке `Authorization: Bearer <ключ>` [2], но как именно он оттуда берётся, не указано.",
+     "found": false,
+     "tools": [],
+     "tokens": 1455,
+     "cost": 0.000487,
+     "seconds": 1.39,
+     "judge": 1
+    },
+    "full": {
+     "answer": "Ключи лежат в `.env` в корне репозитория — он общий для всех заданий и подхватывается ими [5]. `.gitignore` тоже общий, в корне [1]. Конкретный механизм загрузки (какая функция/библиотека читает `.env`) в приведённых фрагментах не описан — если нужно, посмотрю код, например `01-llm-api-request/main.py`.",
+     "found": false,
+     "tools": [],
+     "tokens": 2346,
+     "cost": 0.000718,
+     "seconds": 1.25,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 1036
+  },
+  {
+   "pass": 1,
+   "id": "missing",
+   "kind": "docs",
+   "question": "Каких номеров дней нет в репозитории?",
+   "needles": [
+    "08",
+    "27"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого репозитория, поэтому определить отсутствующие номера дней невозможно. Уточни путь/список файлов или дай вывод `ls`.",
+     "found": false,
+     "tools": [],
+     "tokens": 115,
+     "cost": 7.1e-05,
+     "seconds": 1.03,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Дней **08** и **27** в репозитории нет [1]. Нумерация папок идёт по номеру задания, а не по порядку, поэтому пропуски возможны [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 1747,
+     "cost": 0.000512,
+     "seconds": 1.21,
+     "judge": 2
+    },
+    "full": {
+     "answer": "<｜｜DSML｜｜ calls>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">300</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">2</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">300</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">3</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n</｜｜DSML｜｜ calls>",
+     "found": false,
+     "tools": [
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files"
+     ],
+     "tokens": 23518,
+     "cost": 0.006679,
+     "seconds": 5.56,
+     "judge": 0
+    }
+   },
+   "judge_tokens": 652
+  },
+  {
+   "pass": 1,
+   "id": "branch",
+   "kind": "git",
+   "question": "На какой git-ветке я сейчас работаю?",
+   "needles": [
+    "main"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу узнать — у меня нет доступа к твоему терминалу. Выполни:\n\n```bash\ngit branch --show-current\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 97,
+     "cost": 5.2e-05,
+     "seconds": 0.83,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Не могу ответить: в предоставленных фрагментах нет текущей git-ветки, а инструменты (git, файлы) в этом диалоге мне недоступны. Чтобы узнать ветку, вызовите MCP-инструмент `git_branch` из `31-dev-assistant/project_server.py` [1] — он возвращает текущую ветку, её последний коммит и отставание от origin.",
+     "found": false,
+     "tools": [],
+     "tokens": 2266,
+     "cost": 0.000691,
+     "seconds": 1.26,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Ветка — **main**, последний коммит `587b6dc` от 2026-10-12 («Задание 30: локальная LLM как приватный сервис»), отставания от `origin/main` нет. Это данные `git_branch` из MCP-сервера дня 31 [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 3148,
+     "cost": 0.000912,
+     "seconds": 1.23,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 628
+  },
+  {
+   "pass": 1,
+   "id": "dirty",
+   "kind": "git",
+   "question": "Что сейчас не закоммичено в репозитории?",
+   "needles": [
+    ".gitignore",
+    "31-dev-assistant"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу узнать — у меня нет доступа к вашему рабочему дереву и возможности запускать команды. Посмотрите сами:\n\n```bash\ngit status\ngit diff          # незастейдженные изменения\ngit diff --staged # застейдженные\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 127,
+     "cost": 8.3e-05,
+     "seconds": 1.24,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Не могу ответить: в предоставленных фрагментах документации нет информации о текущем состоянии рабочей копии git (что закоммичено, а что нет). Чтобы узнать это, нужен вывод `git status` — а инструменты в этом диалоге мне недоступны.\n\nЕсли нужно, подскажите — я сформулирую, какую команду выполнить, чтобы получить ответ.",
+     "found": false,
+     "tools": [],
+     "tokens": 1815,
+     "cost": 0.000563,
+     "seconds": 1.38,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Незакоммичено:\n\n- **Изменён:** `.gitignore` (M).\n- **Не отслеживается:** вся папка `31-dev-assistant/` — `assistant.py`, `chunking.py`, `cli.py`, `corpus.py`, `embeddings.py`, `gen_docs.py`, `help_demo.py`, `index.py`, `mcp_client.py`, `project_server.py`, `providers.py`, `tools.py`, `web.py` и `docs/` (`architecture.md`, `mcp-api.md`, `schemas.md`).\n\nВетка `main` синхронна с `origin/main` (0/0), последний коммит — 587b6dc «Задание 30». То есть день 31 целиком ещё не закоммичен.",
+     "found": true,
+     "tools": [
+      "git_status"
+     ],
+     "tokens": 5696,
+     "cost": 0.001702,
+     "seconds": 2.45,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 797
+  },
+  {
+   "pass": 1,
+   "id": "last",
+   "kind": "git",
+   "question": "Какой последний коммит в репозитории? Назови хеш.",
+   "needles": [
+    "587b6dc"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу — у меня нет доступа к вашему репозиторию и его git-истории. Чтобы узнать последний коммит, выполните локально:\n\n```\ngit log -1 --format=%H\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 123,
+     "cost": 7.3e-05,
+     "seconds": 1.19,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Точного ответа в приведённых фрагментах нет: там указан лишь пример из документации — коммит `9d40005` от 2026-09-17 [4], но это иллюстрация, а не гарантированно последний коммит.\n\nЧтобы узнать актуальный хеш последнего коммита, нужен вызов инструмента `git_summary` (он возвращает дату последнего коммита) или `git_log` с `limit: 1` [2][6]. Скажи, если хочешь, чтобы я выполнил такой запрос.",
+     "found": false,
+     "tools": [],
+     "tokens": 1933,
+     "cost": 0.000634,
+     "seconds": 1.43,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Последний коммит — `587b6dc`, от 2026-10-12, сообщение «Задание 30: локальная LLM как приватный сервис» (из git-контекста выше).",
+     "found": true,
+     "tools": [],
+     "tokens": 2751,
+     "cost": 0.000785,
+     "seconds": 1.09,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 966
+  },
+  {
+   "pass": 1,
+   "id": "files-26",
+   "kind": "git",
+   "question": "Какие Python-файлы лежат в папке 26-local-llm?",
+   "needles": [
+    "cli.py",
+    "local_demo.py",
+    "local_llm.py",
+    "make_cast.py",
+    "web.py"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — у меня нет доступа к файловой системе репозитория, я вижу только то, что ты напишешь в чате.\n\nЧтобы узнать, выполни в терминале:\n\n```bash\nls 26-local-llm/*.py\n```\n\nили\n\n```bash\nfind 26-local-llm -name \"*.py\"\n```\n\nСкинь вывод — помогу разобраться с содержимым.",
+     "found": false,
+     "tools": [],
+     "tokens": 166,
+     "cost": 0.00012,
+     "seconds": 1.18,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В папке `26-local-llm` по документации упоминаются такие Python-файлы: `cli.py`, `web.py`, `local_llm.py`, `local_demo.py`, `make_cast.py` [2][3]. Это всё, что называют фрагменты; полный список файлов папки они не дают.",
+     "found": true,
+     "tools": [],
+     "tokens": 2019,
+     "cost": 0.000609,
+     "seconds": 1.14,
+     "judge": 2
+    },
+    "full": {
+     "answer": "В папке `26-local-llm` пять Python-файлов:\n\n- `cli.py` — терминальный клиент (один запрос или диалог с историей) [2]\n- `web.py` — веб-чат на порту 8026 [2]\n- `local_llm.py` — клиент Ollama: `chat()`, `ask()`, `models()`, `loaded()`, `unload()` [3]\n- `local_demo.py` — доказательный прогон, ~1,5 минуты [2]\n- `make_cast.py` — сборка `demo.svg` из `data/local_result.json` [2]\n\nОстальное в папке — `README.md`, `demo.svg` и `data/` (`demo_log.txt`, `local_result.json`).",
+     "found": true,
+     "tools": [
+      "git_files"
+     ],
+     "tokens": 6047,
+     "cost": 0.001815,
+     "seconds": 2.49,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 867
+  },
+  {
+   "pass": 1,
+   "id": "timeout",
+   "kind": "code",
+   "question": "Какой таймаут по умолчанию у HttpTransport в mcp_client.py дня 16?",
+   "needles": [
+    "30"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого `mcp_client.py` дня 16, поэтому назвать значение таймаута по умолчанию не могу. Посмотри в коде: обычно это параметр `timeout` в `__init__` класса `HttpTransport` (или константа рядом).",
+     "found": false,
+     "tools": [],
+     "tokens": 153,
+     "cost": 0.000104,
+     "seconds": 1.03,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В предоставленных фрагментах документации нет информации о таймауте по умолчанию у `HttpTransport` в `mcp_client.py` дня 16. Ни один из фрагментов [1]–[6] не описывает эту деталь. Чтобы ответить точно, нужно посмотреть сам файл `16-mcp-client/mcp_client.py` — рекомендую открыть его и найти определение класса `HttpTransport`.",
+     "found": false,
+     "tools": [],
+     "tokens": 2250,
+     "cost": 0.000686,
+     "seconds": 1.2,
+     "judge": 0
+    },
+    "full": {
+     "answer": "30 секунд: `HttpTransport.__init__(self, url, timeout=30)` — `16-mcp-client/mcp_client.py:36`. Тот же дефолт и у `StdioTransport` (строка 84).",
+     "found": true,
+     "tools": [
+      "read_file",
+      "git_files"
+     ],
+     "tokens": 7744,
+     "cost": 0.002196,
+     "seconds": 2.29,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 620
+  },
+  {
+   "pass": 1,
+   "id": "port-01",
+   "kind": "code",
+   "question": "На каком порту запускается web.py дня 01 — тоже по правилу 8000 + номер?",
+   "needles": [
+    "8000"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого `web.py` дня 01, поэтому подтвердить правило «8000 + номер» не могу. Посмотри в самом файле (обычно `uvicorn.run(..., port=...)` или `app.run(port=...)`) либо в README дня.",
+     "found": true,
+     "tools": [],
+     "tokens": 150,
+     "cost": 9.9e-05,
+     "seconds": 1.16,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Да, порт 8000: правило «порт = 8000 + номер дня» [2], и для `01-llm-api-request/web.py` указано значение 8000 [1]. Запуск — `python3 web.py`, открывается http://localhost:8000 [4].",
+     "found": true,
+     "tools": [],
+     "tokens": 2419,
+     "cost": 0.000708,
+     "seconds": 1.35,
+     "judge": 1
+    },
+    "full": {
+     "answer": "Да, порт 8000 — это ровно 8000 + 1 [1]. В таблице он указан для `01-llm-api-request/web.py`, и правило «порт = 8000 + номер дня» из жёстких правил [2] это подтверждает.",
+     "found": true,
+     "tools": [],
+     "tokens": 3322,
+     "cost": 0.000953,
+     "seconds": 1.18,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 975
+  },
+  {
+   "pass": 2,
+   "id": "mcp-client",
+   "kind": "docs",
+   "question": "Где в проекте лежит MCP-клиент и какие транспорты он поддерживает?",
+   "needles": [
+    "16-mcp-client",
+    "stdio",
+    "HTTP"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории MCP-клиента нет — я его не вижу. Проект состоит из папок с ежедневными заданиями (`day_XX/`), там скрипты на Python для работы с LLM, но интеграции с MCP нет.\n\nЕсли ты имеешь в виду другой репозиторий или конкретную папку — уточни путь, посмотрю.",
+     "found": false,
+     "tools": [],
+     "tokens": 167,
+     "cost": 0.000121,
+     "seconds": 1.41,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "MCP-клиент лежит в папке `16-mcp-client/` [2]. Он поддерживает два транспорта: Streamable HTTP (POST с JSON-RPC, ответ JSON или поток SSE) и stdio (дочерний процесс, JSON построчно в stdin/stdout) [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 1497,
+     "cost": 0.000457,
+     "seconds": 1.28,
+     "judge": 1
+    },
+    "full": {
+     "answer": "MCP-клиент лежит в папке `16-mcp-client/` [2]. Он поддерживает два транспорта: Streamable HTTP (POST с JSON-RPC, ответ JSON или поток SSE) и stdio (дочерний процесс, JSON построчно в stdin/stdout) [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2399,
+     "cost": 0.000701,
+     "seconds": 1.49,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 789
+  },
+  {
+   "pass": 2,
+   "id": "port-23",
+   "kind": "docs",
+   "question": "На каком порту поднимается веб-интерфейс дня 23?",
+   "needles": [
+    "8023"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет информации о дне 23 и его веб-интерфейсе. Уточни путь к файлу/папке дня 23, и я посмотрю.",
+     "found": false,
+     "tools": [],
+     "tokens": 126,
+     "cost": 7.6e-05,
+     "seconds": 0.95,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Веб-интерфейс дня 23 (`23-rerank-filter/web.py`) поднимается на порту **8023** — по правилу «8000 + номер дня» [1]. В README дня указан адрес `http://localhost:8023` [3].",
+     "found": true,
+     "tools": [],
+     "tokens": 2396,
+     "cost": 0.000699,
+     "seconds": 1.23,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Порт 8023 — по правилу «8000 + номер дня» [1], файл `23-rerank-filter/web.py` [1][4].",
+     "found": true,
+     "tools": [],
+     "tokens": 3270,
+     "cost": 0.000912,
+     "seconds": 1.27,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 599
+  },
+  {
+   "pass": 2,
+   "id": "embedder",
+   "kind": "docs",
+   "question": "Какой моделью в проекте считаются эмбеддинги и где она работает?",
+   "needles": [
+    "bge-m3",
+    "Ollama"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В проекте эмбеддинги считает модель **`intfloat/multilingual-e5-small`** (через `sentence-transformers`).\n\nРаботает она **локально** — на CPU, без обращения к внешним API.",
+     "found": false,
+     "tools": [],
+     "tokens": 128,
+     "cost": 7.9e-05,
+     "seconds": 1.04,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Эмбеддинги считает модель **bge-m3**, запущенная в **Ollama на `localhost:11434`** [2]. Она используется в днях 21–25, 28, 29 и 31 [2]. В локальном RAG (день 28) bge-m3 работает на этом же Mac вместе с qwen2.5 [1][5].",
+     "found": true,
+     "tools": [],
+     "tokens": 4500,
+     "cost": 0.001288,
+     "seconds": 1.33,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Эмбеддинги считает модель **bge-m3**, запущенная в **Ollama на `localhost:11434`** [2]. Она используется во всех RAG-днях: 21–25, 28, 29, 31 [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 5375,
+     "cost": 0.001502,
+     "seconds": 1.46,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 743
+  },
+  {
+   "pass": 2,
+   "id": "schema",
+   "kind": "docs",
+   "question": "Какие колонки у таблицы chunks в индексе Конституции дня 25?",
+   "needles": [
+    "article",
+    "amended"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет информации о таблице `chunks` в индексе Конституции дня 25. Уточни файл/схему или дай содержимое репозитория.",
+     "found": false,
+     "tools": [],
+     "tokens": 126,
+     "cost": 7.6e-05,
+     "seconds": 1.31,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В дне 25 (`25-rag-chat/index.py`) используется **вариант 2** схемы `chunks` [1]:\n\n- `chunk_id` TEXT PRIMARY KEY — например `ст.81` или `ст.72#2`\n- `article` TEXT — `81`, `67.1`, `ЗП`\n- `chapter` TEXT — «Глава 4. Президент Российской Федерации»\n- `parts` TEXT — какие части статьи внутри: «1–3» или «весь текст»\n- `amended` INTEGER — 1, если статья затронута поправками 2020\n- `text` TEXT\n- `n_chars` INTEGER\n- `vector` BLOB — float32 × 1024, L2-нормирован\n\nЭто та же схема, что в днях 22, 23, 24, 28, 29 [1]; отличается от варианта 1 из дня 21 (`strategy`, `source`, `title`, `section`, `start_char`, `end_char`) [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3051,
+     "cost": 0.001019,
+     "seconds": 1.69,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Судя по документации, у таблицы `chunks` в индексе Конституции (день 22 и последующие дни 23–25, 28, 29) такие колонки [1][3]:\n\n- `chunk_id` TEXT PRIMARY KEY — например `ст.81` или `ст.83#2`\n- `article` TEXT — номер статьи (`81`, `67.1`, `ЗП`)\n- `chapter` TEXT — глава\n- `parts` TEXT — какие части статьи внутри\n- `amended` INTEGER — затронута ли поправками 2020\n- `text` TEXT\n- `n_chars` INTEGER\n- `vector` BLOB — float32 × 1024, L2-нормирован\n\nЭто вариант 2 схемы; вариант 1 (с `strategy`, `source`, `title`, `section`) используется в дне 21 [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 3921,
+     "cost": 0.001227,
+     "seconds": 2.02,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 846
+  },
+  {
+   "pass": 2,
+   "id": "weather",
+   "kind": "docs",
+   "question": "Какие инструменты у MCP-сервера погоды и в каком порядке их вызывать?",
+   "needles": [
+    "search",
+    "forecast"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории MCP-сервер погоды мне неизвестен — в предоставленном контексте его нет, и я не могу утверждать, какие у него инструменты и порядок вызова.\n\nУточни: путь к файлу сервера (например, `mcp/weather_server.py`) или название задания — тогда посмотрю и отвечу точно.",
+     "found": false,
+     "tools": [],
+     "tokens": 160,
+     "cost": 0.000112,
+     "seconds": 1.15,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "У сервера погоды `20-mcp-orchestration/weather_server.py` два инструмента [2]:\n\n1. **`search`** — параметр `query: string`; ищет город по названию и возвращает кандидатов с `place_id`, регионом и страной.\n2. **`forecast`** — параметры `place_id: string`, `date: string` (YYYY-MM-DD, не дальше 15 дней вперёд); возвращает прогноз и `forecast_id`.\n\nПорядок: сначала `search`, чтобы получить `place_id`, затем `forecast` с этим `place_id` и нужной датой [2]. В общем каталоге реестра они видны как `weather__search` и `weather__forecast` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 1924,
+     "cost": 0.000667,
+     "seconds": 1.61,
+     "judge": 2
+    },
+    "full": {
+     "answer": "У сервера погоды `20-mcp-orchestration/weather_server.py` два инструмента [2]:\n\n1. **`search`** — параметр `query: string`; ищет город по названию, возвращает кандидатов с `place_id`, регионом и страной.\n2. **`forecast`** — параметры `place_id: string`, `date: string` (YYYY-MM-DD, не дальше 15 дней вперёд); возвращает прогноз и `forecast_id`.\n\nПорядок вызова: сначала `search`, чтобы получить `place_id`, затем `forecast` с этим `place_id` и датой [2]. В общем каталоге реестра они видны как `weather__search` и `weather__forecast` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2826,
+     "cost": 0.000911,
+     "seconds": 2.04,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 770
+  },
+  {
+   "pass": 2,
+   "id": "groq-403",
+   "kind": "docs",
+   "question": "Groq отвечает 403 error code 1010 — в чём причина и как лечить?",
+   "needles": [
+    "User-Agent"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "403 + код **1010** — это не Groq, а **Cloudflare** (он стоит перед API). Cloudflare блокирует запрос по своим правилам, обычно из-за «подозрительного» клиента.\n\nЧастые причины:\n- **User-Agent** пустой/дефолтный (`python-requests/2.x`, `curl`, `httpx`) — Cloudflare режет ботов.\n- Запрос идёт **не из браузера/не из SDK** (голый `requests` без заголовков).\n- **VPN/прокси/датацентр-IP** (особенно бесплатные VPN, некоторые облака).\n- Регион, откуда Cloudflare не пускает (гео-блок).\n- Слишком частые запросы с одного IP.\n\nКак лечить (по порядку):\n1. **Использовать официальный SDK** — `pip install groq`, он шлёт корректные заголовки:\n   ```python\n   from groq import Groq\n   client = Groq(api_key=os.environ[\"GROQ_API_KEY\"])\n   ```\n2. Если нужен `requests` — задать нормальный **User-Agent**:\n   ```python\n   headers = {\n       \"Authorization\": f\"Bearer {key}\",\n       \"Content-Type\": \"application/json\",\n       \"User-Agent\": \"Mozilla/5.0 ...\",\n   }\n   ```\n3. **Отключить VPN/прокси**, попробовать с другого IP/сети.\n4. Проверить, что ключ валиден и не истёк (но 1010 — именно Cloudflare, не auth).\n5. Если в Docker/CI — убедиться, что исходящий IP не в блок-листе Cloudflare.\n\nБыстрая диагностика: тот же запрос через `curl` с браузерным User-Agent. Если проходит — дело в заголовках клиента.",
+     "found": true,
+     "tools": [],
+     "tokens": 507,
+     "cost": 0.000495,
+     "seconds": 2.56,
+     "judge": 1
+    },
+    "rag": {
+     "answer": "Причина: Cloudflare банит стандартный `Python-urllib` — запросы из стандартной библиотеки получают `403, error code 1010`, хотя тот же запрос через `curl` проходит [1][2]. Лечение — одна строка: передавать свой `User-Agent` в заголовках запроса [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 2436,
+     "cost": 0.000721,
+     "seconds": 1.26,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Причина — Cloudflare банит стандартный `Python-urllib` по User-Agent, поэтому запрос из stdlib получает `403 error code 1010`, хотя тот же запрос через `curl` проходит [1][2]. Лечится одной строкой: передавать свой `User-Agent` в заголовках запроса [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3339,
+     "cost": 0.000965,
+     "seconds": 1.13,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 1120
+  },
+  {
+   "pass": 2,
+   "id": "keys",
+   "kind": "docs",
+   "question": "Где хранятся API-ключи и как скрипты их находят?",
+   "needles": [
+    ".env",
+    "find_env_file"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории ключи обычно лежат в файле `.env` в корне проекта (он в `.gitignore`), а скрипты читают их через `python-dotenv`:\n\n```python\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv()\napi_key = os.getenv(\"OPENAI_API_KEY\")\n```\n\nТочные имена переменных и путь к `.env` могут отличаться от задания к заданию — посмотри `.env.example` и начало нужного скрипта. Если файла нет, скажи, в каком задании смотришь, и я уточню.",
+     "found": false,
+     "tools": [],
+     "tokens": 212,
+     "cost": 0.000172,
+     "seconds": 1.24,
+     "judge": 1
+    },
+    "rag": {
+     "answer": "API-ключи лежат в общем файле `.env` в корне репозитория — он подхватывается всеми заданиями [5], а `.gitignore` тоже общий, в корне [1]. Конкретный механизм загрузки (какая функция/библиотека читает `.env`) в приведённых фрагментах не описан — в `main.py` ключ лишь передаётся в заголовке `Authorization: Bearer <ключ>` [2].",
+     "found": false,
+     "tools": [],
+     "tokens": 1453,
+     "cost": 0.000484,
+     "seconds": 1.44,
+     "judge": 1
+    },
+    "full": {
+     "answer": "Ключи лежат в `.env` в корне репозитория и подхватываются всеми заданиями [5]. `.gitignore` тоже общий, в корне [1]. Конкретный механизм загрузки (какая библиотека/функция читает `.env`) в приведённых фрагментах не описан — если нужно, посмотрю код, например `01-llm-api-request/main.py`.",
+     "found": false,
+     "tools": [],
+     "tokens": 2341,
+     "cost": 0.000713,
+     "seconds": 1.35,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 860
+  },
+  {
+   "pass": 2,
+   "id": "missing",
+   "kind": "docs",
+   "question": "Каких номеров дней нет в репозитории?",
+   "needles": [
+    "08",
+    "27"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого репозитория, поэтому определить отсутствующие номера дней невозможно. Уточни путь/список файлов или дай вывод `ls`.",
+     "found": false,
+     "tools": [],
+     "tokens": 115,
+     "cost": 7.1e-05,
+     "seconds": 0.95,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Дня 08 и дня 27 — их в репозитории нет [1]. Нумерация идёт по номеру задания, а не по порядку папок, поэтому пропуски возможны [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 1748,
+     "cost": 0.000513,
+     "seconds": 1.15,
+     "judge": 2
+    },
+    "full": {
+     "answer": "<｜｜DSML｜｜ calls>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">300</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">2</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">300</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">3</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n</｜｜DSML｜｜ calls>",
+     "found": false,
+     "tools": [
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files"
+     ],
+     "tokens": 23620,
+     "cost": 0.006743,
+     "seconds": 5.76,
+     "judge": 0
+    }
+   },
+   "judge_tokens": 666
+  },
+  {
+   "pass": 2,
+   "id": "branch",
+   "kind": "git",
+   "question": "На какой git-ветке я сейчас работаю?",
+   "needles": [
+    "main"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу узнать — у меня нет доступа к твоему терминалу и состоянию репозитория. Выполни:\n\n```bash\ngit branch --show-current\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 104,
+     "cost": 6e-05,
+     "seconds": 0.89,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Не могу ответить: в предоставленных фрагментах нет текущего состояния репозитория, а инструменты (git, файлы) мне сейчас недоступны.\n\nЧтобы узнать ветку, нужен вызов MCP-инструмента `git_branch` из `31-dev-assistant/project_server.py` — он возвращает текущую ветку, её последний коммит и отставание от origin [1].",
+     "found": false,
+     "tools": [],
+     "tokens": 2263,
+     "cost": 0.000687,
+     "seconds": 1.49,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Ветка **main**, последний коммит `587b6dc` от 2026-10-12 («Задание 30: локальная LLM как приватный сервис»), отставания от `origin/main` нет — 0 впереди, 0 позади.",
+     "found": true,
+     "tools": [],
+     "tokens": 3139,
+     "cost": 0.000902,
+     "seconds": 1.3,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 639
+  },
+  {
+   "pass": 2,
+   "id": "dirty",
+   "kind": "git",
+   "question": "Что сейчас не закоммичено в репозитории?",
+   "needles": [
+    ".gitignore",
+    "31-dev-assistant"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу узнать — у меня нет доступа к вашему рабочему дереву и возможности запускать команды. Посмотрите сами:\n\n```\ngit status\ngit diff          # незастейдженные изменения\ngit diff --staged # застейдженные\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 125,
+     "cost": 8.1e-05,
+     "seconds": 1.02,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Не могу ответить: в предоставленных фрагментах документации нет информации о текущем состоянии рабочей копии git (что закоммичено, а что нет). Чтобы узнать это, нужен вывод `git status` — запусти его, и я разберу результат.",
+     "found": false,
+     "tools": [],
+     "tokens": 1788,
+     "cost": 0.000533,
+     "seconds": 1.14,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Незакоммичено:\n\n- **Изменён:** `.gitignore` (M).\n- **Не отслеживается:** вся папка `31-dev-assistant/` — 17 файлов: `assistant.py`, `chunking.py`, `cli.py`, `corpus.py`, `embeddings.py`, `gen_docs.py`, `help_demo.py`, `index.py`, `make_cast.py`, `mcp_client.py`, `project_server.py`, `providers.py`, `tools.py`, `web.py` и `docs/` (`architecture.md`, `mcp-api.md`, `schemas.md`).\n\nВетка `main` синхронна с `origin/main` (0/0), последний коммит — 587b6dc «Задание 30». То есть день 31 ещё не закоммичен.",
+     "found": true,
+     "tools": [
+      "git_status"
+     ],
+     "tokens": 5715,
+     "cost": 0.001714,
+     "seconds": 2.63,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 735
+  },
+  {
+   "pass": 2,
+   "id": "last",
+   "kind": "git",
+   "question": "Какой последний коммит в репозитории? Назови хеш.",
+   "needles": [
+    "587b6dc"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу — у меня нет доступа к репозиторию, я не вижу его состояние. Запусти `git log -1 --format=%H` (или `git log -1 --oneline`) и покажи вывод, тогда помогу дальше.",
+     "found": false,
+     "tools": [],
+     "tokens": 132,
+     "cost": 8.3e-05,
+     "seconds": 1.22,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "По документации [2][6] для этого есть инструмент `git_summary` — он возвращает сводку по репозиторию, включая дату последнего коммита, но **хеша в его описании нет**. Хеш последнего коммита даёт `git_log` (первая строка истории) [2][4].\n\nТочный хеш я назвать не могу: в приведённых фрагментах он не указан, а инструменты git в этом диалоге мне недоступны. Из фрагмента [4] известен лишь хеш коммита задания 14 — `9d40005`, но это не последний коммит.",
+     "found": false,
+     "tools": [],
+     "tokens": 1950,
+     "cost": 0.000653,
+     "seconds": 1.93,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Последний коммит — `587b6dc`, дата 2026-10-12, сообщение «Задание 30: локальная LLM как приватный сервис» (из git-контекста выше).",
+     "found": true,
+     "tools": [],
+     "tokens": 2752,
+     "cost": 0.000786,
+     "seconds": 1.29,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 656
+  },
+  {
+   "pass": 2,
+   "id": "files-26",
+   "kind": "git",
+   "question": "Какие Python-файлы лежат в папке 26-local-llm?",
+   "needles": [
+    "cli.py",
+    "local_demo.py",
+    "local_llm.py",
+    "make_cast.py",
+    "web.py"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — у меня нет доступа к файловой системе репозитория, поэтому список файлов в `26-local-llm` я видеть не могу.\n\nЧтобы узнать, выполни в терминале:\n\n```bash\nls 26-local-llm/*.py\n```\n\nили\n\n```bash\nfind 26-local-llm -name \"*.py\"\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 155,
+     "cost": 0.000108,
+     "seconds": 1.11,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В папке `26-local-llm` по документации упоминаются: `cli.py`, `web.py`, `local_llm.py`, `local_demo.py`, `make_cast.py` [2][3]. Это не полный список файлов — в README перечислены только те, что участвуют в запуске и демо.",
+     "found": true,
+     "tools": [],
+     "tokens": 2018,
+     "cost": 0.000608,
+     "seconds": 1.56,
+     "judge": 1
+    },
+    "full": {
+     "answer": "В папке `26-local-llm` лежат пять Python-файлов:\n\n- `cli.py` — терминальный клиент (один запрос или диалог с историей) [2]\n- `web.py` — веб-чат на порту 8026 [2]\n- `local_llm.py` — клиент Ollama (`chat`, `ask`, `models`, `loaded`, `unload`) [3]\n- `local_demo.py` — доказательный прогон [2]\n- `make_cast.py` — сборка `demo.svg` из `data/local_result.json` [2]\n\nОстальное в папке — не Python: `README.md`, `demo.svg` и `data/demo_log.txt`, `data/local_result.json`.",
+     "found": true,
+     "tools": [
+      "git_files"
+     ],
+     "tokens": 6038,
+     "cost": 0.001805,
+     "seconds": 3.18,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 795
+  },
+  {
+   "pass": 2,
+   "id": "timeout",
+   "kind": "code",
+   "question": "Какой таймаут по умолчанию у HttpTransport в mcp_client.py дня 16?",
+   "needles": [
+    "30"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого `mcp_client.py` дня 16, поэтому назвать значение таймаута по умолчанию не могу. Посмотри в файле `mcp_client.py` определение класса `HttpTransport` (обычно параметр вида `timeout=...` в `__init__` или в вызове `httpx.AsyncClient`).",
+     "found": false,
+     "tools": [],
+     "tokens": 169,
+     "cost": 0.000121,
+     "seconds": 1.08,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В предоставленных фрагментах документации нет информации о таймауте по умолчанию у `HttpTransport` в `mcp_client.py` дня 16. Ни один из фрагментов [1]–[6] не описывает эту деталь. Чтобы ответить точно, нужно посмотреть сам файл `16-mcp-client/mcp_client.py` — рекомендую открыть его и найти определение класса `HttpTransport`.",
+     "found": false,
+     "tools": [],
+     "tokens": 2250,
+     "cost": 0.000686,
+     "seconds": 1.27,
+     "judge": 0
+    },
+    "full": {
+     "answer": "30 секунд: `HttpTransport.__init__(self, url, timeout=30)` — `16-mcp-client/mcp_client.py:36`. У `StdioTransport` дефолт такой же (строка 84).",
+     "found": true,
+     "tools": [
+      "read_file",
+      "git_files"
+     ],
+     "tokens": 7742,
+     "cost": 0.002193,
+     "seconds": 2.27,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 663
+  },
+  {
+   "pass": 2,
+   "id": "port-01",
+   "kind": "code",
+   "question": "На каком порту запускается web.py дня 01 — тоже по правилу 8000 + номер?",
+   "needles": [
+    "8000"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого `web.py` дня 01, поэтому подтвердить правило «8000 + номер» не могу. Посмотри в самом файле вызов `uvicorn.run(...)` или `app.run(port=...)`.",
+     "found": true,
+     "tools": [],
+     "tokens": 139,
+     "cost": 8.7e-05,
+     "seconds": 1.02,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Да, порт 8000 — это ровно 8000 + 1 [1]. Правило «порт = 8000 + номер дня» зафиксировано в CLAUDE.md [2], и в таблице портов для `01-llm-api-request/web.py` указано значение 8000 [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2425,
+     "cost": 0.000715,
+     "seconds": 1.37,
+     "judge": 1
+    },
+    "full": {
+     "answer": "Да, порт 8000 — это 8000 + 1 [1]. В таблице портов `01-llm-api-request/web.py` указан как 8000, и в README дня запуск идёт на `http://localhost:8000` [4]. Правило «порт = 8000 + номер дня» зафиксировано в жёстких правилах [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3345,
+     "cost": 0.000978,
+     "seconds": 1.51,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 1000
+  },
+  {
+   "pass": 3,
+   "id": "mcp-client",
+   "kind": "docs",
+   "question": "Где в проекте лежит MCP-клиент и какие транспорты он поддерживает?",
+   "needles": [
+    "16-mcp-client",
+    "stdio",
+    "HTTP"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории MCP-клиента нет — я его не вижу. Уточни, о каком проекте речь (путь/репозиторий), либо скажи, что искать: файл, класс, зависимость.",
+     "found": false,
+     "tools": [],
+     "tokens": 131,
+     "cost": 8.1e-05,
+     "seconds": 1.06,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "MCP-клиент лежит в папке `16-mcp-client/` [2]. Он поддерживает два транспорта: Streamable HTTP (POST с JSON-RPC, ответ обычным JSON или потоком SSE) и stdio (дочерний процесс, JSON построчно в stdin/stdout) [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 1500,
+     "cost": 0.000461,
+     "seconds": 1.25,
+     "judge": 1
+    },
+    "full": {
+     "answer": "MCP-клиент лежит в папке `16-mcp-client/` [2]. Он поддерживает два транспорта: Streamable HTTP (POST с JSON-RPC, ответ JSON или поток SSE) и stdio (дочерний процесс, JSON построчно в stdin/stdout) [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2399,
+     "cost": 0.000701,
+     "seconds": 1.08,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 753
+  },
+  {
+   "pass": 3,
+   "id": "port-23",
+   "kind": "docs",
+   "question": "На каком порту поднимается веб-интерфейс дня 23?",
+   "needles": [
+    "8023"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет информации о дне 23 и его веб-интерфейсе. Уточни путь к файлу/папке дня 23, и я посмотрю.",
+     "found": false,
+     "tools": [],
+     "tokens": 126,
+     "cost": 7.6e-05,
+     "seconds": 0.95,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Веб-интерфейс дня 23 (`23-rerank-filter/web.py`) поднимается на порту **8023** — `http://localhost:8023` [1][3].",
+     "found": true,
+     "tools": [],
+     "tokens": 2377,
+     "cost": 0.000678,
+     "seconds": 1.08,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Порт **8023** — `23-rerank-filter/web.py`, по правилу «8000 + номер дня» [1]. Запуск: `python3 web.py` → http://localhost:8023 [3].",
+     "found": true,
+     "tools": [],
+     "tokens": 3284,
+     "cost": 0.000927,
+     "seconds": 1.25,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 480
+  },
+  {
+   "pass": 3,
+   "id": "embedder",
+   "kind": "docs",
+   "question": "Какой моделью в проекте считаются эмбеддинги и где она работает?",
+   "needles": [
+    "bge-m3",
+    "Ollama"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В проекте эмбеддинги считает модель **`intfloat/multilingual-e5-small`** (через `sentence-transformers`).\n\nРаботает она **локально** — на CPU, без обращения к внешним API.",
+     "found": false,
+     "tools": [],
+     "tokens": 128,
+     "cost": 7.9e-05,
+     "seconds": 1.1,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Эмбеддинги считает модель **bge-m3**, запущенная в **Ollama на `localhost:11434`** [2]. Она используется в дни 21–25, 28, 29 и 31 [2]; в частности, в локальном RAG дня 28 bge-m3 работает на этом же Mac вместе с qwen2.5 [1][5].",
+     "found": true,
+     "tools": [],
+     "tokens": 4499,
+     "cost": 0.001287,
+     "seconds": 1.31,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Эмбеддинги считает модель **bge-m3**, запущенная в **Ollama на `localhost:11434`** [2]. Она используется во всех RAG-днях: 21–25, 28, 29, 31 [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 5375,
+     "cost": 0.001502,
+     "seconds": 1.37,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 749
+  },
+  {
+   "pass": 3,
+   "id": "schema",
+   "kind": "docs",
+   "question": "Какие колонки у таблицы chunks в индексе Конституции дня 25?",
+   "needles": [
+    "article",
+    "amended"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет информации о таблице `chunks` в индексе Конституции дня 25. Уточни файл/схему или дай содержимое репозитория.",
+     "found": false,
+     "tools": [],
+     "tokens": 126,
+     "cost": 7.6e-05,
+     "seconds": 1.17,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В дне 25 (`25-rag-chat/index.py`) используется **вариант 2** схемы `chunks` [1]:\n\n- `chunk_id` TEXT PRIMARY KEY — `ст.81 | ст.72#2`\n- `article` TEXT — `81`, `67.1`, `ЗП`\n- `chapter` TEXT — «Глава 4. Президент Российской Федерации»\n- `parts` TEXT — «1–3» или «весь текст»\n- `amended` INTEGER — 1, если статья затронута поправками 2020\n- `text` TEXT\n- `n_chars` INTEGER\n- `vector` BLOB — float32 × 1024, L2-нормирован\n\nЭто та же схема, что в днях 22, 23, 24, 28, 29 [1]; подробности нарезки — в README дня 22 [3].",
+     "found": true,
+     "tools": [],
+     "tokens": 3022,
+     "cost": 0.000987,
+     "seconds": 1.6,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Согласно документации, у таблицы `chunks` в индексе Конституции (день 22 и далее, включая 25) такие колонки [1][3]:\n\n- `chunk_id` TEXT PRIMARY KEY — например `ст.81` или `ст.83#2`\n- `article` TEXT — номер статьи: `81`, `67.1`, `ЗП`\n- `chapter` TEXT — глава, например «Глава 4. Президент Российской Федерации»\n- `parts` TEXT — какие части статьи внутри: «весь текст», «3–5», «1 п. а–ж.1»\n- `amended` INTEGER — 1, если статья затронута поправками 2020\n- `text` TEXT\n- `n_chars` INTEGER\n- `vector` BLOB — float32 × 1024, L2-нормирован\n\nЭто вариант 2 схемы; он используется в `22-first-rag/index.py`, `23-rerank-filter/index.py`, `24-citations/index.py`, `25-rag-chat/index.py`, `28-local-rag/index.py`, `29-local-optimization/index.py` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 3979,
+     "cost": 0.001291,
+     "seconds": 2.04,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 847
+  },
+  {
+   "pass": 3,
+   "id": "weather",
+   "kind": "docs",
+   "question": "Какие инструменты у MCP-сервера погоды и в каком порядке их вызывать?",
+   "needles": [
+    "search",
+    "forecast"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории MCP-сервера погоды нет — я его не вижу. Уточни, о чём речь: это задание из челленджа, внешний сервер или ты имеешь в виду другой проект?",
+     "found": false,
+     "tools": [],
+     "tokens": 132,
+     "cost": 8.1e-05,
+     "seconds": 1.03,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "У сервера погоды (`20-mcp-orchestration/weather_server.py`) два инструмента [2]:\n\n1. **`search`** — параметр `query: string`; ищет город по названию и возвращает кандидатов с `place_id`, регионом и страной.\n2. **`forecast`** — параметры `place_id: string`, `date: string` (YYYY-MM-DD, не дальше 15 дней вперёд); возвращает прогноз и `forecast_id`.\n\nПорядок вызова: сначала `search`, чтобы получить `place_id`, затем `forecast` с этим `place_id` и датой [2]. В общем каталоге реестра они видны как `weather__search` и `weather__forecast` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 1924,
+     "cost": 0.000667,
+     "seconds": 1.63,
+     "judge": 2
+    },
+    "full": {
+     "answer": "У сервера погоды (`20-mcp-orchestration/weather_server.py`) два инструмента [2]:\n\n1. **`search`** — параметр `query: string`; ищет город по названию, возвращает кандидатов с `place_id`, регионом и страной.\n2. **`forecast`** — параметры `place_id: string`, `date: string`; даёт прогноз на день (температура, осадки, ветер), возвращает `forecast_id`.\n\nПорядок: сначала `search`, чтобы получить `place_id`, затем `forecast` с этим `place_id` и датой `YYYY-MM-DD` (не дальше 15 дней вперёд) [2]. В общем каталоге реестра они видны как `weather__search` и `weather__forecast` [1].",
+     "found": true,
+     "tools": [],
+     "tokens": 2841,
+     "cost": 0.000927,
+     "seconds": 1.6,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 769
+  },
+  {
+   "pass": 3,
+   "id": "groq-403",
+   "kind": "docs",
+   "question": "Groq отвечает 403 error code 1010 — в чём причина и как лечить?",
+   "needles": [
+    "User-Agent"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "403 + код **1010** — это не ошибка Groq API, а блокировка на уровне **Cloudflare** (WAF). Cloudflare так отвечает, когда запрос выглядит подозрительно.\n\nЧастые причины:\n- **User-Agent** пустой/дефолтный (`python-requests/...`, `curl/...`) — Cloudflare режет.\n- Запрос идёт **не из поддерживаемой страны** (РФ/Беларусь и др. в блок-листе Groq).\n- **Датацентр/VPS/прокси IP** — часто в чёрном списке.\n- Слишком частые запросы с одного IP (rate-limit на edge).\n\nКак лечить:\n1. Задать нормальный `User-Agent` в заголовках (например, `Mozilla/5.0 ...` или имя своего клиента).\n2. Проверить, что IP не из заблокированного региона — при необходимости использовать разрешённый прокси/VPN (но не бесплатные DC-прокси, они тоже в бане).\n3. Убедиться, что ключ валиден и передаётся как `Authorization: Bearer <key>` — но при 1010 дело обычно не в ключе.\n4. Если это VPS — попробовать другой IP/провайдера.\n\nБыстрая проверка: тот же запрос через `curl` с браузерным User-Agent. Если проходит — проблема в заголовках; если нет — в IP/регионе.",
+     "found": true,
+     "tools": [],
+     "tokens": 415,
+     "cost": 0.000393,
+     "seconds": 2.66,
+     "judge": 1
+    },
+    "rag": {
+     "answer": "Причина: Cloudflare у Groq банит стандартный `Python-urllib` по User-Agent, поэтому запросы из стандартной библиотеки получают `403 error code 1010`, хотя тот же запрос через `curl` проходит [1][2]. Лечение — одна строка: передавать свой `User-Agent` в заголовках запроса [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 2443,
+     "cost": 0.000729,
+     "seconds": 1.46,
+     "judge": 2
+    },
+    "full": {
+     "answer": "Причина — Cloudflare банит стандартный `Python-urllib` по User-Agent, поэтому запрос из stdlib получает `403 error code 1010`, хотя тот же запрос через `curl` проходит [1][2]. Лечится одной строкой: передать свой `User-Agent` в заголовках запроса [1][2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3339,
+     "cost": 0.000965,
+     "seconds": 1.22,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 1110
+  },
+  {
+   "pass": 3,
+   "id": "keys",
+   "kind": "docs",
+   "question": "Где хранятся API-ключи и как скрипты их находят?",
+   "needles": [
+    ".env",
+    "find_env_file"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "В этом репозитории ключи обычно лежат в файле `.env` в корне проекта (он в `.gitignore`), а скрипты читают их через `python-dotenv`:\n\n```python\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv()\napi_key = os.getenv(\"OPENAI_API_KEY\")\n```\n\nТочные имена переменных и путь к `.env` могут отличаться от задания к заданию — посмотри `.env.example` и начало нужного скрипта. Если файла нет, скажи, в каком задании смотришь, и я уточню.",
+     "found": false,
+     "tools": [],
+     "tokens": 212,
+     "cost": 0.000172,
+     "seconds": 1.3,
+     "judge": 1
+    },
+    "rag": {
+     "answer": "API-ключи лежат в общем файле `.env` в корне репозитория и подхватываются всеми заданиями [5]; `.gitignore` там же [1]. Конкретный механизм загрузки (какая функция/библиотека читает `.env`) в приведённых фрагментах не описан — в `main.py` ключ лишь передаётся в заголовке `Authorization: Bearer <ключ>` [2].",
+     "found": false,
+     "tools": [],
+     "tokens": 1446,
+     "cost": 0.000477,
+     "seconds": 1.44,
+     "judge": 1
+    },
+    "full": {
+     "answer": "Ключи лежат в `.env` в корне репозитория и подхватываются всеми заданиями [5]; сам `.env` в git не попадает — в корне есть общий `.gitignore` [1]. Конкретный механизм загрузки (какая функция/библиотека читает `.env`) в приведённых фрагментах не описан — чтобы ответить точно, нужно посмотреть код, например `01-llm-api-request/main.py`.",
+     "found": false,
+     "tools": [],
+     "tokens": 2352,
+     "cost": 0.000725,
+     "seconds": 1.2,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 903
+  },
+  {
+   "pass": 3,
+   "id": "missing",
+   "kind": "docs",
+   "question": "Каких номеров дней нет в репозитории?",
+   "needles": [
+    "08",
+    "27"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого репозитория, поэтому определить отсутствующие номера дней невозможно. Уточни путь/список файлов или дай вывод `ls`.",
+     "found": false,
+     "tools": [],
+     "tokens": 115,
+     "cost": 7.1e-05,
+     "seconds": 1.07,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Дня 08 и дня 27 — их в репозитории нет [1]. Нумерация идёт по номеру задания, а не по порядку папок, поэтому пропуски возможны [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 1748,
+     "cost": 0.000513,
+     "seconds": 1.2,
+     "judge": 2
+    },
+    "full": {
+     "answer": "<｜｜DSML｜｜ calls>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">20</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">21</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">22</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">23</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">24</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">25</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">26</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">27</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">28</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">29</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">30</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n<｜｜DSML｜｜ invoke name=\"git_files\">\n<｜｜DSML｜｜ parameter name=\"limit\" string=\"false\">200</｜｜DSML｜｜ parameter>\n<｜｜DSML｜｜ parameter name=\"path\" string=\"true\">31</｜｜DSML｜｜ parameter>\n</｜｜DSML｜｜ invoke>\n</｜｜DSML｜｜ calls>",
+     "found": false,
+     "tools": [
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files",
+      "git_files"
+     ],
+     "tokens": 23958,
+     "cost": 0.007163,
+     "seconds": 6.89,
+     "judge": 0
+    }
+   },
+   "judge_tokens": 1493
+  },
+  {
+   "pass": 3,
+   "id": "branch",
+   "kind": "git",
+   "question": "На какой git-ветке я сейчас работаю?",
+   "needles": [
+    "main"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу узнать — у меня нет доступа к твоему терминалу и состоянию репозитория. Выполни `git branch --show-current` (или `git status`), чтобы увидеть текущую ветку.",
+     "found": false,
+     "tools": [],
+     "tokens": 115,
+     "cost": 7.2e-05,
+     "seconds": 0.99,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Не могу ответить: в предоставленных фрагментах документации нет текущего состояния репозитория, а инструменты (git) в этом диалоге мне недоступны.\n\nЧтобы узнать ветку, запустите `git branch --show-current` или `git status -sb` в корне репозитория. Либо спросите ассистента дня 31 — он вызывает `git_branch` через MCP `31-dev-assistant/project_server.py` и всегда возвращает текущую ветку, её последний коммит и отставание от origin [1][6].",
+     "found": false,
+     "tools": [],
+     "tokens": 2301,
+     "cost": 0.000729,
+     "seconds": 1.49,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Ветка **main**, последний коммит `587b6dc` от 2026-10-12 («Задание 30: локальная LLM как приватный сервис»), отставания от `origin/main` нет — 0 впереди, 0 позади.",
+     "found": true,
+     "tools": [],
+     "tokens": 3139,
+     "cost": 0.000902,
+     "seconds": 1.31,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 678
+  },
+  {
+   "pass": 3,
+   "id": "dirty",
+   "kind": "git",
+   "question": "Что сейчас не закоммичено в репозитории?",
+   "needles": [
+    ".gitignore",
+    "31-dev-assistant"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу узнать — у меня нет доступа к вашему рабочему дереву и возможности запускать команды. Посмотрите сами:\n\n```\ngit status\ngit diff          # незастейдженные изменения\ngit diff --staged # застейдженные\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 125,
+     "cost": 8.1e-05,
+     "seconds": 1.14,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Не могу ответить: в предоставленных фрагментах документации нет информации о текущем состоянии рабочей копии git. Чтобы узнать, что не закоммичено, нужен вывод `git status` — а инструменты в этом диалоге мне недоступны.",
+     "found": false,
+     "tools": [],
+     "tokens": 1786,
+     "cost": 0.000531,
+     "seconds": 1.39,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Незакоммичено:\n\n- **Изменён:** `.gitignore` (M).\n- **Не отслеживается:** вся папка `31-dev-assistant/` — 15 файлов: `assistant.py`, `chunking.py`, `cli.py`, `corpus.py`, `embeddings.py`, `gen_docs.py`, `help_demo.py`, `index.py`, `make_cast.py`, `mcp_client.py`, `project_server.py`, `providers.py`, `tools.py`, `web.py` и `docs/` (`architecture.md`, `mcp-api.md`, `schemas.md`).\n\nВетка `main` синхронна с `origin/main` (0/0), последний коммит — 587b6dc «Задание 30». То есть день 31 ещё не закоммичен.",
+     "found": true,
+     "tools": [
+      "git_status"
+     ],
+     "tokens": 5715,
+     "cost": 0.001714,
+     "seconds": 2.97,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 924
+  },
+  {
+   "pass": 3,
+   "id": "last",
+   "kind": "git",
+   "question": "Какой последний коммит в репозитории? Назови хеш.",
+   "needles": [
+    "587b6dc"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не могу — у меня нет доступа к вашему репозиторию и его git-истории. Чтобы узнать последний коммит, выполните локально:\n\n```\ngit log -1 --format=%H\n```",
+     "found": false,
+     "tools": [],
+     "tokens": 123,
+     "cost": 7.3e-05,
+     "seconds": 1.05,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "По документации [2][6] для этого есть инструмент `git_summary` — он возвращает сводку по репозиторию, включая дату последнего коммита, но **хеш последнего коммита он не отдаёт**. Хеш можно получить через `git_log` (например, `git_log({\"limit\": 1})`) — он показывает историю коммитов [2][6].\n\nКонкретный хеш последнего коммита в предоставленных фрагментах не указан, а инструменты git я здесь вызвать не могу — так что назвать его не получится.",
+     "found": false,
+     "tools": [],
+     "tokens": 1934,
+     "cost": 0.000635,
+     "seconds": 1.54,
+     "judge": 0
+    },
+    "full": {
+     "answer": "Последний коммит — `587b6dc`, дата 2026-10-12, сообщение «Задание 30: локальная LLM как приватный сервис» (из git-контекста выше). Ветка `main`, синхронизирована с `origin/main`.",
+     "found": true,
+     "tools": [],
+     "tokens": 2769,
+     "cost": 0.000805,
+     "seconds": 1.33,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 572
+  },
+  {
+   "pass": 3,
+   "id": "files-26",
+   "kind": "git",
+   "question": "Какие Python-файлы лежат в папке 26-local-llm?",
+   "needles": [
+    "cli.py",
+    "local_demo.py",
+    "local_llm.py",
+    "make_cast.py",
+    "web.py"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — у меня нет доступа к файловой системе репозитория, я вижу только то, что ты напишешь в чате.\n\nЧтобы узнать, выполни в терминале:\n\n```bash\nls 26-local-llm/*.py\n```\n\nили\n\n```bash\nfind 26-local-llm -name \"*.py\"\n```\n\nСкинь вывод — помогу разобраться с содержимым.",
+     "found": false,
+     "tools": [],
+     "tokens": 166,
+     "cost": 0.00012,
+     "seconds": 0.98,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В папке `26-local-llm` из документации явно названы только `cli.py`, `web.py`, `local_llm.py`, `local_demo.py` и `make_cast.py` [2][3]. Полного списка файлов в приведённых фрагментах нет — за точным перечнем лучше посмотреть сам каталог.",
+     "found": true,
+     "tools": [],
+     "tokens": 2024,
+     "cost": 0.000615,
+     "seconds": 1.08,
+     "judge": 2
+    },
+    "full": {
+     "answer": "В папке `26-local-llm` пять Python-файлов:\n\n- `cli.py` — CLI-обёртка (один запрос или диалог с историей)\n- `web.py` — веб-чат на порту 8026 [2]\n- `local_llm.py` — клиент Ollama (`chat`, `ask`, `models`, `loaded`, `unload`) [3]\n- `local_demo.py` — доказательный прогон [3]\n- `make_cast.py` — сборка `demo.svg` из `data/local_result.json` [2]\n\nОстальное в папке — `README.md`, `demo.svg` и `data/` (`demo_log.txt`, `local_result.json`).",
+     "found": true,
+     "tools": [
+      "git_files"
+     ],
+     "tokens": 6032,
+     "cost": 0.001799,
+     "seconds": 2.28,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 767
+  },
+  {
+   "pass": 3,
+   "id": "timeout",
+   "kind": "code",
+   "question": "Какой таймаут по умолчанию у HttpTransport в mcp_client.py дня 16?",
+   "needles": [
+    "30"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого `mcp_client.py` дня 16, поэтому назвать значение таймаута по умолчанию не могу. Посмотри в коде: обычно это параметр `timeout` в `__init__` класса `HttpTransport` (или константа рядом).",
+     "found": false,
+     "tools": [],
+     "tokens": 153,
+     "cost": 0.000104,
+     "seconds": 1.24,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "В предоставленных фрагментах документации нет информации о таймауте по умолчанию у `HttpTransport` в `mcp_client.py` дня 16. Ни один из фрагментов [1]–[6] не описывает эту деталь. Чтобы ответить точно, нужно посмотреть сам файл `16-mcp-client/mcp_client.py` — рекомендую открыть его и найти определение класса `HttpTransport`.",
+     "found": false,
+     "tools": [],
+     "tokens": 2250,
+     "cost": 0.000686,
+     "seconds": 1.26,
+     "judge": 0
+    },
+    "full": {
+     "answer": "30 секунд: `HttpTransport.__init__(self, url, timeout=30)` — `16-mcp-client/mcp_client.py:36`. Тот же дефолт и у `StdioTransport` (строка 84).",
+     "found": true,
+     "tools": [
+      "read_file",
+      "git_files"
+     ],
+     "tokens": 7744,
+     "cost": 0.002196,
+     "seconds": 2.25,
+     "judge": 2
+    }
+   },
+   "judge_tokens": 574
+  },
+  {
+   "pass": 3,
+   "id": "port-01",
+   "kind": "code",
+   "question": "На каком порту запускается web.py дня 01 — тоже по правилу 8000 + номер?",
+   "needles": [
+    "8000"
+   ],
+   "modes": {
+    "llm": {
+     "answer": "Не знаю — в предоставленном контексте нет содержимого `web.py` дня 01, поэтому подтвердить правило «8000 + номер» не могу. Посмотри в самом файле: обычно порт задаётся в `uvicorn.run(...)` или в `if __name__ == \"__main__\"`.",
+     "found": true,
+     "tools": [],
+     "tokens": 149,
+     "cost": 9.8e-05,
+     "seconds": 0.98,
+     "judge": 0
+    },
+    "rag": {
+     "answer": "Да, порт 8000: правило «порт = 8000 + номер дня» [2], и для `01-llm-api-request/web.py` указано значение 8000 [1]. Запуск — `python3 web.py`, открывается http://localhost:8000 [4].",
+     "found": true,
+     "tools": [],
+     "tokens": 2419,
+     "cost": 0.000708,
+     "seconds": 1.31,
+     "judge": 1
+    },
+    "full": {
+     "answer": "Да, порт 8000 — это ровно 8000 + 1 [1]. В таблице портов для `01-llm-api-request/web.py` указано значение 8000, и это согласуется с правилом «порт = 8000 + номер дня» [2].",
+     "found": true,
+     "tools": [],
+     "tokens": 3322,
+     "cost": 0.000953,
+     "seconds": 1.36,
+     "judge": 1
+    }
+   },
+   "judge_tokens": 896
+  }
+ ],
+ "summary": [
+  {
+   "mode": "llm",
+   "kind": "docs",
+   "n": 24,
+   "found": 3,
+   "judge": 6,
+   "judge_max": 48,
+   "tokens": 4471,
+   "cost": 0.0034,
+   "seconds": 1.3
+  },
+  {
+   "mode": "llm",
+   "kind": "git",
+   "n": 12,
+   "found": 0,
+   "judge": 0,
+   "judge_max": 24,
+   "tokens": 1558,
+   "cost": 0.001,
+   "seconds": 1.1
+  },
+  {
+   "mode": "llm",
+   "kind": "code",
+   "n": 6,
+   "found": 3,
+   "judge": 0,
+   "judge_max": 12,
+   "tokens": 913,
+   "cost": 0.0006,
+   "seconds": 1.1
+  },
+  {
+   "mode": "llm",
+   "kind": "all",
+   "n": 42,
+   "found": 6,
+   "judge": 6,
+   "judge_max": 84,
+   "tokens": 6942,
+   "cost": 0.0051,
+   "seconds": 1.2
+  },
+  {
+   "mode": "rag",
+   "kind": "docs",
+   "n": 24,
+   "found": 21,
+   "judge": 42,
+   "judge_max": 48,
+   "tokens": 56942,
+   "cost": 0.0175,
+   "seconds": 1.4
+  },
+  {
+   "mode": "rag",
+   "kind": "git",
+   "n": 12,
+   "found": 3,
+   "judge": 5,
+   "judge_max": 24,
+   "tokens": 24097,
+   "cost": 0.0075,
+   "seconds": 1.4
+  },
+  {
+   "mode": "rag",
+   "kind": "code",
+   "n": 6,
+   "found": 3,
+   "judge": 3,
+   "judge_max": 12,
+   "tokens": 14013,
+   "cost": 0.0042,
+   "seconds": 1.3
+  },
+  {
+   "mode": "rag",
+   "kind": "all",
+   "n": 42,
+   "found": 27,
+   "judge": 50,
+   "judge_max": 84,
+   "tokens": 95052,
+   "cost": 0.0291,
+   "seconds": 1.4
+  },
+  {
+   "mode": "full",
+   "kind": "docs",
+   "n": 24,
+   "found": 18,
+   "judge": 36,
+   "judge_max": 48,
+   "tokens": 141659,
+   "cost": 0.0415,
+   "seconds": 2.0
+  },
+  {
+   "mode": "full",
+   "kind": "git",
+   "n": 12,
+   "found": 12,
+   "judge": 23,
+   "judge_max": 24,
+   "tokens": 52941,
+   "cost": 0.0156,
+   "seconds": 2.0
+  },
+  {
+   "mode": "full",
+   "kind": "code",
+   "n": 6,
+   "found": 6,
+   "judge": 9,
+   "judge_max": 12,
+   "tokens": 33219,
+   "cost": 0.0095,
+   "seconds": 1.8
+  },
+  {
+   "mode": "full",
+   "kind": "all",
+   "n": 42,
+   "found": 36,
+   "judge": 68,
+   "judge_max": 84,
+   "tokens": 227819,
+   "cost": 0.0667,
+   "seconds": 2.0
+  }
+ ],
+ "minutes": 3.9
+}

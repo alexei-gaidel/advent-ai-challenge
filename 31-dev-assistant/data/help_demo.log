@@ -1,0 +1,59 @@
+[1] mcp-client llm:·0  rag:✓2  full:✓2
+[1] port-23    llm:·0  rag:✓2  full:✓2
+[1] embedder   llm:·0  rag:✓1  full:✓1
+[1] schema     llm:·0  rag:✓2  full:✓2+read_file,git_files
+[1] weather    llm:·0  rag:✓2  full:✓2
+[1] groq-403   llm:✓1  rag:✓2  full:✓2
+[1] keys       llm:·1  rag:·1  full:·1
+[1] missing    llm:·0  rag:✓2  full:✓2+git_files
+[1] branch     llm:·0  rag:·0  full:✓2
+[1] dirty      llm:·0  rag:·0  full:✓2+git_status
+[1] last       llm:·0  rag:·0  full:✓2
+[1] files-26   llm:·0  rag:✓2  full:✓2+git_files
+[1] timeout    llm:·0  rag:·0  full:✓2+read_file,git_files
+[1] port-01    llm:✓0  rag:✓1  full:✓1
+[2] mcp-client llm:·0  rag:✓1  full:✓1
+[2] port-23    llm:·0  rag:✓2  full:✓2
+[2] embedder   llm:·0  rag:✓2  full:✓2
+[2] schema     llm:·0  rag:✓2  full:✓2+read_file,git_files
+[2] weather    llm:·0  rag:✓2  full:✓2
+[2] groq-403   llm:✓1  rag:✓2  full:✓2
+[2] keys       llm:·1  rag:·1  full:·1
+[2] missing    llm:·0  rag:✓2  full:✓2+git_files
+[2] branch     llm:·0  rag:·0  full:✓2
+[2] dirty      llm:·0  rag:·0  full:✓2+git_status
+[2] last       llm:·0  rag:·0  full:✓1
+[2] files-26   llm:·0  rag:✓1  full:✓1+git_files
+[2] timeout    llm:·0  rag:·0  full:✓2+git_files,read_file
+[2] port-01    llm:✓0  rag:✓1  full:✓1
+[3] mcp-client llm:·0  rag:✓2  full:✓2
+[3] port-23    llm:·0  rag:✓2  full:✓2
+[3] embedder   llm:·0  rag:✓2  full:✓2
+[3] schema     llm:·0  rag:✓2  full:✓2+read_file
+[3] weather    llm:·0  rag:✓2  full:✓2
+[3] groq-403   llm:✓1  rag:✓2  full:✓2
+[3] keys       llm:·1  rag:·1  full:·1
+[3] missing    llm:·0  rag:✓2  full:✓2+git_files
+[3] branch     llm:·0  rag:·0  full:✓2
+[3] dirty      llm:·0  rag:·0  full:✓2+git_status
+[3] last       llm:·0  rag:·0  full:✓2
+[3] files-26   llm:·0  rag:✓1  full:✓1+git_files
+[3] timeout    llm:·0  rag:·0  full:✓2+read_file,git_files
+[3] port-01    llm:✓0  rag:✓1  full:✓1
+
+Итог по режимам (сумма за все проходы):
+режим        тип     эталон     судья   токенов        $  с/вопр
+только модель docs     3/24     6/48        4425   0.0034     1.3
+только модель git      0/12     0/24        1463   0.0009     1.0
+только модель code     3/6      0/12         889   0.0006     1.2
+только модель all      6/42     6/84        6777   0.0049     1.2
+RAG без MCP  docs    21/24    43/48       57429   0.0176     1.4
+RAG без MCP  git      3/12     4/24       24213   0.0076     1.5
+RAG без MCP  code     3/6      3/12       14152   0.0043     1.4
+RAG без MCP  all     27/42    50/84       95794   0.0294     1.4
+RAG + MCP    docs    21/24    43/48      103107   0.0301     1.7
+RAG + MCP    git     12/12    21/24       53464   0.0158     1.9
+RAG + MCP    code     6/6      9/12       33613   0.0096     2.0
+RAG + MCP    all     39/42    73/84      190184   0.0555     1.8
+
+→ data/help_result.json за 3.8 мин

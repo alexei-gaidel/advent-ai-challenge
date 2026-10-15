@@ -76,3 +76,6 @@ venv/
 29-local-optimization/custom_roles.json
 30-private-llm-service/data/requests.log
 30-private-llm-service/data/server.pid
+31-dev-assistant/index.db*
+31-dev-assistant/agents.db*
+31-dev-assistant/custom_roles.json
