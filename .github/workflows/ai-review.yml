@@ -51,6 +51,7 @@ jobs:
           OLLAMA_MODELS=$HOME/.ollama-models nohup ollama serve > /tmp/ollama.log 2>&1 &
           for i in $(seq 30); do curl -sf localhost:11434/api/tags >/dev/null && break; sleep 1; done
           ollama pull bge-m3
+          ollama list | grep -q '^bge-m3' || { echo "::warning::bge-m3 не скачалась — ревью уйдёт на BM25"; exit 1; }
 
       - name: Ревью
         env:

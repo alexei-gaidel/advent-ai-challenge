@@ -73,9 +73,14 @@ def main():
     try:
         result, meta = run(args.repo, args.base, args.head, not args.no_rag, args.search, log,
                            pin_rules=not args.no_pin)
-    except RuntimeError as error:
-        markdown = f"{reviewer.MARKER}\n## 🤖 AI-ревью\n\n⚠ Ревью не выполнено: {error}"
+    except Exception as error:      # noqa: BLE001 — любая поломка должна дойти до PR
+        # Замечание AI-ревью PR #1: ловился только RuntimeError, и таймаут git или битый
+        # JSON роняли job молча — автор PR не видел ни ревью, ни причины.
+        markdown = (f"{reviewer.MARKER}\n## 🤖 AI-ревью\n\n⚠ Ревью не выполнено: "
+                    f"{type(error).__name__}: {error}")
         github.step_summary(markdown)
+        if pr:
+            github.upsert_comment(pr["repo"], pr["number"], markdown, reviewer.MARKER)
         print(markdown)
         return 1
 

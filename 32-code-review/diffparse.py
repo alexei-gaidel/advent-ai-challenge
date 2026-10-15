@@ -49,6 +49,14 @@ def parse(diff_text):
         if current is None:
             continue
         current["lines"].append(line)
+        # Заголовок «diff --git a/x b/y» неоднозначен при пробелах в имени — берём путь
+        # из «+++ b/…» (замечание AI-ревью PR #1). Удалённый файл: «+++ /dev/null».
+        if line.startswith("+++ b/"):
+            current["path"] = line[6:].rstrip("\t")
+            continue
+        if line.startswith("--- a/") and current["status"] == "deleted":
+            current["path"] = line[6:].rstrip("\t")
+            continue
         if line.startswith("new file mode"):
             current["status"] = "added"
         elif line.startswith("deleted file mode"):

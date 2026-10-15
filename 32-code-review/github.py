@@ -10,6 +10,7 @@ import urllib.error
 import urllib.request
 
 API = "https://api.github.com"
+MAX_PAGES = 30          # 3000 комментариев: дальше маркер не ищем, создаём новый
 
 
 def event():
@@ -46,8 +47,7 @@ def _request(method, url, body=None):
 
 def upsert_comment(repo, number, body, marker):
     """→ (url комментария, 'created' | 'updated')."""
-    page = 1
-    while True:
+    for page in range(1, MAX_PAGES + 1):
         comments = _request("GET", f"{API}/repos/{repo}/issues/{number}/comments"
                                    f"?per_page=100&page={page}")
         for comment in comments:
@@ -57,7 +57,6 @@ def upsert_comment(repo, number, body, marker):
                 return updated["html_url"], "updated"
         if len(comments) < 100:
             break
-        page += 1
     created = _request("POST", f"{API}/repos/{repo}/issues/{number}/comments", {"body": body})
     return created["html_url"], "created"
 
