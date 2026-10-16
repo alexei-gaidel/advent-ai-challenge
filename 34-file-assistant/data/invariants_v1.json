@@ -1,0 +1,337 @@
+{
+  "goal": "Проверь проект на соответствие жёстким правилам из CLAUDE.md, которые можно проверить по файлам: порт web.py, записи в .gitignore, только стандартная библиотека, граница web.py. Сохрани отчёт в INVARIANTS_REPORT.md — таблица | файл | строка | правило | что не так | как исправить |, одна строка на нарушение. Сам код не исправляй.",
+  "tools": [
+    {
+      "round": 1,
+      "name": "read_file",
+      "arguments": {
+        "path": "CLAUDE.md"
+      },
+      "ok": true,
+      "result": "CLAUDE.md, строки 1–122 из 122\n   1  # Advent AI Challenge — как делается новый день\n   2  \n   3  Инструкция для сессии Claude Code, которая подхватывает проект с нуля. Челлендж\n   4  ежедневный: каждый день приходит текстом задание, к вечеру должны быть код,\n   5  README с реальными цифрами и запушенный коммит. Формат сдачи — видео + код,\n   6  поэтому наглядность важнее объёма.\n   7  \n   8  ## Репозиторий\n   9  \n  10  - GitHub: https://github.com/alexei-gaidel/advent-ai-challenge (публичный)\n  11  - Локально: `/Users/g.a.s./advent AI challenge`, ветка `main`, пушим сразу\n  12  - Одно задание"
+    },
+    {
+      "round": 1,
+      "name": "list_files",
+      "arguments": {},
+      "ok": true,
+      "result": "Верхний уровень проекта (число файлов):\n.gitignore                     1\n01-llm-api-request/            3\n02-response-format/            2\n03-prompting-strategies/       3\n04-temperature/                3\n05-model-versions/             3\n06-agent/                      5\n07-persistent-context/         7\n09-context-compression/        7\n10-context-strategies/         8\n11-memory-model/               9\n12-personalization/            10\n13-task-state/                 11\n14-invariants/                 12\n15-lifecycle/                  12\n16-mcp-client/                 6\n17-mcp-tool/                "
+    },
+    {
+      "round": 2,
+      "name": "read_file",
+      "arguments": {
+        "path": ".gitignore"
+      },
+      "ok": true,
+      "result": ".gitignore, строки 1–89 из 89\n   1  # секреты — НИКОГДА не коммитить\n   2  .env\n   3  .env.local\n   4  *.key\n   5  \n   6  # python\n   7  __pycache__/\n   8  *.pyc\n   9  .venv/\n  10  venv/\n  11  \n  12  # macOS\n  13  .DS_Store\n  14  \n  15  # редакторы/IDE\n  16  .vscode/\n  17  .idea/\n  18  .claude/\n  19  \n  20  # роли, созданные в интерфейсе задания 06\n  21  06-agent/custom_roles.json\n  22  \n  23  # локальные данные заданий\n  24  07-persistent-context/agents.db*\n  25  07-persistent-context/custom_roles.json\n  26  09-context-compression/agents.db*\n  27  09-context-compression/custom_roles.json\n  28"
+    },
+    {
+      "round": 2,
+      "name": "list_files",
+      "arguments": {
+        "pattern": "web.py"
+      },
+      "ok": true,
+      "result": "01-llm-api-request/web.py  163 стр.\n03-prompting-strategies/web.py  310 стр.\n04-temperature/web.py  316 стр.\n05-model-versions/web.py  337 стр.\n06-agent/web.py  473 стр.\n07-persistent-context/web.py  507 стр.\n09-context-compression/web.py  544 стр.\n10-context-strategies/web.py  625 стр.\n11-memory-model/web.py  673 стр.\n12-personalization/web.py  907 стр.\n13-task-state/web.py  1063 стр.\n14-invariants/web.py  1175 стр.\n15-lifecycle/web.py  1212 стр.\n16-mcp-client/web.py  235 стр.\n17-mcp-tool/web.py  1268 стр.\n18-scheduled-mcp/web.py  1341 стр.\n19-mcp-pipeline/web.py  1359 стр.\n20-mcp-orchestrati"
+    },
+    {
+      "round": 3,
+      "name": "search",
+      "arguments": {
+        "pattern": "8000|80[0-9][0-9]|PORT|port",
+        "glob": "web.py",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 424 в 28 файлах:\n  01-llm-api-request/web.py — 10\n  03-prompting-strategies/web.py — 11\n  04-temperature/web.py — 11\n  05-model-versions/web.py — 11\n  06-agent/web.py — 13\n  07-persistent-context/web.py — 14\n  09-context-compression/web.py — 14\n  10-context-strategies/web.py — 15\n  11-memory-model/web.py — 15\n  12-personalization/web.py — 16\n  13-task-state/web.py — 17\n  14-invariants/web.py — 18\n  15-lifecycle/web.py — 18\n  16-mcp-client/web.py — 18\n  17-mcp-tool/web.py — 18\n  18-scheduled-mcp/web.py — 21\n  19-mcp-pipeline/web.py — 24\n  20-mcp-orchestration/web.py — 16\n  21-documen"
+    },
+    {
+      "round": 4,
+      "name": "search",
+      "arguments": {
+        "glob": "web.py",
+        "pattern": "^PORT = ",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 28 в 28 файлах:\n  01-llm-api-request/web.py — 1\n  03-prompting-strategies/web.py — 1\n  04-temperature/web.py — 1\n  05-model-versions/web.py — 1\n  06-agent/web.py — 1\n  07-persistent-context/web.py — 1\n  09-context-compression/web.py — 1\n  10-context-strategies/web.py — 1\n  11-memory-model/web.py — 1\n  12-personalization/web.py — 1\n  13-task-state/web.py — 1\n  14-invariants/web.py — 1\n  15-lifecycle/web.py — 1\n  16-mcp-client/web.py — 1\n  17-mcp-tool/web.py — 1\n  18-scheduled-mcp/web.py — 1\n  19-mcp-pipeline/web.py — 1\n  20-mcp-orchestration/web.py — 1\n  21-document-index/web.py — 1\n"
+    },
+    {
+      "round": 5,
+      "name": "read_file",
+      "arguments": {
+        "path": "20-mcp-orchestration/web.py",
+        "start": 20,
+        "lines": 15
+      },
+      "ok": true,
+      "result": "20-mcp-orchestration/web.py, строки 20–34 из 279\n  20  from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer\n  21  \n  22  import agent as agents\n  23  import orchestration\n  24  from providers import CATALOG\n  25  from registry import Registry\n  26  \n  27  PORT = 8002\n  28  \n  29  REGISTRY = Registry()\n  30  AGENT = agents.Agent(registry=REGISTRY)\n  31  LOCK = threading.Lock()\n  32  \n  33  PAGE = '''<!doctype html>\n  34  <html lang=\"ru\">\n… дальше ещё 245 строк (start=35)"
+    },
+    {
+      "round": 5,
+      "name": "list_files",
+      "arguments": {
+        "pattern": "agents.db*"
+      },
+      "ok": true,
+      "result": "файлов не найдено"
+    },
+    {
+      "round": 6,
+      "name": "search",
+      "arguments": {
+        "pattern": "agents.db",
+        "glob": "*.py"
+      },
+      "ok": true,
+      "result": "Совпадений 13 в 13 файлах:\n  07-persistent-context/storage.py — 1\n  09-context-compression/compare.py — 1\n  09-context-compression/storage.py — 1\n  10-context-strategies/storage.py — 1\n  11-memory-model/storage.py — 1\n  12-personalization/storage.py — 1\n  13-task-state/storage.py — 1\n  14-invariants/storage.py — 1\n  15-lifecycle/storage.py — 1\n  17-mcp-tool/storage.py — 1\n  18-scheduled-mcp/storage.py — 1\n  19-mcp-pipeline/storage.py — 1\n  31-dev-assistant/gen_docs.py — 1\n\nСтроки:\n07-persistent-context/storage.py:13: DB_PATH = pathlib.Path(__file__).with_name(\"agents.db\")\n09-context-compressio"
+    },
+    {
+      "round": 6,
+      "name": "search",
+      "arguments": {
+        "pattern": "custom_roles.json",
+        "glob": "*.py"
+      },
+      "ok": true,
+      "result": "Совпадений 12 в 12 файлах:\n  06-agent/agent.py — 1\n  07-persistent-context/agent.py — 1\n  09-context-compression/agent.py — 1\n  10-context-strategies/agent.py — 1\n  11-memory-model/agent.py — 1\n  12-personalization/agent.py — 1\n  13-task-state/agent.py — 1\n  14-invariants/agent.py — 1\n  15-lifecycle/agent.py — 1\n  17-mcp-tool/agent.py — 1\n  18-scheduled-mcp/agent.py — 1\n  19-mcp-pipeline/agent.py — 1\n\nСтроки:\n06-agent/agent.py:110: CUSTOM_ROLES_PATH = pathlib.Path(__file__).with_name(\"custom_roles.json\")\n07-persistent-context/agent.py:114: CUSTOM_ROLES_PATH = pathlib.Path(__file__).with_name(\""
+    },
+    {
+      "round": 7,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "\\.db",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 109 в 65 файлах:\n  07-persistent-context/storage.py — 1\n  07-persistent-context/web.py — 2\n  09-context-compression/compare.py — 1\n  09-context-compression/storage.py — 1\n  09-context-compression/web.py — 2\n  10-context-strategies/compare_strategies.py — 1\n  10-context-strategies/make_cast.py — 1\n  10-context-strategies/storage.py — 1\n  10-context-strategies/web.py — 2\n  11-memory-model/make_cast.py — 1\n  11-memory-model/memory_demo.py — 1\n  11-memory-model/storage.py — 1\n  11-memory-model/web.py — 2\n  12-personalization/make_cast.py — 1\n  12-personalization/profiles_demo.py — 1\n  1"
+    },
+    {
+      "round": 8,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "agents.db",
+        "path": "16-mcp-client"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 8,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "agents.db",
+        "path": "20-mcp-orchestration"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 8,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "agents.db",
+        "path": "21-document-index"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 8,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "agents.db",
+        "path": "33-support-assistant"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 9,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "custom_roles",
+        "path": "20-mcp-orchestration"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 9,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "custom_roles",
+        "path": "16-mcp-client"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 9,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "custom_roles",
+        "path": "21-document-index"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 9,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "custom_roles",
+        "path": "33-support-assistant"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 10,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "^import |^from ",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 1709 в 275 файлах:\n  01-llm-api-request/main.py — 6\n  01-llm-api-request/web.py — 5\n  02-response-format/main.py — 7\n  03-prompting-strategies/strategies.py — 9\n  03-prompting-strategies/web.py — 6\n  04-temperature/temperature.py — 9\n  04-temperature/web.py — 6\n  05-model-versions/models.py — 9\n  05-model-versions/web.py — 6\n  06-agent/agent.py — 5\n  06-agent/providers.py — 8\n  06-agent/toon.py — 1\n  06-agent/web.py — 8\n  07-persistent-context/agent.py — 6\n  07-persistent-context/check_restart.py — 8\n  07-persistent-context/providers.py — 8\n  07-persistent-context/storage.py — 4\n  0"
+    },
+    {
+      "round": 11,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "import (requests|numpy|pandas|flask|fastapi|openai|anthropic|dotenv|httpx|aiohttp|tqdm|rich|pydantic|yaml|bs4|scipy|sklearn|torch|transformers|sentence_transfor… (246 симв.)",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 1 в 1 файлах:\n  23-rerank-filter/embeddings.py — 1\n\nСтроки:\n23-rerank-filter/embeddings.py:12: import requests"
+    },
+    {
+      "round": 11,
+      "name": "search",
+      "arguments": {
+        "glob": "*.py",
+        "pattern": "from (requests|numpy|pandas|flask|fastapi|openai|anthropic|dotenv|httpx|aiohttp|tqdm|rich|pydantic|yaml|bs4|scipy|sklearn|torch|transformers|sentence_transforme… (251 симв.)",
+        "regex": true
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 12,
+      "name": "read_file",
+      "arguments": {
+        "path": "23-rerank-filter/embeddings.py",
+        "start": 1,
+        "lines": 40
+      },
+      "ok": true,
+      "result": "23-rerank-filter/embeddings.py, строки 1–40 из 71\n   1  \"\"\"Эмбеддинги через локальную Ollama (модель bge-m3, 1024 измерения).\n   2  \n   3  У DeepSeek API эндпоинта эмбеддингов нет — только chat/completions, поэтому векторы\n   4  считаются локально. Из Python это обычный HTTP к localhost, без пакетов.\n   5  \n   6      brew install ollama && ollama serve && ollama pull bge-m3\n   7  \"\"\"\n   8  \n   9  import json\n  10  import math\n  11  import os\n  12  import requests\n  13  import time\n  14  import urllib.error\n  15  import urllib.request\n  16  \n  17  OLLAMA = os.environ.get(\"OLLAMA_HOST\", \"http://"
+    },
+    {
+      "round": 13,
+      "name": "search",
+      "arguments": {
+        "path": "23-rerank-filter/embeddings.py",
+        "pattern": "requests"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 14,
+      "name": "search",
+      "arguments": {
+        "glob": "web.py",
+        "pattern": "api.deepseek|api.groq|chat/completions|messages\\.append|\"messages\"|'messages'",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 15 в 14 файлах:\n  01-llm-api-request/web.py — 1\n  07-persistent-context/web.py — 1\n  09-context-compression/web.py — 1\n  10-context-strategies/web.py — 1\n  11-memory-model/web.py — 1\n  12-personalization/web.py — 1\n  13-task-state/web.py — 1\n  14-invariants/web.py — 1\n  15-lifecycle/web.py — 1\n  17-mcp-tool/web.py — 1\n  18-scheduled-mcp/web.py — 1\n  19-mcp-pipeline/web.py — 1\n  25-rag-chat/web.py — 2\n  26-local-llm/web.py — 1\n\nСтроки:\n01-llm-api-request/web.py:135: messages = json.loads(self.rfile.read(length))[\"messages\"]\n07-persistent-context/web.py:497: f\"сообщений: {restored['me"
+    },
+    {
+      "round": 15,
+      "name": "read_file",
+      "arguments": {
+        "path": "01-llm-api-request/web.py",
+        "start": 125,
+        "lines": 30
+      },
+      "ok": true,
+      "result": "01-llm-api-request/web.py, строки 125–154 из 163\n 125              self._reply(200, \"text/html; charset=utf-8\", PAGE)\n 126          else:\n 127              self._reply(404, \"text/plain; charset=utf-8\", b\"not found\")\n 128  \n 129      def do_POST(self):\n 130          if self.path != \"/api/chat\":\n 131              self._reply(404, \"text/plain; charset=utf-8\", b\"not found\")\n 132              return\n 133  \n 134          length = int(self.headers.get(\"Content-Length\", 0))\n 135          messages = json.loads(self.rfile.read(length))[\"messages\"]\n 136  \n 137          try:\n 138              answer = ask"
+    },
+    {
+      "round": 15,
+      "name": "read_file",
+      "arguments": {
+        "path": "25-rag-chat/web.py",
+        "start": 1,
+        "lines": 60
+      },
+      "ok": true,
+      "result": "25-rag-chat/web.py, строки 1–60 из 284\n   1  \"\"\"Мини-чат по Конституции РФ: история, RAG на каждом ходу, источники, память задачи.\n   2  \n   3  Запуск:\n   4      python3 web.py     → откроется http://localhost:8025\n   5  \n   6  Слева — чаты (режим выбирается при создании), в центре — лента: под каждым ответом\n   7  поисковый запрос, источники-ссылки и цитаты; справа — память задачи: цель, уточнения,\n   8  ограничения, термины. Поля можно поправить и закрепить замком — модель их не тронет.\n   9  \n  10  Сервер тонкий: всё делает Chat из chat.py.\n  11  \"\"\"\n  12  \n  13  import json\n  14  import sy"
+    },
+    {
+      "round": 15,
+      "name": "read_file",
+      "arguments": {
+        "path": "26-local-llm/web.py",
+        "start": 175,
+        "lines": 30
+      },
+      "ok": true,
+      "result": "26-local-llm/web.py, строки 175–204 из 207\n 175          except Exception as error:\n 176              traceback.print_exc()\n 177              self.reply(200, {\"error\": str(error)})\n 178  \n 179      def do_POST(self):\n 180          try:\n 181              if self.path != \"/api/chat\":\n 182                  return self.reply(404, {\"error\": \"нет такого адреса\"})\n 183              length = int(self.headers.get(\"Content-Length\") or 0)\n 184              body = json.loads(self.rfile.read(length) or b\"{}\")\n 185              messages = body.get(\"messages\")\n 186              if not isinstance(messages, li"
+    },
+    {
+      "round": 16,
+      "name": "search",
+      "arguments": {
+        "path": "25-rag-chat/web.py",
+        "pattern": "PING_URL"
+      },
+      "ok": true,
+      "result": "совпадений нет"
+    },
+    {
+      "round": 16,
+      "name": "search",
+      "arguments": {
+        "glob": "web.py",
+        "pattern": "deepseek|groq|api\\.",
+        "regex": true
+      },
+      "ok": true,
+      "result": "Совпадений 2 в 2 файлах:\n  25-rag-chat/web.py — 1\n  28-local-rag/web.py — 1\n\nСтроки:\n25-rag-chat/web.py:26: PING_URL = \"https://api.deepseek.com/chat/completions\"  # проверка ключа при старте\n28-local-rag/web.py:1: \"\"\"Локальный RAG по Конституции РФ: выбор стека (локальная qwen2.5 или облачный deepseek-chat)."
+    }
+  ],
+  "rounds": 16,
+  "errors": 0,
+  "prompt_tokens": 228933,
+  "completion_tokens": 4156,
+  "cost": 0.066383,
+  "answer": "## Что сделано\n\nПроверил проект по четырём жёстким правилам CLAUDE.md, которые проверяются по файлам. Отчёт **не успел сохранить** в `INVARIANTS_REPORT.md` — лимит вызовов инструментов исчерпан до записи файла. Ниже — готовое содержимое отчёта, его осталось только записать.\n\n### Найденные нарушения\n\n**1. Порт ≠ 8000 + номер дня (правило 4)**\n\n| файл | строка | правило | что не так | как исправить |\n|---|---|---|---|---|\n| 20-mcp-orchestration/web.py | 27 | Порт = 8000 + номер дня | `PORT = 8002`, должно быть `8020` | заменить на `PORT = 8020` |\n\nОстальные 27 файлов `web.py` соответствуют правилу (01→8000, 03→8003, … 33→8033).\n\n**2. Только стандартная библиотека (правило 1)**\n\n| файл | строка | правило | что не так | как исправить |\n|---|---|---|---|---|\n| 23-rerank-filter/embeddings.py | 12 | Только stdlib | `import requests` — сторонний пакет, к тому же нигде в файле не используется (весь HTTP идёт через `urllib`) | удалить строку `import requests` |\n\n**3. Записи в .gitignore (правило 3)**\n\n| файл | строка | правило | что не так | как исправить |\n|---|---|---|---|---|\n| .gitignore | 34 | Для каждой папки `NN-название/agents.db*` и `custom_roles.json` | у `13-task-state` есть только `custom_roles.json`, но нет `13-task-state/agents.db*`, хотя `13-task-state/storage.py:16` создаёт `agents.db` | добавить строку `13-task-state/agents.db*` |\n\n**4. Граница web.py (правило «web.py не знает URL провайдеров»)**\n\n| файл | строка | правило | что не так | как исправить |\n|---|---|---|---|---|\n| 25-rag-chat/web.py | 26 | web.py не знает URL провайдеров | `PING_URL = \"https://api.deepseek.com/chat/completions\"` — URL провайдера зашит в web.py (константа нигде не используется, но объявлена) | убрать константу; проверку ключа вынести в `providers.py`/`chat.py` |\n\n### Спорные случаи (в отчёт не включал, но стоит знать)\n\n- `01-llm-api-request/web.py:135` и `26-local-llm/web.py:185` читают `messages` из payload запроса и передают их в `ask()`/`local_llm.chat()`. Формально это «чтение», а не «сборка» messages, и это дни до появления агентской архитектуры (01) либо тонкий прокси к локальной LLM (26). Под строгое «web.py не собирает messages» не подпадают, но при желании можно трактовать как пограничные.\n\n### Что прочитано\n- `CLAUDE.md`, `.gitignore`\n- `web.py` во всех 28 папках (через поиск `^PORT = `, `messages`, `deepseek|groq|api.`)\n- `20-mcp-orchestration/web.py` (строки 20–34), `23-rerank-filter/embeddings.py` (1–40), `01-llm-api-request/web.py` (125–154), `25-rag-chat/web.py` (1–60), `26-local-llm/web.py` (175–204)\n- поиск по `agents.db`, `custom_roles.json`, `\\.db`, импортам сторонних пакетов\n\n### Что не успел\n- Не записал `INVARIANTS_REPORT.md` (лимит инструментов). Содержимое таблицы выше готово к вставке.\n- Не проверил построчно все 275 `.py`-файлов на сторонние импорты — проверял по списку популярных пакетов (`requests`, `numpy`, `openai`, `dotenv` и т.п.); экзотический сторонний пакет теоретически мог остаться незамеченным.\n- Не проверял правило 2 (ключи только в `.env`) и правило 5 (цифры в README) — они не входили в поставленную задачу.",
+  "diff": "черновик пуст",
+  "changed": [],
+  "read": [
+    ".gitignore",
+    "01-llm-api-request/web.py",
+    "20-mcp-orchestration/web.py",
+    "23-rerank-filter/embeddings.py",
+    "25-rag-chat/web.py",
+    "26-local-llm/web.py",
+    "CLAUDE.md"
+  ],
+  "seconds": 42.74
+}

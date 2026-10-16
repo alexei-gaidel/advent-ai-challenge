@@ -88,3 +88,6 @@ venv/
 33-support-assistant/data/crm_live.tmp
 33-support-assistant/agents.db*
 33-support-assistant/custom_roles.json
+34-file-assistant/workspace/
+34-file-assistant/agents.db*
+34-file-assistant/custom_roles.json
