@@ -1,0 +1,1898 @@
+{
+  "markets": [
+    "ozon",
+    "wb",
+    "ym"
+  ],
+  "passes": 2,
+  "judge": "openai/gpt-oss-120b",
+  "summary": {
+    "runs": 20,
+    "errors": 0,
+    "need_input": 0,
+    "identified": 20,
+    "identified_text": 12,
+    "text_runs": 12,
+    "identified_photo": 8,
+    "photo_runs": 8,
+    "markets": {
+      "ozon": {
+        "ok": 0,
+        "blocked": 20,
+        "captcha": 0,
+        "error": 0
+      },
+      "wb": {
+        "ok": 0,
+        "blocked": 20,
+        "captcha": 0,
+        "error": 0
+      },
+      "ym": {
+        "ok": 20,
+        "blocked": 0,
+        "captcha": 0,
+        "error": 0
+      }
+    },
+    "naive_ok": 15,
+    "naive_total": 20,
+    "best_found": 20,
+    "best_ok": 20,
+    "same_confirmed": 106,
+    "same_judged": 119,
+    "missed_cheaper": 1,
+    "cost": 0.0379,
+    "judge_cost": 0.0083,
+    "seconds": 584
+  },
+  "rows": [
+    {
+      "id": "sony-exact",
+      "by_photo": false,
+      "card": {
+        "brand": "Sony",
+        "model": "WH-1000XM5",
+        "variant": {
+          "color": "черный",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "наушники",
+        "title": "Беспроводные наушники Sony WH-1000XM5 черные",
+        "queries": [
+          "sony wh-1000xm5 черные",
+          "sony wh-1000xm5",
+          "наушники sony wh-1000xm5"
+        ],
+        "must": [
+          "wh-1000xm5"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000999,
+      "tokens": 2394,
+      "seconds": 28.91,
+      "saved": "data/runs/20261016-212950.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 7.8,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016162721_01M52RM6ZS2AKMVS2DSMMGP6P1 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.6,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 4460ab98775f15d14a7e3bfedcbaf1ba IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 7,
+          "seconds": 1.0,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 21537.0,
+        "title": "Наушники Sony WH-1000XM5 Black/Черный",
+        "url": "https://market.yandex.ru/card/naushniki-sony-wh-1000xm5-blackchernyy/4780705003"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 557.0,
+        "title": "Беспроводные наушники Sony WH-1000XM5, черные",
+        "url": "https://market.yandex.ru/card/silikonovyy-chekhol-dlya-sony-wh-1000xm5/4937572943"
+      },
+      "naive_ok": false,
+      "same": 7,
+      "same_confirmed": 7,
+      "same_judged": 7,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 7,
+        "variant": 0,
+        "accessory": 1,
+        "other": 0
+      },
+      "judge_cost": 0.000527,
+      "attempt": 1
+    },
+    {
+      "id": "sony-vague",
+      "by_photo": false,
+      "card": {
+        "brand": "Sony",
+        "model": "WH-1000XM5",
+        "variant": {
+          "color": null,
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "наушники",
+        "title": "Наушники Sony WH-1000XM5 с шумоподавлением",
+        "queries": [
+          "sony wh-1000xm5",
+          "sony wh 1000xm5 наушники",
+          "sony wh-1000xm5 беспроводные наушники"
+        ],
+        "must": [
+          "wh-1000xm5",
+          "5"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000979,
+      "tokens": 2416,
+      "seconds": 22.83,
+      "saved": "data/runs/20261016-213018.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.4,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016162749_01M52RN2P2FNGWRDPVMCM3SHVM Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 285d567cf865098781ce6db9c54a0eb6 IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 4,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 21737.0,
+        "title": "Беспроводные наушники Sony WH-1000XM5, с шумоподавлением, цвет Чёрный / Black",
+        "url": "https://market.yandex.ru/card/besprovodnyye-naushniki-sony-wh-1000xm5-s-shumopodavleniyem-tsvet-chernyy--black/5200861071"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 557.0,
+        "title": "Беспроводные наушники Sony WH-1000XM5, черные",
+        "url": "https://market.yandex.ru/card/silikonovyy-chekhol-dlya-sony-wh-1000xm5/4937572943"
+      },
+      "naive_ok": false,
+      "same": 4,
+      "same_confirmed": 4,
+      "same_judged": 4,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 4,
+        "variant": 3,
+        "accessory": 1,
+        "other": 0
+      },
+      "judge_cost": 0.000394,
+      "attempt": 1
+    },
+    {
+      "id": "airpods4-anc",
+      "by_photo": false,
+      "card": {
+        "brand": "Apple",
+        "model": "AirPods 4",
+        "variant": {
+          "color": null,
+          "memory": null,
+          "size": null,
+          "other": "с активным шумоподавлением (ANC)"
+        },
+        "category": "беспроводные наушники",
+        "title": "Apple AirPods 4 с активным шумоподавлением",
+        "queries": [
+          "Apple AirPods 4 с активным шумоподавлением",
+          "AirPods 4 ANC",
+          "Apple AirPods 4"
+        ],
+        "must": [
+          "4"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия",
+          "airpods pro",
+          "airpods 3",
+          "airpods 2"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000998,
+      "tokens": 2432,
+      "seconds": 21.34,
+      "saved": "data/runs/20261016-213043.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016162816_01M52RNWA8X4XR0TWTA9JXXGZG Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: f1a8207fb5896db35998f0e2295cbc4a IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 7,
+          "seconds": 1.1,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 12831.0,
+        "title": "Наушники беспроводные Apple AirPods 4 ANC A3055/A3056/A3059 MXP93LL/A белый",
+        "url": "https://market.yandex.ru/card/naushniki-besprovodnyye-apple-airpods-4-anc-a3055a3056a3059-mxp93lla-belyy/5717750117"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 12831.0,
+        "title": "Наушники беспроводные Apple AirPods 4 ANC A3055/A3056/A3059 MXP93LL/A белый",
+        "url": "https://market.yandex.ru/card/naushniki-besprovodnyye-apple-airpods-4-anc-a3055a3056a3059-mxp93lla-belyy/5717750117"
+      },
+      "naive_ok": true,
+      "same": 7,
+      "same_confirmed": 7,
+      "same_judged": 7,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 7,
+        "variant": 0,
+        "accessory": 0,
+        "other": 1
+      },
+      "judge_cost": 0.00036,
+      "attempt": 1
+    },
+    {
+      "id": "iphone16",
+      "by_photo": false,
+      "card": {
+        "brand": "Apple",
+        "model": "iPhone 16",
+        "variant": {
+          "color": "черный",
+          "memory": "128 ГБ",
+          "size": null,
+          "other": null
+        },
+        "category": "смартфон",
+        "title": "Apple iPhone 16 128 ГБ черный",
+        "queries": [
+          "Apple iPhone 16 128 ГБ черный",
+          "iPhone 16 128 ГБ черный",
+          "iPhone 16 128"
+        ],
+        "must": [
+          "16",
+          "128"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.001003,
+      "tokens": 2369,
+      "seconds": 21.27,
+      "saved": "data/runs/20261016-213108.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.4,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016162841_01M52RPMNVB3K7BRB025TXCRP8 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: a712de695bbdb2e9826311e2f80bd24f IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 8,
+          "seconds": 1.0,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 68379.0,
+        "title": "Смартфон Apple iPhone 16, 128 GB, Sim+Esim, черный",
+        "url": "https://market.yandex.ru/card/smartfon-apple-iphone-16-128-gb-simesim-chernyy/5708371519"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 68379.0,
+        "title": "Смартфон Apple iPhone 16, 128 GB, Sim+Esim, черный",
+        "url": "https://market.yandex.ru/card/smartfon-apple-iphone-16-128-gb-simesim-chernyy/5708371519"
+      },
+      "naive_ok": true,
+      "same": 8,
+      "same_confirmed": 8,
+      "same_judged": 8,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 8,
+        "variant": 0,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.000447,
+      "attempt": 1
+    },
+    {
+      "id": "oralb-io9",
+      "by_photo": false,
+      "card": {
+        "brand": "Oral-B",
+        "model": "iО 9",
+        "variant": {
+          "color": "черный",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "электрическая зубная щетка",
+        "title": "Электрическая зубная щетка Oral-B iO 9 черная",
+        "queries": [
+          "oral-b io 9 черная",
+          "oral-b io9 black",
+          "oral-b io 9"
+        ],
+        "must": [
+          "io9"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "насадка",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000903,
+      "tokens": 2129,
+      "seconds": 21.6,
+      "saved": "data/runs/20261016-213133.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016162905_01M52RQCCAPKGZ9TVCXW5N0WBM Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 6df6bb56b52d1a10495b23ae99880654 IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 5,
+          "seconds": 0.8,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 20417.0,
+        "title": "Зубная щётка электрическая Oral-b iO Series 9 Black",
+        "url": "https://market.yandex.ru/card/oral-b-zubnaya-shchetka-elektricheskaya-io-series-9-black/6073041337"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 20417.0,
+        "title": "Зубная щётка электрическая Oral-b iO Series 9 Black",
+        "url": "https://market.yandex.ru/card/oral-b-zubnaya-shchetka-elektricheskaya-io-series-9-black/6073041337"
+      },
+      "naive_ok": true,
+      "same": 5,
+      "same_confirmed": 1,
+      "same_judged": 5,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 5,
+        "variant": 1,
+        "accessory": 1,
+        "other": 1
+      },
+      "judge_cost": 0.000471,
+      "attempt": 1
+    },
+    {
+      "id": "dyson-v15",
+      "by_photo": false,
+      "card": {
+        "brand": "Dyson",
+        "model": "V15 Detect",
+        "variant": {
+          "color": null,
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "пылесос",
+        "title": "Пылесос Dyson V15 Detect",
+        "queries": [
+          "Dyson V15 Detect",
+          "Dyson V15 Detect пылесос",
+          "Dyson V15"
+        ],
+        "must": [
+          "v15"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "фильтр",
+          "насадка",
+          "щётка",
+          "аккумулятор",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000892,
+      "tokens": 2175,
+      "seconds": 21.5,
+      "saved": "data/runs/20261016-213159.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016162930_01M52RR55RV4SKANXXRZEDVT46 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: f3d193b2fed9c16dc7ce73aa301029b6 IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 6,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 62925.0,
+        "title": "Пылесос Dyson V15 Detect absolute , UK, вертикальный, сухой, контейнер, желтый, UK",
+        "url": "https://market.yandex.ru/card/pylesos-dyson-v15-detect-absolute-yellow--uk/4983391602"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 62925.0,
+        "title": "Пылесос Dyson V15 Detect absolute , UK, вертикальный, сухой, контейнер, желтый, UK",
+        "url": "https://market.yandex.ru/card/pylesos-dyson-v15-detect-absolute-yellow--uk/4983391602"
+      },
+      "naive_ok": true,
+      "same": 6,
+      "same_confirmed": 6,
+      "same_judged": 6,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 6,
+        "variant": 0,
+        "accessory": 1,
+        "other": 1
+      },
+      "judge_cost": 0.00051,
+      "attempt": 1
+    },
+    {
+      "id": "photo-airpods-pro2",
+      "by_photo": true,
+      "card": {
+        "brand": "Apple",
+        "model": "AirPods Pro 2",
+        "variant": {
+          "color": "белый",
+          "memory": null,
+          "size": null,
+          "other": "кейс USB-C"
+        },
+        "category": "наушники беспроводные",
+        "title": "Apple AirPods Pro 2 (USB-C)",
+        "queries": [
+          "Apple AirPods Pro 2 USB-C",
+          "Apple AirPods Pro 2-го поколения USB-C",
+          "AirPods Pro 2 USB-C"
+        ],
+        "must": [
+          "airpods pro 2",
+          "usb-c"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "защитное",
+          "накладка",
+          "копия",
+          "реплика",
+          "аналог"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.003717,
+      "tokens": 4768,
+      "seconds": 25.96,
+      "saved": "data/runs/20261016-213228.json",
+      "asked": "Какой именно это модели AirPods Pro: 1-го, 2-го или 3-го поколения? (На фото они выглядят очень похоже, но цена и характеристики сильно отличаются)",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163000_01M52RS1XSSNWT02BZ0RG0E5G5 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.2,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 622f64b9257379097478c9f7652f57b2 IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 8,
+          "seconds": 0.8,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 17297.0,
+        "title": "Беспроводные наушники Apple AirPods Pro 2 MagSafe Charging Case (USB-C), белый",
+        "url": "https://market.yandex.ru/card/besprovodnyye-naushniki-apple-airpods-pro-2-magsafe-charging-case-usb-c-belyy/103257923180"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 17297.0,
+        "title": "Беспроводные наушники Apple AirPods Pro 2 MagSafe Charging Case (USB-C), белый",
+        "url": "https://market.yandex.ru/card/besprovodnyye-naushniki-apple-airpods-pro-2-magsafe-charging-case-usb-c-belyy/103257923180"
+      },
+      "naive_ok": true,
+      "same": 8,
+      "same_confirmed": 8,
+      "same_judged": 8,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 8,
+        "variant": 0,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.00049,
+      "attempt": 1
+    },
+    {
+      "id": "photo-switch-oled",
+      "by_photo": true,
+      "card": {
+        "brand": "Nintendo",
+        "model": "Switch OLED",
+        "variant": {
+          "color": "белый",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "игровая консоль",
+        "title": "Nintendo Switch OLED белый",
+        "queries": [
+          "Nintendo Switch OLED белый",
+          "Nintendo Switch OLED white",
+          "Nintendo Switch OLED"
+        ],
+        "must": [],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "стекло",
+          "плёнка",
+          "док-станция",
+          "б/у"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.002752,
+      "tokens": 3530,
+      "seconds": 22.56,
+      "saved": "data/runs/20261016-213259.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.6,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163031_01M52RT0DTX9BSRHXKM8XH7BJ8 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 68550e2d30b9f2a00beee72b5fd3a160 IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 6,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 26588.0,
+        "title": "Игровая приставка Nintendo Switch OLED 64 ГБ, белый",
+        "url": "https://market.yandex.ru/card/igrovaya-pristavka-nintendo-switch-oled-64-gb-belyy/6059304327"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 26588.0,
+        "title": "Игровая приставка Nintendo Switch OLED 64 ГБ, белый",
+        "url": "https://market.yandex.ru/card/igrovaya-pristavka-nintendo-switch-oled-64-gb-belyy/6059304327"
+      },
+      "naive_ok": true,
+      "same": 6,
+      "same_confirmed": 6,
+      "same_judged": 6,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 6,
+        "variant": 2,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.000304,
+      "attempt": 1
+    },
+    {
+      "id": "photo-kindle",
+      "by_photo": true,
+      "card": {
+        "brand": "Amazon",
+        "model": "Kindle Paperwhite 11-го поколения",
+        "variant": {
+          "color": "чёрный",
+          "memory": "16 ГБ",
+          "size": null,
+          "other": null
+        },
+        "category": "электронная книга",
+        "title": "Электронная книга Amazon Kindle Paperwhite 11-го поколения 16 ГБ",
+        "queries": [
+          "Amazon Kindle Paperwhite 11",
+          "Kindle Paperwhite 11-го поколения 16 ГБ",
+          "Kindle Paperwhite 2021"
+        ],
+        "must": [
+          "paperwhite",
+          "11-го поколения"
+        ],
+        "must_not": [
+          "чехол",
+          "защитное стекло",
+          "плёнка",
+          "аксессуар"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.004021,
+      "tokens": 5576,
+      "seconds": 29.07,
+      "saved": "data/runs/20261016-213332.json",
+      "asked": "Какая именно модель Kindle у вас? (Например: Kindle 11-го поколения, Kindle Paperwhite 12-го поколения или Kindle Oasis). По фото сложно отличить базовую модель от Paperwhite.",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.4,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163102_01M52RTYVNQ054K58V1F60YHJC Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.5,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: d69ef068cf2b02966a14f4131b097fa7 IP: 77.222.96.189 Новая попытка через 00:59 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 15,
+          "same": 1,
+          "seconds": 0.8,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 15039.0,
+        "title": "Amazon Kindle Paperwhite 11 (5) Электронная книга 6.8\" 16GB черная",
+        "url": "https://market.yandex.ru/card/elektronnaya-kniga-kindle-paperwhite5-16g-chernaya/5730057356"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 7963.0,
+        "title": "Электронная книга Kindle Paperwhite 3 (7 поколения), 4 ГБ, с подсветкой, русифицированная, электронный ридер",
+        "url": "https://market.yandex.ru/card/elektronnaya-kniga-kindle-paperwhite-3-7-go-pokoleniya-podsvetka-russkiy-4-gb/5729976901"
+      },
+      "naive_ok": false,
+      "same": 1,
+      "same_confirmed": 1,
+      "same_judged": 1,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 1,
+        "variant": 4,
+        "accessory": 0,
+        "other": 10
+      },
+      "judge_cost": 0.000324,
+      "attempt": 1
+    },
+    {
+      "id": "photo-dualsense",
+      "by_photo": true,
+      "card": {
+        "brand": "Sony",
+        "model": "DualSense",
+        "variant": {
+          "color": "белый",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "геймпад",
+        "title": "Геймпад Sony DualSense для PlayStation 5 (белый)",
+        "queries": [
+          "Sony DualSense белый",
+          "геймпад PS5 DualSense",
+          "Sony DualSense white"
+        ],
+        "must": [],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "накладка",
+          "ремешок",
+          "кабель",
+          "б/у"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.002732,
+      "tokens": 3400,
+      "seconds": 21.7,
+      "saved": "data/runs/20261016-213357.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163129_01M52RVS4PFQ46AE7QDPX5VF40 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.2,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 1c16153ac4258d91555119bb50888cba IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 6,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 6563.0,
+        "title": "Геймпад для PS5 DualSense Беспроводной White, Sony PlayStation 5 DualSense, (CFI ZCT1W) белый, Bluetooth Контроллер, Джойстик, Беспроводное управление Игровой приставкой, Аксессуар для Сони Плейстейшн 5",
+        "url": "https://market.yandex.ru/card/geympad-dlya-ps5-dualsense-besprovodnoy-white-sony-playstation-5-dualsense-cfi-zct1w-belyy-bluetooth-kontroller-dzhoystik-besprovodnoye-upravleniye-igrovoy-pristavkoy-aksessuar-dlya-soni-pleysteyshn-5/231110992821280768"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 6563.0,
+        "title": "Геймпад для PS5 DualSense Беспроводной White, Sony PlayStation 5 DualSense, (CFI ZCT1W) белый, Bluetooth Контроллер, Джойстик, Беспроводное управление Игровой приставкой, Аксессуар для Сони Плейстейшн 5",
+        "url": "https://market.yandex.ru/card/geympad-dlya-ps5-dualsense-besprovodnoy-white-sony-playstation-5-dualsense-cfi-zct1w-belyy-bluetooth-kontroller-dzhoystik-besprovodnoye-upravleniye-igrovoy-pristavkoy-aksessuar-dlya-soni-pleysteyshn-5/231110992821280768"
+      },
+      "naive_ok": true,
+      "same": 6,
+      "same_confirmed": 6,
+      "same_judged": 6,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 6,
+        "variant": 0,
+        "accessory": 0,
+        "other": 2
+      },
+      "judge_cost": 0.000308,
+      "attempt": 1
+    },
+    {
+      "id": "sony-exact",
+      "by_photo": false,
+      "card": {
+        "brand": "Sony",
+        "model": "WH-1000XM5",
+        "variant": {
+          "color": "черный",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "наушники",
+        "title": "Беспроводные наушники Sony WH-1000XM5 черные",
+        "queries": [
+          "sony wh-1000xm5 черные",
+          "sony wh-1000xm5",
+          "wh-1000xm5"
+        ],
+        "must": [
+          "wh-1000xm5"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.001006,
+      "tokens": 2427,
+      "seconds": 27.45,
+      "saved": "data/runs/20261016-213429.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163158_01M52RWNW8DNMJM670NEKT39VD Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: fec8728f37c57b178185951ae24789ac IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 7,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 21537.0,
+        "title": "Наушники Sony WH-1000XM5 Black/Черный",
+        "url": "https://market.yandex.ru/card/naushniki-sony-wh-1000xm5-blackchernyy/4780705003"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 21537.0,
+        "title": "Наушники Sony WH-1000XM5 Black/Черный",
+        "url": "https://market.yandex.ru/card/naushniki-sony-wh-1000xm5-blackchernyy/4780705003"
+      },
+      "naive_ok": true,
+      "same": 7,
+      "same_confirmed": 7,
+      "same_judged": 7,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 7,
+        "variant": 1,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.000269,
+      "attempt": 2
+    },
+    {
+      "id": "sony-vague",
+      "by_photo": false,
+      "card": {
+        "brand": "Sony",
+        "model": "WH-1000XM5",
+        "variant": {
+          "color": null,
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "наушники",
+        "title": "Наушники Sony WH-1000XM5 с шумоподавлением",
+        "queries": [
+          "sony wh-1000xm5",
+          "sony wh 1000xm5 наушники",
+          "sony wh-1000xm5 беспроводные наушники"
+        ],
+        "must": [
+          "wh-1000xm5",
+          "5"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000982,
+      "tokens": 2453,
+      "seconds": 23.7,
+      "saved": "data/runs/20261016-213456.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163226_01M52RXGZHQ9E7A5YVGFQAD6B3 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.2,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 4fc8ac247cda75965e4c4d6ec2617a51 IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 6,
+          "seconds": 0.8,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 21737.0,
+        "title": "Беспроводные наушники Sony WH-1000XM5, с шумоподавлением, цвет Чёрный / Black",
+        "url": "https://market.yandex.ru/card/besprovodnyye-naushniki-sony-wh-1000xm5-s-shumopodavleniyem-tsvet-chernyy--black/5200861071"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 21537.0,
+        "title": "Наушники Sony WH-1000XM5 Midnight Blue/Синий",
+        "url": "https://market.yandex.ru/card/naushniki-sony-wh-1000xm5-midnight-bluesiniy/4780705000"
+      },
+      "naive_ok": true,
+      "same": 6,
+      "same_confirmed": 6,
+      "same_judged": 6,
+      "missed_cheaper": [
+        {
+          "price": 21537.0,
+          "title": "Наушники Sony WH-1000XM5 Midnight Blue/Синий",
+          "class": "variant",
+          "note": "Та же модель, но цвет Midnight Blue"
+        }
+      ],
+      "counts": {
+        "same": 6,
+        "variant": 2,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.00032,
+      "attempt": 2
+    },
+    {
+      "id": "airpods4-anc",
+      "by_photo": false,
+      "card": {
+        "brand": "Apple",
+        "model": "AirPods 4",
+        "variant": {
+          "color": null,
+          "memory": null,
+          "size": null,
+          "other": "с активным шумоподавлением (ANC)"
+        },
+        "category": "беспроводные наушники",
+        "title": "Apple AirPods 4 с активным шумоподавлением",
+        "queries": [
+          "Apple AirPods 4 с активным шумоподавлением",
+          "AirPods 4 ANC",
+          "Apple AirPods 4"
+        ],
+        "must": [
+          "4"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия",
+          "pro"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000994,
+      "tokens": 2429,
+      "seconds": 24.07,
+      "saved": "data/runs/20261016-213524.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.4,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163253_01M52RYBEX7B57D8J74X46J2G4 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.2,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 0302e83de147ff2b4d837595afd0b387 IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 7,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 12831.0,
+        "title": "Наушники беспроводные Apple AirPods 4 ANC A3055/A3056/A3059 MXP93LL/A белый",
+        "url": "https://market.yandex.ru/card/naushniki-besprovodnyye-apple-airpods-4-anc-a3055a3056a3059-mxp93lla-belyy/5717750117"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 12831.0,
+        "title": "Наушники беспроводные Apple AirPods 4 ANC A3055/A3056/A3059 MXP93LL/A белый",
+        "url": "https://market.yandex.ru/card/naushniki-besprovodnyye-apple-airpods-4-anc-a3055a3056a3059-mxp93lla-belyy/5717750117"
+      },
+      "naive_ok": true,
+      "same": 7,
+      "same_confirmed": 7,
+      "same_judged": 7,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 7,
+        "variant": 0,
+        "accessory": 0,
+        "other": 1
+      },
+      "judge_cost": 0.00043,
+      "attempt": 2
+    },
+    {
+      "id": "iphone16",
+      "by_photo": false,
+      "card": {
+        "brand": "Apple",
+        "model": "iPhone 16",
+        "variant": {
+          "color": "черный",
+          "memory": "128 ГБ",
+          "size": null,
+          "other": null
+        },
+        "category": "смартфон",
+        "title": "Apple iPhone 16 128 ГБ черный",
+        "queries": [
+          "Apple iPhone 16 128 ГБ черный",
+          "iPhone 16 128 ГБ черный",
+          "iPhone 16 128"
+        ],
+        "must": [
+          "16",
+          "128"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "плёнка",
+          "стекло",
+          "ремешок",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.001016,
+      "tokens": 2408,
+      "seconds": 23.1,
+      "saved": "data/runs/20261016-213551.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163322_01M52RZ7CZV2PQ45CM2ZD41P0H Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.2,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 18d332ebbb8e3db6e25257a33ff2dfee IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 8,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 68379.0,
+        "title": "Смартфон Apple iPhone 16, 128 GB, Sim+Esim, черный",
+        "url": "https://market.yandex.ru/card/smartfon-apple-iphone-16-128-gb-simesim-chernyy/5708371519"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 68379.0,
+        "title": "Смартфон Apple iPhone 16, 128 GB, Sim+Esim, черный",
+        "url": "https://market.yandex.ru/card/smartfon-apple-iphone-16-128-gb-simesim-chernyy/5708371519"
+      },
+      "naive_ok": true,
+      "same": 8,
+      "same_confirmed": 2,
+      "same_judged": 8,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 8,
+        "variant": 0,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.0006,
+      "attempt": 2
+    },
+    {
+      "id": "oralb-io9",
+      "by_photo": false,
+      "card": {
+        "brand": "Oral-B",
+        "model": "iО 9",
+        "variant": {
+          "color": "черный",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "электрическая зубная щетка",
+        "title": "Электрическая зубная щетка Oral-B iO 9 черная",
+        "queries": [
+          "oral-b io 9 черная",
+          "oral-b io9 black",
+          "oral-b io 9"
+        ],
+        "must": [
+          "io9"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "насадка",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000898,
+      "tokens": 2125,
+      "seconds": 24.37,
+      "saved": "data/runs/20261016-213620.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163351_01M52S04085MA0N091P36NVD5S Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 3b8a20350e2d5ce43d6ccb691e67038d IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 5,
+          "seconds": 0.9,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 20417.0,
+        "title": "Зубная щётка электрическая Oral-b iO Series 9 Black",
+        "url": "https://market.yandex.ru/card/oral-b-zubnaya-shchetka-elektricheskaya-io-series-9-black/6073041337"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 20417.0,
+        "title": "Зубная щётка электрическая Oral-b iO Series 9 Black",
+        "url": "https://market.yandex.ru/card/oral-b-zubnaya-shchetka-elektricheskaya-io-series-9-black/6073041337"
+      },
+      "naive_ok": true,
+      "same": 5,
+      "same_confirmed": 2,
+      "same_judged": 5,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 5,
+        "variant": 1,
+        "accessory": 1,
+        "other": 1
+      },
+      "judge_cost": 0.00047,
+      "attempt": 2
+    },
+    {
+      "id": "dyson-v15",
+      "by_photo": false,
+      "card": {
+        "brand": "Dyson",
+        "model": "V15 Detect",
+        "variant": {
+          "color": null,
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "пылесос",
+        "title": "Пылесос Dyson V15 Detect",
+        "queries": [
+          "Dyson V15 Detect",
+          "Dyson V15 Detect пылесос",
+          "Dyson V15"
+        ],
+        "must": [
+          "v15"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "фильтр",
+          "насадка",
+          "щётка",
+          "аккумулятор",
+          "запчасть",
+          "б/у",
+          "уценка",
+          "реплика",
+          "копия"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.000903,
+      "tokens": 2237,
+      "seconds": 22.83,
+      "saved": "data/runs/20261016-213647.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.4,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163418_01M52S0Y0F06AKK459KPNP5MA9 Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 5e992e46b37cda01df9d798ed910875a IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 8,
+          "seconds": 0.8,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 62925.0,
+        "title": "Пылесос Dyson V15 Detect absolute , UK, вертикальный, сухой, контейнер, желтый, UK",
+        "url": "https://market.yandex.ru/card/pylesos-dyson-v15-detect-absolute-yellow--uk/4983391602"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 62925.0,
+        "title": "Пылесос Dyson V15 Detect absolute , UK, вертикальный, сухой, контейнер, желтый, UK",
+        "url": "https://market.yandex.ru/card/pylesos-dyson-v15-detect-absolute-yellow--uk/4983391602"
+      },
+      "naive_ok": true,
+      "same": 8,
+      "same_confirmed": 8,
+      "same_judged": 8,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 8,
+        "variant": 0,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.000558,
+      "attempt": 2
+    },
+    {
+      "id": "photo-airpods-pro2",
+      "by_photo": true,
+      "card": {
+        "brand": "Apple",
+        "model": "AirPods Pro 2",
+        "variant": {
+          "color": "белый",
+          "memory": null,
+          "size": null,
+          "other": "кейс USB-C"
+        },
+        "category": "наушники беспроводные",
+        "title": "Apple AirPods Pro 2 (USB-C)",
+        "queries": [
+          "Apple AirPods Pro 2 USB-C",
+          "Apple AirPods Pro 2-го поколения USB-C",
+          "AirPods Pro 2 USB-C"
+        ],
+        "must": [
+          "airpods pro 2",
+          "usb-c"
+        ],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "амбушюры",
+          "защитное",
+          "накладка",
+          "копия",
+          "реплика",
+          "аналог"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.003695,
+      "tokens": 4699,
+      "seconds": 25.689999999999998,
+      "saved": "data/runs/20261016-213717.json",
+      "asked": "Какой именно это модели AirPods Pro: 1-го, 2-го или 3-го поколения? (На фото они выглядят очень похоже, но цена и характеристики сильно отличаются)",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163447_01M52S1TZRZBCTSN45JYB976SY Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 2a5f8480ed560e26615357a8cc8f7be9 IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 7,
+          "seconds": 0.8,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 17297.0,
+        "title": "Беспроводные наушники Apple AirPods Pro 2 MagSafe Charging Case (USB-C), белый",
+        "url": "https://market.yandex.ru/card/besprovodnyye-naushniki-apple-airpods-pro-2-magsafe-charging-case-usb-c-belyy/103257923180"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 4205.0,
+        "title": "Apple Наушники беспроводные с микрофоном Apple AirPods Pro 2",
+        "url": "https://market.yandex.ru/card/apple-naushniki-besprovodnyye-s-mikrofonom-apple-airpods-pro-2/6044877739"
+      },
+      "naive_ok": false,
+      "same": 7,
+      "same_confirmed": 7,
+      "same_judged": 7,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 7,
+        "variant": 0,
+        "accessory": 0,
+        "other": 1
+      },
+      "judge_cost": 0.0006,
+      "attempt": 2
+    },
+    {
+      "id": "photo-switch-oled",
+      "by_photo": true,
+      "card": {
+        "brand": "Nintendo",
+        "model": "Switch OLED",
+        "variant": {
+          "color": "белый",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "игровая консоль",
+        "title": "Nintendo Switch OLED белый",
+        "queries": [
+          "Nintendo Switch OLED белый",
+          "Nintendo Switch OLED white",
+          "Nintendo Switch OLED"
+        ],
+        "must": [],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "стекло",
+          "плёнка",
+          "док-станция",
+          "б/у"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.002759,
+      "tokens": 3527,
+      "seconds": 25.17,
+      "saved": "data/runs/20261016-213749.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163517_01M52S2QW2RV5PCS0G7PCDSQBK Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.2,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 1fd05d8b7c5744fc0a99f45684e7d82b IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 5,
+          "seconds": 4.2,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 26588.0,
+        "title": "Игровая приставка Nintendo Switch OLED 64 ГБ, белый",
+        "url": "https://market.yandex.ru/card/igrovaya-pristavka-nintendo-switch-oled-64-gb-belyy/6059304327"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 26588.0,
+        "title": "Игровая приставка Nintendo Switch OLED 64 ГБ, белый",
+        "url": "https://market.yandex.ru/card/igrovaya-pristavka-nintendo-switch-oled-64-gb-belyy/6059304327"
+      },
+      "naive_ok": true,
+      "same": 5,
+      "same_confirmed": 5,
+      "same_judged": 5,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 5,
+        "variant": 3,
+        "accessory": 0,
+        "other": 0
+      },
+      "judge_cost": 0.000343,
+      "attempt": 2
+    },
+    {
+      "id": "photo-kindle",
+      "by_photo": true,
+      "card": {
+        "brand": "Amazon",
+        "model": "Kindle Paperwhite 11-го поколения",
+        "variant": {
+          "color": "чёрный",
+          "memory": "16 ГБ",
+          "size": null,
+          "other": null
+        },
+        "category": "электронная книга",
+        "title": "Электронная книга Amazon Kindle Paperwhite 11-го поколения 16 ГБ",
+        "queries": [
+          "Amazon Kindle Paperwhite 11",
+          "Kindle Paperwhite 11-го поколения",
+          "Kindle Paperwhite 16 ГБ"
+        ],
+        "must": [
+          "paperwhite",
+          "11-го поколения"
+        ],
+        "must_not": [
+          "чехол",
+          "защитное стекло",
+          "плёнка",
+          "аксессуар"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.003964,
+      "tokens": 5531,
+      "seconds": 30.1,
+      "saved": "data/runs/20261016-213824.json",
+      "asked": "Какая именно модель Kindle у вас? (Например: Kindle 11-го поколения, Kindle Paperwhite 12-го поколения или Kindle Oasis). По фото сложно точно определить поколение, так как они выглядят очень похоже.",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.6,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163554_01M52S3VJH4HV6VXSXPPD3MM4F Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.4,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: e8158d2f7f5b9cd86b6fab7e6994649c IP: 77.222.96.189 Новая попытка через 00:53 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 13,
+          "same": 1,
+          "seconds": 1.0,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 15039.0,
+        "title": "Amazon Kindle Paperwhite 11 (5) Электронная книга 6.8\" 16GB черная",
+        "url": "https://market.yandex.ru/card/elektronnaya-kniga-kindle-paperwhite5-16g-chernaya/5730057356"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 13774.0,
+        "title": "Amazon Kindle Paperwhite 11 (5) Электронная книга 6.8\" 8GB черная",
+        "url": "https://market.yandex.ru/card/elektronnaya-kniga-kindle-paperwhite5-8g-chernaya/5730067033"
+      },
+      "naive_ok": false,
+      "same": 1,
+      "same_confirmed": 1,
+      "same_judged": 1,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 1,
+        "variant": 2,
+        "accessory": 0,
+        "other": 10
+      },
+      "judge_cost": 0.000267,
+      "attempt": 2
+    },
+    {
+      "id": "photo-dualsense",
+      "by_photo": true,
+      "card": {
+        "brand": "Sony",
+        "model": "DualSense",
+        "variant": {
+          "color": "белый",
+          "memory": null,
+          "size": null,
+          "other": null
+        },
+        "category": "геймпад",
+        "title": "Геймпад Sony DualSense для PlayStation 5 (белый)",
+        "queries": [
+          "Sony DualSense белый",
+          "геймпад PS5 DualSense",
+          "Sony DualSense white"
+        ],
+        "must": [],
+        "must_not": [
+          "чехол",
+          "кейс",
+          "накладка",
+          "ремешок",
+          "кабель",
+          "б/у"
+        ],
+        "confidence": "high",
+        "question": null
+      },
+      "need_input": false,
+      "cost": 0.002723,
+      "tokens": 3396,
+      "seconds": 34.0,
+      "saved": "data/runs/20261016-213902.json",
+      "identified": true,
+      "markets": {
+        "ozon": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.5,
+          "note": "Похоже, нет соединения Выключите VPN, перезагрузите роутер или подключитесь к другой сети Инцидент: fab_chlg_20261016163627_01M52S4WH58XCZHNRG3RJGR3VJ Обновить "
+        },
+        "wb": {
+          "status": "blocked",
+          "found": 0,
+          "same": 0,
+          "seconds": 6.3,
+          "note": "Что-то не так... Подозрительная активность. Пожалуйста, подождите. ID: 002319670b667ff46bf24c5c19a61e88 IP: 77.222.96.189 Новая попытка через 00:58 Что делать: "
+        },
+        "ym": {
+          "status": "ok",
+          "found": 8,
+          "same": 7,
+          "seconds": 1.0,
+          "note": ""
+        }
+      },
+      "best": {
+        "market": "ym",
+        "price": 6563.0,
+        "title": "Геймпад для PS5 DualSense Беспроводной White, Sony PlayStation 5 DualSense, (CFI ZCT1W) белый, Bluetooth Контроллер, Джойстик, Беспроводное управление Игровой приставкой, Аксессуар для Сони Плейстейшн 5",
+        "url": "https://market.yandex.ru/card/geympad-dlya-ps5-dualsense-besprovodnoy-white-sony-playstation-5-dualsense-cfi-zct1w-belyy-bluetooth-kontroller-dzhoystik-besprovodnoye-upravleniye-igrovoy-pristavkoy-aksessuar-dlya-soni-pleysteyshn-5/231110992821280768"
+      },
+      "best_ok": true,
+      "naive": {
+        "market": "ym",
+        "price": 6563.0,
+        "title": "Геймпад для PS5 DualSense Беспроводной White, Sony PlayStation 5 DualSense, (CFI ZCT1W) белый, Bluetooth Контроллер, Джойстик, Беспроводное управление Игровой приставкой, Аксессуар для Сони Плейстейшн 5",
+        "url": "https://market.yandex.ru/card/geympad-dlya-ps5-dualsense-besprovodnoy-white-sony-playstation-5-dualsense-cfi-zct1w-belyy-bluetooth-kontroller-dzhoystik-besprovodnoye-upravleniye-igrovoy-pristavkoy-aksessuar-dlya-soni-pleysteyshn-5/231110992821280768"
+      },
+      "naive_ok": true,
+      "same": 7,
+      "same_confirmed": 7,
+      "same_judged": 7,
+      "missed_cheaper": [],
+      "counts": {
+        "same": 7,
+        "variant": 0,
+        "accessory": 0,
+        "other": 1
+      },
+      "judge_cost": 0.000292,
+      "attempt": 2
+    }
+  ]
+}

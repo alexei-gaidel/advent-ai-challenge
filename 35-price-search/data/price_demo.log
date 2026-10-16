@@ -1,0 +1,39 @@
+маркетплейсы: Ozon, Wildberries, Яндекс.Маркет · проходов 2 · temperature=0 · судья openai/gpt-oss-120b · 2026-10-16 21:29
+
+Проход 1
+  sony-exact: опознан ✓ «Беспроводные наушники Sony WH-1000XM5 че» · ozon:blocked wb:blocked ym:ok · наивно 557.0 ₽ ✗ · AI 21537.0 ₽ ✓ · тот же 7/7 · пропущено дешевле 0 · $0.0015 · 28.91 с
+  sony-vague: опознан ✓ «Наушники Sony WH-1000XM5 с шумоподавлени» · ozon:blocked wb:blocked ym:ok · наивно 557.0 ₽ ✗ · AI 21737.0 ₽ ✓ · тот же 4/4 · пропущено дешевле 0 · $0.0014 · 22.83 с
+  airpods4-anc: опознан ✓ «Apple AirPods 4 с активным шумоподавлени» · ozon:blocked wb:blocked ym:ok · наивно 12831.0 ₽ ✓ · AI 12831.0 ₽ ✓ · тот же 7/7 · пропущено дешевле 0 · $0.0014 · 21.34 с
+  iphone16: опознан ✓ «Apple iPhone 16 128 ГБ черный» · ozon:blocked wb:blocked ym:ok · наивно 68379.0 ₽ ✓ · AI 68379.0 ₽ ✓ · тот же 8/8 · пропущено дешевле 0 · $0.0014 · 21.27 с
+  oralb-io9: опознан ✓ «Электрическая зубная щетка Oral-B iO 9 ч» · ozon:blocked wb:blocked ym:ok · наивно 20417.0 ₽ ✓ · AI 20417.0 ₽ ✓ · тот же 1/5 · пропущено дешевле 0 · $0.0014 · 21.6 с
+  dyson-v15: опознан ✓ «Пылесос Dyson V15 Detect» · ozon:blocked wb:blocked ym:ok · наивно 62925.0 ₽ ✓ · AI 62925.0 ₽ ✓ · тот же 6/6 · пропущено дешевле 0 · $0.0014 · 21.5 с
+  photo-airpods-pro2: модель спросила «Какой именно это модели AirPods Pro: 1-го, 2-го или 3-го поколения? (На фото они» → «второе поколение, кейс USB-C»
+  photo-airpods-pro2: опознан ✓ «Apple AirPods Pro 2 (USB-C)» · ozon:blocked wb:blocked ym:ok · наивно 17297.0 ₽ ✓ · AI 17297.0 ₽ ✓ · тот же 8/8 · пропущено дешевле 0 · $0.0042 · 25.96 с
+  photo-switch-oled: опознан ✓ «Nintendo Switch OLED белый» · ozon:blocked wb:blocked ym:ok · наивно 26588.0 ₽ ✓ · AI 26588.0 ₽ ✓ · тот же 6/6 · пропущено дешевле 0 · $0.0031 · 22.56 с
+  photo-kindle: модель спросила «Какая именно модель Kindle у вас? (Например: Kindle 11-го поколения, Kindle Pape» → «Paperwhite 11-го поколения, 16 ГБ»
+  photo-kindle: опознан ✓ «Электронная книга Amazon Kindle Paperwhi» · ozon:blocked wb:blocked ym:ok · наивно 7963.0 ₽ ✗ · AI 15039.0 ₽ ✓ · тот же 1/1 · пропущено дешевле 0 · $0.0043 · 29.07 с
+  photo-dualsense: опознан ✓ «Геймпад Sony DualSense для PlayStation 5» · ozon:blocked wb:blocked ym:ok · наивно 6563.0 ₽ ✓ · AI 6563.0 ₽ ✓ · тот же 6/6 · пропущено дешевле 0 · $0.003 · 21.7 с
+
+Проход 2
+  sony-exact: опознан ✓ «Беспроводные наушники Sony WH-1000XM5 че» · ozon:blocked wb:blocked ym:ok · наивно 21537.0 ₽ ✓ · AI 21537.0 ₽ ✓ · тот же 7/7 · пропущено дешевле 0 · $0.0013 · 27.45 с
+  sony-vague: опознан ✓ «Наушники Sony WH-1000XM5 с шумоподавлени» · ozon:blocked wb:blocked ym:ok · наивно 21537.0 ₽ ✓ · AI 21737.0 ₽ ✓ · тот же 6/6 · пропущено дешевле 1 · $0.0013 · 23.7 с
+      пропущено: 21537 ₽ Наушники Sony WH-1000XM5 Midnight Blue/Синий [variant: Та же модель, но цвет Midnight Blue]
+  airpods4-anc: опознан ✓ «Apple AirPods 4 с активным шумоподавлени» · ozon:blocked wb:blocked ym:ok · наивно 12831.0 ₽ ✓ · AI 12831.0 ₽ ✓ · тот же 7/7 · пропущено дешевле 0 · $0.0014 · 24.07 с
+  iphone16: опознан ✓ «Apple iPhone 16 128 ГБ черный» · ozon:blocked wb:blocked ym:ok · наивно 68379.0 ₽ ✓ · AI 68379.0 ₽ ✓ · тот же 2/8 · пропущено дешевле 0 · $0.0016 · 23.1 с
+  oralb-io9: опознан ✓ «Электрическая зубная щетка Oral-B iO 9 ч» · ozon:blocked wb:blocked ym:ok · наивно 20417.0 ₽ ✓ · AI 20417.0 ₽ ✓ · тот же 2/5 · пропущено дешевле 0 · $0.0014 · 24.37 с
+  dyson-v15: опознан ✓ «Пылесос Dyson V15 Detect» · ozon:blocked wb:blocked ym:ok · наивно 62925.0 ₽ ✓ · AI 62925.0 ₽ ✓ · тот же 8/8 · пропущено дешевле 0 · $0.0015 · 22.83 с
+  photo-airpods-pro2: модель спросила «Какой именно это модели AirPods Pro: 1-го, 2-го или 3-го поколения? (На фото они» → «второе поколение, кейс USB-C»
+  photo-airpods-pro2: опознан ✓ «Apple AirPods Pro 2 (USB-C)» · ozon:blocked wb:blocked ym:ok · наивно 4205.0 ₽ ✗ · AI 17297.0 ₽ ✓ · тот же 7/7 · пропущено дешевле 0 · $0.0043 · 25.689999999999998 с
+  photo-switch-oled: опознан ✓ «Nintendo Switch OLED белый» · ozon:blocked wb:blocked ym:ok · наивно 26588.0 ₽ ✓ · AI 26588.0 ₽ ✓ · тот же 5/5 · пропущено дешевле 0 · $0.0031 · 25.17 с
+  photo-kindle: модель спросила «Какая именно модель Kindle у вас? (Например: Kindle 11-го поколения, Kindle Pape» → «Paperwhite 11-го поколения, 16 ГБ»
+  photo-kindle: опознан ✓ «Электронная книга Amazon Kindle Paperwhi» · ozon:blocked wb:blocked ym:ok · наивно 13774.0 ₽ ✗ · AI 15039.0 ₽ ✓ · тот же 1/1 · пропущено дешевле 0 · $0.0042 · 30.1 с
+  photo-dualsense: опознан ✓ «Геймпад Sony DualSense для PlayStation 5» · ozon:blocked wb:blocked ym:ok · наивно 6563.0 ₽ ✓ · AI 6563.0 ₽ ✓ · тот же 7/7 · пропущено дешевле 0 · $0.003 · 34.0 с
+
+Итог: опознано 20/20 (текст 12/12, фото 8/8) · уточнить просили 0
+  Ozon: blocked 20
+  Wildberries: blocked 20
+  Яндекс.Маркет: ok 20
+  наивно самое дешёвое — тот товар: 15/20
+  итог AI — тот товар: 20/20 · «тот же» подтверждено судьёй 106/119 · пропущено более дешёвых тех же 1
+  конвейер $0.0379 · судья $0.0083 · 584 с
+→ data/price_result.json
