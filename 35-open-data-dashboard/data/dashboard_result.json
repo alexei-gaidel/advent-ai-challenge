@@ -1,0 +1,3246 @@
+{
+  "model": "deepseek-chat",
+  "passes": 3,
+  "summary": {
+    "topics": {
+      "finansy": {
+        "category": "Бюджет (Финансы)",
+        "count": 50,
+        "topics": [
+          8,
+          8,
+          7
+        ],
+        "first_try": 1,
+        "valid": 3,
+        "attempts": 5,
+        "rand": [
+          0.913,
+          0.89,
+          0.962
+        ],
+        "tokens": 12935,
+        "cost": 0.006,
+        "seconds": 18.7
+      },
+      "gosimushchestvo": {
+        "category": "Госимущество",
+        "count": 60,
+        "topics": [
+          8,
+          8,
+          8
+        ],
+        "first_try": 3,
+        "valid": 3,
+        "attempts": 3,
+        "rand": [
+          0.863,
+          0.94,
+          0.917
+        ],
+        "tokens": 9236,
+        "cost": 0.0039,
+        "seconds": 11.9
+      },
+      "gosudarstvennoe-upravlenie": {
+        "category": "Государственное управление",
+        "count": 287,
+        "topics": [
+          8,
+          8,
+          8
+        ],
+        "first_try": 3,
+        "valid": 3,
+        "attempts": 3,
+        "rand": [
+          0.911,
+          0.881,
+          0.91
+        ],
+        "tokens": 37327,
+        "cost": 0.0124,
+        "seconds": 17.1
+      },
+      "dosug-i-otdykh": {
+        "category": "Досуг и отдых",
+        "count": 32,
+        "topics": [
+          8,
+          7,
+          8
+        ],
+        "first_try": 3,
+        "valid": 3,
+        "attempts": 3,
+        "rand": [
+          0.938,
+          0.982,
+          0.956
+        ],
+        "tokens": 4862,
+        "cost": 0.0025,
+        "seconds": 10.2
+      }
+    },
+    "recipes": {
+      "расходы": {
+        "topic": "Исполнение бюджета МО: расходы",
+        "values_ok": 18,
+        "values": 18,
+        "dates_ok": 9,
+        "dates": 9,
+        "verdicts": {
+          "верно": 18
+        },
+        "tokens": 9945,
+        "cost": 0.0036
+      },
+      "доходы": {
+        "topic": "Исполнение бюджета МО: доходы",
+        "values_ok": 24,
+        "values": 24,
+        "dates_ok": 13,
+        "dates": 15,
+        "verdicts": {
+          "верно": 24
+        },
+        "tokens": 19587,
+        "cost": 0.0074
+      },
+      "долг": {
+        "topic": "Муниципальный долг",
+        "values_ok": 9,
+        "values": 9,
+        "dates_ok": 9,
+        "dates": 9,
+        "verdicts": {
+          "верно": 9
+        },
+        "tokens": 8160,
+        "cost": 0.0035
+      }
+    },
+    "chat": {
+      "ok": 24,
+      "of": 24,
+      "answers_with_unknown": 1,
+      "unknown_numbers": 1,
+      "tokens": 53597,
+      "cost": 0.0181,
+      "answers_with_unknown_v1": 15,
+      "unknown_numbers_v1": 22
+    }
+  },
+  "topics": [
+    {
+      "slug": "finansy",
+      "category": "Бюджет (Финансы)",
+      "count": 50,
+      "topics": [
+        8,
+        8,
+        7
+      ],
+      "first_try": 1,
+      "valid": 3,
+      "attempts": 5,
+      "rand": [
+        0.913,
+        0.89,
+        0.962
+      ],
+      "tokens": 12935,
+      "cost": 0.006,
+      "seconds": 18.7,
+      "titles": [
+        [
+          "Исполнение бюджета МО: доходы",
+          "Исполнение бюджета МО: расходы",
+          "Муниципальный и государственный долг",
+          "Налоги и сборы в бюджеты МО",
+          "Исполнение муниципальных и государственных программ",
+          "Инвестиционные предложения и соглашения",
+          "Поддержка МСП и предпринимательства",
+          "Прочее"
+        ],
+        [
+          "Исполнение бюджета МО: доходы и расходы",
+          "Основные характеристики и источники финансирования бюджета МО",
+          "Муниципальный долг МО",
+          "Налоги и сборы в бюджеты МО",
+          "Исполнение государственных и муниципальных программ",
+          "Поддержка малого и среднего предпринимательства",
+          "Инвестиционные предложения и соглашения",
+          "Прочее"
+        ],
+        [
+          "Исполнение бюджета МО: доходы и расходы",
+          "Муниципальный долг",
+          "Налоги и сборы в бюджеты МО",
+          "Исполнение муниципальных и государственных программ",
+          "Поддержка малого и среднего предпринимательства",
+          "Инвестиционные предложения и соглашения",
+          "Прочее"
+        ]
+      ]
+    },
+    {
+      "slug": "gosimushchestvo",
+      "category": "Госимущество",
+      "count": 60,
+      "topics": [
+        8,
+        8,
+        8
+      ],
+      "first_try": 3,
+      "valid": 3,
+      "attempts": 3,
+      "rand": [
+        0.863,
+        0.94,
+        0.917
+      ],
+      "tokens": 9236,
+      "cost": 0.0039,
+      "seconds": 11.9,
+      "titles": [
+        [
+          "Реестры государственного имущества Югры",
+          "Реестры муниципального недвижимого имущества",
+          "Реестры движимого имущества и жилого фонда МО",
+          "Имущество для поддержки МСП и СОНКО",
+          "Размещение оборудования связи на объектах МО",
+          "Инвестиционные предложения и соглашения",
+          "Муниципальные услуги и учреждения",
+          "Прочее"
+        ],
+        [
+          "Реестры государственного имущества Югры",
+          "Реестры муниципального недвижимого имущества",
+          "Реестры муниципального движимого имущества и оборудования",
+          "Земельные участки в муниципальной собственности",
+          "Жилой фонд и аварийное жильё",
+          "Имущество для поддержки МСП и СОНКО",
+          "Объекты для размещения оборудования связи",
+          "Прочее"
+        ],
+        [
+          "Реестры государственного имущества Югры",
+          "Реестры муниципального недвижимого имущества",
+          "Реестры движимого имущества и жилого фонда МО",
+          "Имущество для поддержки МСП и СОНКО",
+          "Объекты для размещения оборудования связи",
+          "Аварийное жильё и очерёдность нуждающихся",
+          "Муниципальные услуги, учреждения и предприятия",
+          "Прочее: инвестпредложения, приватизация, НПА и объекты"
+        ]
+      ]
+    },
+    {
+      "slug": "gosudarstvennoe-upravlenie",
+      "category": "Государственное управление",
+      "count": 287,
+      "topics": [
+        8,
+        8,
+        8
+      ],
+      "first_try": 3,
+      "valid": 3,
+      "attempts": 3,
+      "rand": [
+        0.911,
+        0.881,
+        0.91
+      ],
+      "tokens": 37327,
+      "cost": 0.0124,
+      "seconds": 17.1,
+      "titles": [
+        [
+          "Правовые акты и нормативная база",
+          "Государственные и муниципальные услуги",
+          "Инвестиционные предложения и соглашения",
+          "Конгрессы, конференции и мероприятия",
+          "Сведения о доходах и имуществе",
+          "Контакты, справочники и места нахождения",
+          "Муниципальные программы и управление",
+          "Прочее"
+        ],
+        [
+          "Правовые акты и нормативная база",
+          "Государственные и муниципальные услуги",
+          "Инвестиционные предложения и соглашения",
+          "Конгрессы, конференции и мероприятия",
+          "Сведения о доходах и имуществе",
+          "Контакты, справочники и места нахождения",
+          "Бюджет, финансы и налоги",
+          "Прочее"
+        ],
+        [
+          "Правовые акты и нормативная база",
+          "Госуслуги и муниципальные услуги",
+          "Доходы, расходы и имущество служащих",
+          "Инвестиции и инвестпредложения",
+          "Конгрессы, конференции и мероприятия",
+          "Контакты, справочники и места нахождения",
+          "Муниципальные программы и управление",
+          "Прочее"
+        ]
+      ]
+    },
+    {
+      "slug": "dosug-i-otdykh",
+      "category": "Досуг и отдых",
+      "count": 32,
+      "topics": [
+        8,
+        7,
+        8
+      ],
+      "first_try": 3,
+      "valid": 3,
+      "attempts": 3,
+      "rand": [
+        0.938,
+        0.982,
+        0.956
+      ],
+      "tokens": 4862,
+      "cost": 0.0025,
+      "seconds": 10.2,
+      "titles": [
+        [
+          "Детские досуг и занятость",
+          "Культура и культурные мероприятия",
+          "Коллективные средства размещения",
+          "Общепит: кафе, бары, рестораны",
+          "Библиотеки и магазины",
+          "Парки, скверы и места отдыха",
+          "Спорт и ярмарки",
+          "Прочее"
+        ],
+        [
+          "Детские активности и досуг детей",
+          "Культура и культурные мероприятия",
+          "Коллективные средства размещения и гостиницы",
+          "Кафе, бары и рестораны",
+          "Парки, скверы, аттракционы и места отдыха",
+          "Торговля, ярмарки и общедоступная сеть",
+          "Прочее"
+        ],
+        [
+          "Детские активности и досуг детей",
+          "Культура и культурные мероприятия",
+          "Коллективные средства размещения и гостиницы",
+          "Кафе, бары и рестораны",
+          "Магазины и общедоступная торговая сеть",
+          "Парки, скверы, аттракционы и места отдыха",
+          "Спорт и ярмарки",
+          "Прочее"
+        ]
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "topic": "Исполнение бюджета МО: расходы",
+      "needle": "расходы",
+      "attempt": 1,
+      "values_ok": 6,
+      "values": 6,
+      "dates_ok": 3,
+      "dates": 3,
+      "verdicts": [
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 7995373719.24,
+            "fact": 5344618013.14
+          }
+        },
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 7995373719.24,
+            "fact": 5344618013.14
+          }
+        },
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 4503008860.0,
+            "fact": 3001402580.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 4503008860.0,
+            "fact": 3001402580.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 57803077441.15,
+            "fact": 34545652102.36
+          }
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 57803077441.15,
+            "fact": 34545652102.36
+          }
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "plan",
+          "title": "Утвержденные бюджетные назначения (план)",
+          "unit": "руб."
+        },
+        {
+          "key": "fact",
+          "title": "Исполнено (факт)",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8605004157-budgetreportRaskhodyMegion": {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 5,
+              "match": {
+                "column": 0,
+                "contains": "Расходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 8,
+              "match": {
+                "column": 0,
+                "contains": "Расходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        },
+        "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho": {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "fact": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено"
+              },
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-data_on_budget_expenditures_of_the_city_of_surgut": {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "plan": {
+              "column": 3,
+              "match": null,
+              "sum": true,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 4,
+              "match": null,
+              "sum": true,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        }
+      },
+      "skipped": [],
+      "tokens": 3315,
+      "cost": 0.001204,
+      "seconds": 2.6
+    },
+    {
+      "topic": "Исполнение бюджета МО: расходы",
+      "needle": "расходы",
+      "attempt": 2,
+      "values_ok": 6,
+      "values": 6,
+      "dates_ok": 3,
+      "dates": 3,
+      "verdicts": [
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 7995373719.24,
+            "fact": 5344618013.14
+          }
+        },
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 7995373719.24,
+            "fact": 5344618013.14
+          }
+        },
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 4503008860.0,
+            "fact": 3001402580.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 4503008860.0,
+            "fact": 3001402580.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 57803077441.15,
+            "fact": 34545652102.36
+          }
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 57803077441.15,
+            "fact": 34545652102.36
+          }
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "plan",
+          "title": "Утвержденные бюджетные назначения (план)",
+          "unit": "руб."
+        },
+        {
+          "key": "fact",
+          "title": "Исполнено (факт)",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8605004157-budgetreportRaskhodyMegion": {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 5,
+              "match": {
+                "column": 0,
+                "contains": "Расходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 8,
+              "match": {
+                "column": 0,
+                "contains": "Расходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        },
+        "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho": {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "fact": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено"
+              },
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-data_on_budget_expenditures_of_the_city_of_surgut": {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "plan": {
+              "column": 3,
+              "match": null,
+              "sum": true,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 4,
+              "match": null,
+              "sum": true,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        }
+      },
+      "skipped": [],
+      "tokens": 3315,
+      "cost": 0.001204,
+      "seconds": 2.8
+    },
+    {
+      "topic": "Исполнение бюджета МО: расходы",
+      "needle": "расходы",
+      "attempt": 3,
+      "values_ok": 6,
+      "values": 6,
+      "dates_ok": 3,
+      "dates": 3,
+      "verdicts": [
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 7995373719.24,
+            "fact": 5344618013.14
+          }
+        },
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 7995373719.24,
+            "fact": 5344618013.14
+          }
+        },
+        {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "mo": "Мегион",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 4503008860.0,
+            "fact": 3001402580.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 4503008860.0,
+            "fact": 3001402580.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 57803077441.15,
+            "fact": 34545652102.36
+          }
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 57803077441.15,
+            "fact": 34545652102.36
+          }
+        },
+        {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "plan",
+          "title": "Утвержденные бюджетные назначения (план)",
+          "unit": "руб."
+        },
+        {
+          "key": "fact",
+          "title": "Исполнено (факт)",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8605004157-budgetreportRaskhodyMegion": {
+          "id": "8605004157-budgetreportRaskhodyMegion",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 5,
+              "match": {
+                "column": 0,
+                "contains": "Расходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 8,
+              "match": {
+                "column": 0,
+                "contains": "Расходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        },
+        "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho": {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_raskho",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "fact": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено"
+              },
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-data_on_budget_expenditures_of_the_city_of_surgut": {
+          "id": "8602020249-data_on_budget_expenditures_of_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "plan": {
+              "column": 3,
+              "match": null,
+              "sum": true,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 4,
+              "match": null,
+              "sum": true,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        }
+      },
+      "skipped": [],
+      "tokens": 3315,
+      "cost": 0.001204,
+      "seconds": 2.5
+    },
+    {
+      "topic": "Исполнение бюджета МО: доходы",
+      "needle": "доходы",
+      "attempt": 1,
+      "values_ok": 8,
+      "values": 8,
+      "dates_ok": 4,
+      "dates": 5,
+      "verdicts": [
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 7668025104.01,
+            "fact": 5148867551.66,
+            "tax_non_tax": 2840645213.01,
+            "free": 4827379891.0
+          }
+        },
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 7668025104.01,
+            "fact": 5148867551.66,
+            "tax_non_tax": 2840645213.01,
+            "free": 4827379891.0
+          }
+        },
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 4558316800.0,
+            "fact": 2816619720.0,
+            "tax_non_tax": 1904192920.0,
+            "free": 2547341680.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 4558316800.0,
+            "fact": 2816619720.0,
+            "tax_non_tax": 1904192920.0,
+            "free": 2547341680.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "неверно (2026-10-13)"
+        },
+        {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "fact": 32254090686.31,
+            "tax_non_tax": 14569421560.13,
+            "free": 16859223158.87
+          }
+        },
+        {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 5276184600.0,
+            "fact": 3548347900.0,
+            "tax_non_tax": 2249788700.0,
+            "free": 3026395900.0
+          }
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 5276184600.0,
+            "fact": 3548347900.0,
+            "tax_non_tax": 2249788700.0,
+            "free": 3026395900.0
+          }
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "mo": "Советский р-н",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 8405262167.92,
+            "tax_non_tax": 1484864850.0,
+            "free": 6920397317.92
+          }
+        },
+        {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "mo": "Советский р-н",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "plan",
+          "title": "Уточнённый план (бюджетные назначения)",
+          "unit": "руб."
+        },
+        {
+          "key": "fact",
+          "title": "Исполнено с начала года",
+          "unit": "руб."
+        },
+        {
+          "key": "tax_non_tax",
+          "title": "Налоговые и неналоговые доходы",
+          "unit": "руб."
+        },
+        {
+          "key": "free",
+          "title": "Безвозмездные поступления",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8605004157-budgetreportDokhodyMegion": {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 4,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "fact": {
+              "column": 6,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 4,
+              "match": {
+                "column": 0,
+                "contains": "НАЛОГОВЫЕ И НЕНАЛОГОВЫЕ ДОХОДЫ"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "free": {
+              "column": 4,
+              "match": {
+                "column": 0,
+                "contains": "БЕЗВОЗМЕЗДНЫЕ ПОСТУПЛЕНИЯ"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        },
+        "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod": {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план на год"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "fact": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено с начала года"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "tax_non_tax": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план на год"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "free": {
+              "column": 6,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план на год"
+              },
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": "version"
+        },
+        "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut": {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "fact": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "free": {
+              "column": 10,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        },
+        "8606003332-komfin_budget_isp_uray": {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "fact": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "tax_non_tax": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "free": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8615007291-dohodBudgetSovetskyr": {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "НАЛОГОВЫЕ И НЕНАЛОГОВЫЕ ДОХОДЫ"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "free": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "БЕЗВОЗМЕЗДНЫЕ ПОСТУПЛЕНИЯ"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        }
+      },
+      "skipped": [],
+      "tokens": 6617,
+      "cost": 0.002556,
+      "seconds": 4.9
+    },
+    {
+      "topic": "Исполнение бюджета МО: доходы",
+      "needle": "доходы",
+      "attempt": 2,
+      "values_ok": 8,
+      "values": 8,
+      "dates_ok": 5,
+      "dates": 5,
+      "verdicts": [
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 7668025104.01,
+            "executed": 5148867551.66,
+            "tax_non_tax": 1803752994.09
+          }
+        },
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 7668025104.01,
+            "executed": 5148867551.66,
+            "tax_non_tax": 1803752994.09
+          }
+        },
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 4558316800.0,
+            "executed": 2816619720.0,
+            "tax_non_tax": 1189472010.0,
+            "transfers": 1555386000.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 4558316800.0,
+            "executed": 2816619720.0,
+            "tax_non_tax": 1189472010.0,
+            "transfers": 1555386000.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "executed": 32254090686.31,
+            "tax_non_tax": 14569421560.13,
+            "transfers": 16859223158.87
+          }
+        },
+        {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 5276184600.0,
+            "executed": 3548347900.0,
+            "tax_non_tax": 1481303300.0,
+            "transfers": 2067044600.0
+          }
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 5276184600.0,
+            "executed": 3548347900.0,
+            "tax_non_tax": 1481303300.0,
+            "transfers": 2067044600.0
+          }
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "mo": "Советский р-н",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 8405262167.92,
+            "tax_non_tax": 1484864850.0
+          }
+        },
+        {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "mo": "Советский р-н",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "plan",
+          "title": "Уточнённый план доходов на год",
+          "unit": "руб."
+        },
+        {
+          "key": "executed",
+          "title": "Исполнено доходов с начала года",
+          "unit": "руб."
+        },
+        {
+          "key": "tax_non_tax",
+          "title": "Налоговые и неналоговые доходы (исполнено)",
+          "unit": "руб."
+        },
+        {
+          "key": "transfers",
+          "title": "Безвозмездные поступления (исполнено)",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8605004157-budgetreportDokhodyMegion": {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 4,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "executed": {
+              "column": 6,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 6,
+              "match": {
+                "column": 0,
+                "contains": "НАЛОГОВЫЕ И НЕНАЛОГОВЫЕ ДОХОДЫ"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        },
+        "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod": {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план на год"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "executed": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено с начала года"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "tax_non_tax": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено с начала года"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "transfers": {
+              "column": 6,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено с начала года"
+              },
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut": {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "executed": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "transfers": {
+              "column": 10,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        },
+        "8606003332-komfin_budget_isp_uray": {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "executed": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "tax_non_tax": {
+              "column": 6,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "transfers": {
+              "column": 7,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8615007291-dohodBudgetSovetskyr": {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "НАЛОГОВЫЕ И НЕНАЛОГОВЫЕ ДОХОДЫ"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        }
+      },
+      "skipped": [],
+      "tokens": 6551,
+      "cost": 0.002483,
+      "seconds": 4.4
+    },
+    {
+      "topic": "Исполнение бюджета МО: доходы",
+      "needle": "доходы",
+      "attempt": 3,
+      "values_ok": 8,
+      "values": 8,
+      "dates_ok": 4,
+      "dates": 5,
+      "verdicts": [
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 7668025104.01,
+            "executed": 5148867551.66,
+            "tax_non_tax": 2840645213.01
+          }
+        },
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 7668025104.01,
+            "executed": 5148867551.66,
+            "tax_non_tax": 2840645213.01
+          }
+        },
+        {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "mo": "Мегион",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 4558316800.0,
+            "executed": 2816619720.0,
+            "tax": 1189472010.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 4558316800.0,
+            "executed": 2816619720.0,
+            "tax": 1189472010.0
+          }
+        },
+        {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "неверно (2026-10-13)"
+        },
+        {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "executed": 32254090686.31,
+            "tax": 14569421560.13
+          }
+        },
+        {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 5276184600.0,
+            "executed": 3548347900.0
+          }
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "fact",
+          "verdict": "верно",
+          "got": {
+            "plan": 5276184600.0,
+            "executed": 3548347900.0
+          }
+        },
+        {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "mo": "Урай",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "mo": "Советский р-н",
+          "kind": "plan",
+          "verdict": "верно",
+          "got": {
+            "plan": 8405262167.92,
+            "tax_non_tax": 1484864850.0
+          }
+        },
+        {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "mo": "Советский р-н",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "plan",
+          "title": "Уточнённый план (бюджетные назначения)",
+          "unit": "руб."
+        },
+        {
+          "key": "executed",
+          "title": "Исполнено с начала года",
+          "unit": "руб."
+        },
+        {
+          "key": "tax_non_tax",
+          "title": "Налоговые и неналоговые доходы",
+          "unit": "руб."
+        },
+        {
+          "key": "tax",
+          "title": "Налоговые доходы",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8605004157-budgetreportDokhodyMegion": {
+          "id": "8605004157-budgetreportDokhodyMegion",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 4,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "executed": {
+              "column": 6,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 4,
+              "match": {
+                "column": 0,
+                "contains": "НАЛОГОВЫЕ И НЕНАЛОГОВЫЕ ДОХОДЫ"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        },
+        "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod": {
+          "id": "8609012600-ispolnenie_byudzheta_goroda_raduzhnyy_po_dokhod",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Уточненный план на год"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "executed": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено с начала года"
+              },
+              "sum": false,
+              "multiplier": 1000
+            },
+            "tax": {
+              "column": 3,
+              "match": {
+                "column": 0,
+                "contains": "Исполнено с начала года"
+              },
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": "version"
+        },
+        "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut": {
+          "id": "8602020249-data_on_the_income_coming_into_the_budget_of_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "executed": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        },
+        "8606003332-komfin_budget_isp_uray": {
+          "id": "8606003332-komfin_budget_isp_uray",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "executed": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8615007291-dohodBudgetSovetskyr": {
+          "id": "8615007291-dohodBudgetSovetskyr",
+          "use": true,
+          "reason": "",
+          "latest_by_column": null,
+          "values": {
+            "plan": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "Доходы бюджета - всего"
+              },
+              "sum": false,
+              "multiplier": 1
+            },
+            "tax_non_tax": {
+              "column": 2,
+              "match": {
+                "column": 0,
+                "contains": "НАЛОГОВЫЕ И НЕНАЛОГОВЫЕ ДОХОДЫ"
+              },
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": "version"
+        }
+      },
+      "skipped": [],
+      "tokens": 6419,
+      "cost": 0.002338,
+      "seconds": 4.0
+    },
+    {
+      "topic": "Муниципальный долг",
+      "needle": "долг",
+      "attempt": 1,
+      "values_ok": 3,
+      "values": 3,
+      "dates_ok": 3,
+      "dates": 3,
+      "verdicts": [
+        {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "mo": "Радужный",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "budget_credits": 0.0,
+            "commercial_credits": 0.0,
+            "guarantees": 0.0
+          }
+        },
+        {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "commercial_credits": 0.0,
+            "budget_credits": 0.0,
+            "guarantees": 0.0
+          }
+        },
+        {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "mo": "Урай",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "budget_credits": 0.0,
+            "commercial_credits": 0.0
+          }
+        },
+        {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "mo": "Урай",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "total_debt",
+          "title": "Объём муниципального долга, всего",
+          "unit": "руб."
+        },
+        {
+          "key": "budget_credits",
+          "title": "Бюджетные кредиты из бюджета автономного округа",
+          "unit": "руб."
+        },
+        {
+          "key": "commercial_credits",
+          "title": "Кредиты коммерческих организаций",
+          "unit": "руб."
+        },
+        {
+          "key": "guarantees",
+          "title": "Муниципальные гарантии",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy": {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "total_debt": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "budget_credits": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "commercial_credits": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "guarantees": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-municipal_debt_the_city_of_surgut": {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "total_debt": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "commercial_credits": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "budget_credits": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "guarantees": {
+              "column": 6,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        },
+        "8606003332-komitet_po_finansam_munitsipalnyy_d_uray": {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "total_debt": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "budget_credits": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "commercial_credits": {
+              "column": 7,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        }
+      },
+      "skipped": [],
+      "tokens": 2718,
+      "cost": 0.001172,
+      "seconds": 3.3
+    },
+    {
+      "topic": "Муниципальный долг",
+      "needle": "долг",
+      "attempt": 2,
+      "values_ok": 3,
+      "values": 3,
+      "dates_ok": 3,
+      "dates": 3,
+      "verdicts": [
+        {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "mo": "Радужный",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "budget_credits": 0.0,
+            "commercial_credits": 0.0,
+            "guarantees": 0.0
+          }
+        },
+        {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "commercial_credits": 0.0,
+            "budget_credits": 0.0,
+            "guarantees": 0.0
+          }
+        },
+        {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "mo": "Урай",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "budget_credits": 0.0,
+            "commercial_credits": 0.0
+          }
+        },
+        {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "mo": "Урай",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "total_debt",
+          "title": "Объём муниципального долга, всего",
+          "unit": "руб."
+        },
+        {
+          "key": "budget_credits",
+          "title": "Бюджетные кредиты из бюджета автономного округа",
+          "unit": "руб."
+        },
+        {
+          "key": "commercial_credits",
+          "title": "Кредиты, полученные от кредитных организаций",
+          "unit": "руб."
+        },
+        {
+          "key": "guarantees",
+          "title": "Муниципальные гарантии",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy": {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "total_debt": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "budget_credits": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "commercial_credits": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "guarantees": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-municipal_debt_the_city_of_surgut": {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "total_debt": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "commercial_credits": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "budget_credits": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "guarantees": {
+              "column": 6,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        },
+        "8606003332-komitet_po_finansam_munitsipalnyy_d_uray": {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "total_debt": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "budget_credits": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "commercial_credits": {
+              "column": 7,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        }
+      },
+      "skipped": [],
+      "tokens": 2721,
+      "cost": 0.001175,
+      "seconds": 4.0
+    },
+    {
+      "topic": "Муниципальный долг",
+      "needle": "долг",
+      "attempt": 3,
+      "values_ok": 3,
+      "values": 3,
+      "dates_ok": 3,
+      "dates": 3,
+      "verdicts": [
+        {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "mo": "Радужный",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "budget_credits": 0.0,
+            "commercial_credits": 0.0,
+            "guarantees": 0.0
+          }
+        },
+        {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "mo": "Радужный",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "commercial_credits": 0.0,
+            "budget_credits": 0.0,
+            "guarantees": 0.0
+          }
+        },
+        {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "mo": "Сургут",
+          "kind": "date",
+          "verdict": "верно"
+        },
+        {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "mo": "Урай",
+          "kind": "total",
+          "verdict": "верно",
+          "got": {
+            "total_debt": 0.0,
+            "budget_credits": 0.0,
+            "commercial_credits": 0.0
+          }
+        },
+        {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "mo": "Урай",
+          "kind": "date",
+          "verdict": "верно"
+        }
+      ],
+      "indicators": [
+        {
+          "key": "total_debt",
+          "title": "Объём муниципального долга, всего",
+          "unit": "руб."
+        },
+        {
+          "key": "budget_credits",
+          "title": "Бюджетные кредиты из бюджета автономного округа",
+          "unit": "руб."
+        },
+        {
+          "key": "commercial_credits",
+          "title": "Кредиты, полученные от кредитных организаций",
+          "unit": "руб."
+        },
+        {
+          "key": "guarantees",
+          "title": "Муниципальные гарантии",
+          "unit": "руб."
+        }
+      ],
+      "recipes": {
+        "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy": {
+          "id": "8609012600-MunitsipalnyyDolgGorodaRaduzhnyy",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "total_debt": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "budget_credits": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "commercial_credits": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "guarantees": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        },
+        "8602020249-municipal_debt_the_city_of_surgut": {
+          "id": "8602020249-municipal_debt_the_city_of_surgut",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 1,
+          "values": {
+            "total_debt": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "commercial_credits": {
+              "column": 4,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "budget_credits": {
+              "column": 5,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            },
+            "guarantees": {
+              "column": 6,
+              "match": null,
+              "sum": false,
+              "multiplier": 1
+            }
+          },
+          "date": {
+            "column": 1,
+            "match": null
+          }
+        },
+        "8606003332-komitet_po_finansam_munitsipalnyy_d_uray": {
+          "id": "8606003332-komitet_po_finansam_munitsipalnyy_d_uray",
+          "use": true,
+          "reason": "",
+          "latest_by_column": 0,
+          "values": {
+            "total_debt": {
+              "column": 2,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "budget_credits": {
+              "column": 3,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            },
+            "commercial_credits": {
+              "column": 7,
+              "match": null,
+              "sum": false,
+              "multiplier": 1000
+            }
+          },
+          "date": {
+            "column": 0,
+            "match": null
+          }
+        }
+      },
+      "skipped": [],
+      "tokens": 2721,
+      "cost": 0.001175,
+      "seconds": 4.3
+    }
+  ],
+  "chat": [
+    {
+      "attempt": 1,
+      "message": "Где хуже всего исполняется план?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_asc",
+        "mode": "execution"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "mode": "execution",
+            "sort": "value_asc"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_asc",
+            "mode": "execution"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Хуже всего исполнение плана у Радужного — 61.8%, далее Мегион (67.1%) и Урай (67.3%); в среднем по МО с планом и фактом — 65.8%. По Сургуту и Советскому р-ну процент исполнения не рассчитан (нет пары план/факт). Учтите, что у Мегиона и Радужного дата отчёта взята из версии файла, а у Сургута и Урая — 2026-10-01, то есть данные не полностью сопоставимы.",
+      "unknown_numbers": [],
+      "tokens": 2590,
+      "cost": 0.00086,
+      "seconds": 4.21,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 1,
+      "message": "Покажи только Сургут и Урай",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [
+          "Сургут",
+          "Урай"
+        ],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "mo": [
+              "Сургут",
+              "Урай"
+            ]
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [
+              "Сургут",
+              "Урай"
+            ],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "На экране только Сургут и Урай: исполнено с начала года — Сургут 32,3 млрд руб., Урай 3,5 млрд руб. (суммарно 35,8 млрд руб.). Уточнённый план есть лишь по одному МО — 5,3 млрд руб., налоговые доходы — 14,6 млрд руб. (1 из 2 МО), среднее исполнение по МО с планом и фактом — 67,3%. Отчётная дата у обоих одинаковая — 2026-10-01, так что данные сопоставимы.",
+      "unknown_numbers": [],
+      "tokens": 2506,
+      "cost": 0.000842,
+      "seconds": 4.51,
+      "unknown_numbers_v1": [
+        "3,5 млрд"
+      ]
+    },
+    {
+      "attempt": 1,
+      "message": "Отсортируй по алфавиту",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "name",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "sort": "name"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "name",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Готово — МО отсортированы по алфавиту: Мегион (5.1 млрд руб.), Радужный (2.8 млрд руб.), Советский р-н (нет данных), Сургут (32.3 млрд руб.), Урай (3.5 млрд руб.). Всего исполнено 43.8 млрд руб. по 4 из 5 МО. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла — сравнение по датам некорректно.",
+      "unknown_numbers": [],
+      "tokens": 2591,
+      "cost": 0.000861,
+      "seconds": 3.48,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 1,
+      "message": "Покажи план доходов",
+      "ok": true,
+      "view": {
+        "indicator": "plan",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "plan"
+          },
+          "view": {
+            "indicator": "plan",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Показал уточнённый план (бюджетные назначения): Советский р-н — 8.4 млрд руб., Мегион — 7.7 млрд, Урай — 5.3 млрд, Радужный — 4.6 млрд; по Сургуту плана в данных нет. Итог по 4 МО — 25.9 млрд руб. Обратите внимание: у Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла, поэтому цифры могут быть не на одну дату.",
+      "unknown_numbers": [],
+      "tokens": 2587,
+      "cost": 0.000858,
+      "seconds": 3.84,
+      "unknown_numbers_v1": [
+        "4.6 млрд"
+      ]
+    },
+    {
+      "attempt": 1,
+      "message": "Кто собрал больше всего доходов?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Больше всего доходов с начала года собрал Сургут — 32.3 млрд руб., далее Мегион (5.1 млрд), Урай (3.5 млрд) и Радужный (2.8 млрд); по Советскому р-ну данных нет. Учтите, что отчётные даты различаются: у Сургута и Урая — на 2026-10-01, а у Мегиона и Радужного дата взята из версии файла, поэтому сравнение не полностью сопоставимо.",
+      "unknown_numbers": [],
+      "tokens": 2631,
+      "cost": 0.000878,
+      "seconds": 3.74,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 1,
+      "message": "Сравни Москву и Сургут",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [],
+      "answer": "Москвы в данных дашборда нет — здесь только 5 муниципалитетов ХМАО (Мегион, Радужный, Советский р-н, Сургут, Урай), так что сравнить не с чем.\n\nПо Сургуту на экране: исполнено с начала года 32.3 млрд руб. — это крупнейший показатель среди МО, при этом отчётная дата у Сургута (2026-10-01) отличается от Мегиона и Радужного, где дата взята из версии файла, а у Советского р-на данных по исполнению нет вовсе.",
+      "unknown_numbers": [],
+      "tokens": 1152,
+      "cost": 0.000433,
+      "seconds": 2.37,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 1,
+      "message": "Можно ли сравнивать эти цифры между собой?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [],
+      "answer": "Нет, напрямую сравнивать эти цифры между собой нельзя: у МО разные отчётные даты. У Сургута и Урая указан отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла — в данных её нет, поэтому их значения (5.1, 2.8 млрд руб. и отсутствующее у Советского р-на) не сопоставимы по периоду с Сургутом (32.3 млрд руб.) и Ураем (3.5 млрд руб.).",
+      "unknown_numbers": [
+        "5.1"
+      ],
+      "tokens": 1146,
+      "cost": 0.000426,
+      "seconds": 2.03,
+      "unknown_numbers_v1": [
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 1,
+      "message": "Покажи все муниципалитеты по исполнению плана, лучшие сверху",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "execution"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "mode": "execution",
+            "sort": "value_desc",
+            "mo": []
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "execution"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "По исполнению плана лидируют Урай — 67.3% и Мегион — 67.1%, далее Радужный — 61.8%; по Сургуту и Советскому р-ну процент не рассчитан (нет пары план/факт). Среднее исполнение по МО с планом и фактом — 65.8% (3 из 5). Осторожно с датами: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла, поэтому сравнение не полностью сопоставимо.",
+      "unknown_numbers": [],
+      "tokens": 2687,
+      "cost": 0.000924,
+      "seconds": 3.91,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 2,
+      "message": "Где хуже всего исполняется план?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_asc",
+        "mode": "execution"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "mode": "execution",
+            "sort": "value_asc"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_asc",
+            "mode": "execution"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Хуже всего исполнение плана у Радужного — 61.8%, далее Мегион (67.1%) и Урай (67.3%); в среднем по МО с планом и фактом — 65.8%. По Сургуту и Советскому району процент исполнения не рассчитан (нет пары план/факт). Учтите, что у Мегиона и Радужного дата отчёта взята из версии файла, а у Сургута и Урая — 2026-10-01, то есть данные не полностью сопоставимы.",
+      "unknown_numbers": [],
+      "tokens": 2589,
+      "cost": 0.000859,
+      "seconds": 3.67,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 2,
+      "message": "Покажи только Сургут и Урай",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [
+          "Сургут",
+          "Урай"
+        ],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "mo": [
+              "Сургут",
+              "Урай"
+            ]
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [
+              "Сургут",
+              "Урай"
+            ],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Оставил только Сургут и Урай: исполнено с начала года — Сургут 32,3 млрд руб., Урай 3,5 млрд руб. (суммарно 35,8 млрд руб.). Уточнённый план показан лишь по одному МО — 5,3 млрд руб., а среднее исполнение по МО с планом и фактом — 67,3% (1 из 2). Оба МО отчитываются на одну дату — 2026-10-01, так что расхождений по отчётным датам нет.",
+      "unknown_numbers": [],
+      "tokens": 2497,
+      "cost": 0.000832,
+      "seconds": 3.17,
+      "unknown_numbers_v1": [
+        "3,5 млрд"
+      ]
+    },
+    {
+      "attempt": 2,
+      "message": "Отсортируй по алфавиту",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "name",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "sort": "name"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "name",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Готово — МО отсортированы по алфавиту: Мегион (5.1 млрд руб.), Радужный (2.8 млрд руб.), Советский р-н (нет данных), Сургут (32.3 млрд руб.), Урай (3.5 млрд руб.). Всего исполнено 43.8 млрд руб. по 4 из 5 МО. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла — сравнение по датам некорректно.",
+      "unknown_numbers": [],
+      "tokens": 2591,
+      "cost": 0.000861,
+      "seconds": 3.99,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 2,
+      "message": "Покажи план доходов",
+      "ok": true,
+      "view": {
+        "indicator": "plan",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "plan"
+          },
+          "view": {
+            "indicator": "plan",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Уточнённый план по доходам: Советский р-н — 8.4 млрд руб., Мегион — 7.7 млрд руб., Урай — 5.3 млрд руб., Радужный — 4.6 млрд руб.; по Сургуту плана в данных нет. Итог по 4 МО с планом — 25.9 млрд руб. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла, поэтому сравнение по датам неоднородно.",
+      "unknown_numbers": [],
+      "tokens": 2592,
+      "cost": 0.000863,
+      "seconds": 3.48,
+      "unknown_numbers_v1": [
+        "4.6 млрд"
+      ]
+    },
+    {
+      "attempt": 2,
+      "message": "Кто собрал больше всего доходов?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Больше всего доходов с начала года собрал Сургут — 32.3 млрд руб., далее Мегион (5.1 млрд), Урай (3.5 млрд) и Радужный (2.8 млрд); по Советскому р-ну данных нет. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона и Радужного дата взята из версии файла, поэтому сравнение не вполне сопоставимо.",
+      "unknown_numbers": [],
+      "tokens": 2623,
+      "cost": 0.000869,
+      "seconds": 3.28,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 2,
+      "message": "Сравни Москву и Сургут",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [],
+      "answer": "Москвы в данных дашборда нет — здесь только 5 муниципалитетов ХМАО (Мегион, Радужный, Советский р-н, Сургут, Урай), так что сравнить не получится.\n\nПо Сургуту на экране: исполнено с начала года — 32.3 млрд руб. (отчёт на 2026-10-01), это максимум среди показанных МО.",
+      "unknown_numbers": [],
+      "tokens": 1108,
+      "cost": 0.000385,
+      "seconds": 1.84,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 2,
+      "message": "Можно ли сравнивать эти цифры между собой?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [],
+      "answer": "Нет, напрямую сравнивать эти цифры между собой нельзя: у МО разные отчётные даты. У Сургута и Урая указан отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла, и в данных её нет — то есть период у них может отличаться.\n\nПоэтому сопоставление, например, Сургута (32.3 млрд руб.) с Мегионом (5.1 млрд руб.) или Радужным (2.8 млрд руб.) будет некорректным без уточнения дат.",
+      "unknown_numbers": [],
+      "tokens": 1156,
+      "cost": 0.000437,
+      "seconds": 2.37,
+      "unknown_numbers_v1": [
+        "5.1 млрд"
+      ]
+    },
+    {
+      "attempt": 2,
+      "message": "Покажи все муниципалитеты по исполнению плана, лучшие сверху",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "execution"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "mode": "execution",
+            "sort": "value_desc",
+            "mo": []
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "execution"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "По исполнению плана лидируют Урай — 67.3% и Мегион — 67.1%, далее Радужный — 61.8%; по Сургуту и Советскому р-ну процент не рассчитан (нет пары план/факт). Среднее исполнение по МО с планом и фактом — 65.8% (3 из 5). Учтите: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла, поэтому сравнение не полностью сопоставимо.",
+      "unknown_numbers": [],
+      "tokens": 2683,
+      "cost": 0.00092,
+      "seconds": 3.47,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 3,
+      "message": "Где хуже всего исполняется план?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_asc",
+        "mode": "execution"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "mode": "execution",
+            "sort": "value_asc"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_asc",
+            "mode": "execution"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Хуже всего исполнение плана у Радужного — 61.8%, далее Мегион (67.1%) и Урай (67.3%); в среднем по МО с планом и фактом — 65.8%. По Сургуту и Советскому р-ну процент исполнения не рассчитан (нет пары план/факт). Учтите, что у Мегиона и Радужного дата взята из версии файла, а у Сургута и Урая отчёт на 2026-10-01, то есть данные не полностью сопоставимы.",
+      "unknown_numbers": [],
+      "tokens": 2625,
+      "cost": 0.000883,
+      "seconds": 3.76,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 3,
+      "message": "Покажи только Сургут и Урай",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [
+          "Сургут",
+          "Урай"
+        ],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "mo": [
+              "Сургут",
+              "Урай"
+            ]
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [
+              "Сургут",
+              "Урай"
+            ],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Оставил только Сургут и Урай: исполнено с начала года — Сургут 32.3 млрд руб., Урай 3.5 млрд руб. (итого 35.8 млрд руб.). Уточнённый план показан лишь по одному МО — 5.3 млрд руб., среднее исполнение по МО с планом и фактом — 67.3%. У обоих МО отчётная дата совпадает — 2026-10-01.",
+      "unknown_numbers": [],
+      "tokens": 2476,
+      "cost": 0.000809,
+      "seconds": 3.88,
+      "unknown_numbers_v1": [
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 3,
+      "message": "Отсортируй по алфавиту",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "name",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "sort": "name"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "name",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Готово — МО отсортированы по алфавиту: Мегион (5.1 млрд руб.), Радужный (2.8 млрд руб.), Советский р-н (нет данных), Сургут (32.3 млрд руб.), Урай (3.5 млрд руб.). Всего исполнено 43.8 млрд руб. по 4 из 5 МО. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона и Радужного дата взята из версии файла — сравнение по датам некорректно.",
+      "unknown_numbers": [],
+      "tokens": 2585,
+      "cost": 0.000855,
+      "seconds": 2.99,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 3,
+      "message": "Покажи план доходов",
+      "ok": true,
+      "view": {
+        "indicator": "plan",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "plan"
+          },
+          "view": {
+            "indicator": "plan",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Уточнённый план по доходам: Советский р-н — 8.4 млрд руб., Мегион — 7.7 млрд руб., Урай — 5.3 млрд руб., Радужный — 4.6 млрд руб.; по Сургуту плана в данных нет. Итог по 4 МО — 25.9 млрд руб. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла, поэтому сравнение по датам неоднородно.",
+      "unknown_numbers": [],
+      "tokens": 2589,
+      "cost": 0.00086,
+      "seconds": 3.41,
+      "unknown_numbers_v1": [
+        "4.6 млрд"
+      ]
+    },
+    {
+      "attempt": 3,
+      "message": "Кто собрал больше всего доходов?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "absolute"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "Больше всего доходов с начала года собрал Сургут — 32.3 млрд руб., далее Мегион (5.1 млрд), Урай (3.5 млрд) и Радужный (2.8 млрд); по Советскому р-ну данных нет. Обратите внимание: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона и Радужного дата взята из версии файла, поэтому сравнение не вполне сопоставимо.",
+      "unknown_numbers": [],
+      "tokens": 2623,
+      "cost": 0.000869,
+      "seconds": 2.98,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 3,
+      "message": "Сравни Москву и Сургут",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [],
+      "answer": "Москвы в данных дашборда нет — здесь только 5 муниципалитетов ХМАО (Мегион, Радужный, Советский р-н, Сургут, Урай), так что сравнить с Москвой не получится.\n\nПо Сургуту на экране: исполнено с начала года — 32.3 млрд руб. (отчёт на 2026-10-01), это крупнейшая сумма среди показанных МО.",
+      "unknown_numbers": [],
+      "tokens": 1113,
+      "cost": 0.00039,
+      "seconds": 2.02,
+      "unknown_numbers_v1": []
+    },
+    {
+      "attempt": 3,
+      "message": "Можно ли сравнивать эти цифры между собой?",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "absolute"
+      },
+      "calls": [],
+      "answer": "Нет, напрямую сравнивать эти цифры между собой нельзя: у МО разные отчётные даты. У Сургута и Урая указан отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла — в данных её нет, поэтому период у них может отличаться.\n\nПоэтому, например, «Исполнено с начала года»: Сургут — 32.3 млрд руб., Мегион — 5.1 млрд руб., Урай — 3.5 млрд руб., Радужный — 2.8 млрд руб. — это цифры за возможно разные периоды, и их сопоставление будет некорректным.",
+      "unknown_numbers": [],
+      "tokens": 1183,
+      "cost": 0.000466,
+      "seconds": 2.05,
+      "unknown_numbers_v1": [
+        "5.1 млрд",
+        "3.5 млрд"
+      ]
+    },
+    {
+      "attempt": 3,
+      "message": "Покажи все муниципалитеты по исполнению плана, лучшие сверху",
+      "ok": true,
+      "view": {
+        "indicator": "executed",
+        "mo": [],
+        "sort": "value_desc",
+        "mode": "execution"
+      },
+      "calls": [
+        {
+          "arguments": {
+            "indicator": "executed",
+            "mo": [],
+            "mode": "execution",
+            "sort": "value_desc"
+          },
+          "view": {
+            "indicator": "executed",
+            "mo": [],
+            "sort": "value_desc",
+            "mode": "execution"
+          },
+          "notes": []
+        }
+      ],
+      "answer": "По исполнению плана лидируют Урай — 67.3% и Мегион — 67.1%, далее Радужный — 61.8%; в среднем по МО с планом и фактом 65.8%. По Сургуту и Советскому р-ну процент не рассчитан (нет пары план/факт). Учтите: у Сургута и Урая отчёт на 2026-10-01, а у Мегиона, Радужного и Советского р-на дата взята из версии файла — сравнение не вполне сопоставимо.",
+      "unknown_numbers": [],
+      "tokens": 2674,
+      "cost": 0.00091,
+      "seconds": 2.91,
+      "unknown_numbers_v1": []
+    }
+  ],
+  "portal": {
+    "network": 2,
+    "cache": 186,
+    "stale": 0
+  }
+}
