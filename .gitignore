@@ -91,6 +91,3 @@ venv/
 34-file-assistant/workspace/
 34-file-assistant/agents.db*
 34-file-assistant/custom_roles.json
-35-open-data-dashboard/data/cache.db*
-35-open-data-dashboard/agents.db*
-35-open-data-dashboard/custom_roles.json
