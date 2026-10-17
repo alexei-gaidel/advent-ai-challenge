@@ -91,7 +91,3 @@ venv/
 34-file-assistant/workspace/
 34-file-assistant/agents.db*
 34-file-assistant/custom_roles.json
-35-price-search/data/runs/
-35-price-search/data/price_demo.err
-35-price-search/agents.db*
-35-price-search/custom_roles.json
