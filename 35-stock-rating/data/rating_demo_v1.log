@@ -1,0 +1,76 @@
+
+=== Часть A: сейчас, 21 акций × 3 прогона, temperature=0 ===
+SBER  формула  7.6 покупать  | deepseek-chat [7.2, 7.2, 7.2] покупать
+VTBR  формула  6.5 держать   | deepseek-chat [5.8, 5.8, 5.8] держать
+T     формула  7.6 покупать  | deepseek-chat [7.2, 7.2, 7.2] покупать
+MOEX  формула  6.4 держать   | deepseek-chat [6.6, 6.6, 6.6] держать
+LKOH  формула  6.0 держать   | deepseek-chat [6.2, 6.4, 6.2] держать
+ROSN  формула  4.0 продавать | deepseek-chat [4.3, 4.2, 4.2] продавать
+GAZP  формула  6.0 держать   | deepseek-chat [5.8, 5.8, 5.8] держать
+NVTK  формула  5.0 держать   | deepseek-chat [5.4, 5.4, 5.4] держать
+TATN  формула  6.5 держать   | deepseek-chat [6.8, 6.8, 6.8] держать
+GMKN  формула  5.7 держать   | deepseek-chat [5.4, 5.9, 5.9] держать
+PLZL  формула  4.9 держать   | deepseek-chat [4.2, 4.2, 4.2] продавать
+ALRS  формула  3.3 продавать | deepseek-chat [3.2, 3.2, 3.2] продавать
+CHMF  формула  3.4 продавать | deepseek-chat [3.8, 3.6, 3.6] продавать
+NLMK  формула  4.6 держать   | deepseek-chat [4.3, 4.3, 4.3] продавать
+PHOR  формула  4.6 держать   | deepseek-chat [4.2, 4.2, 4.2] продавать
+MGNT  формула  2.9 продавать | deepseek-chat [3.4, 3.2, 3.4] продавать
+X5    формула  6.3 держать   | deepseek-chat [6.1, 6.1, 6.0] держать
+MTSS  формула  6.9 держать   | deepseek-chat [6.4, 6.4, 6.4] держать
+YDEX  формула  6.3 держать   | deepseek-chat [6.6, 6.6, 6.6] держать
+OZON  формула  4.9 держать   | deepseek-chat [5.4, 5.4, 5.4] держать
+AFLT  формула  5.0 держать   | deepseek-chat [4.3, 4.3, 4.3] продавать
+
+=== Часть B: задним числом 2025-04-01, 2025-10-01, доходность за 12 мес. минус IMOEX ===
+2025-04-01 SBER  отчёт 2024 формула  7.1 deepseek-chat|anon=7.0 deepseek-chat|named=7.0 | за 12 мес. +4.4% (IMOEX -6.4%) → +10.8 п.п.
+2025-04-01 VTBR  отчёт 2024 формула  4.2 deepseek-chat|anon=5.2 deepseek-chat|named=5.2 | за 12 мес. +11.9% (IMOEX -6.4%) → +18.3 п.п.
+2025-04-01 T     отчёт 2024 формула  6.6 deepseek-chat|anon=6.2 deepseek-chat|named=6.4 | за 12 мес. -0.1% (IMOEX -6.4%) → +6.3 п.п.
+2025-04-01 MOEX  отчёт 2024 формула  7.0 deepseek-chat|anon=6.6 deepseek-chat|named=6.8 | за 12 мес. -12.6% (IMOEX -6.4%) → -6.2 п.п.
+2025-04-01 LKOH  отчёт 2024 формула  6.3 deepseek-chat|anon=6.3 deepseek-chat|named=6.3 | за 12 мес. -20.4% (IMOEX -6.4%) → -14.1 п.п.
+2025-04-01 ROSN  отчёт 2024 формула  6.3 deepseek-chat|anon=6.0 deepseek-chat|named=6.0 | за 12 мес. -1.5% (IMOEX -6.4%) → +4.9 п.п.
+2025-04-01 GAZP  отчёт 2023 формула  4.7 deepseek-chat|anon=4.3 deepseek-chat|named=4.3 | за 12 мес. -1.9% (IMOEX -6.4%) → +4.5 п.п.
+2025-04-01 NVTK  отчёт 2024 формула  6.4 deepseek-chat|anon=6.4 deepseek-chat|named=6.4 | за 12 мес. +8.9% (IMOEX -6.4%) → +15.3 п.п.
+2025-04-01 TATN  отчёт 2024 формула  7.2 deepseek-chat|anon=7.0 deepseek-chat|named=7.0 | за 12 мес. -0.3% (IMOEX -6.4%) → +6.0 п.п.
+2025-04-01 GMKN  отчёт 2024 формула  4.2 deepseek-chat|anon=3.8 deepseek-chat|named=4.3 | за 12 мес. +15.9% (IMOEX -6.4%) → +22.3 п.п.
+2025-04-01 PLZL  отчёт 2024 формула  7.3 deepseek-chat|anon=6.8 deepseek-chat|named=6.8 | за 12 мес. +21.6% (IMOEX -6.4%) → +28.0 п.п.
+2025-04-01 ALRS  отчёт 2024 формула  3.8 deepseek-chat|anon=3.6 deepseek-chat|named=3.9 | за 12 мес. -33.9% (IMOEX -6.4%) → -27.5 п.п.
+2025-04-01 CHMF  отчёт 2024 формула  6.0 deepseek-chat|anon=5.6 deepseek-chat|named=5.6 | за 12 мес. -25.0% (IMOEX -6.4%) → -18.6 п.п.
+2025-04-01 NLMK  отчёт 2023 формула  7.2 deepseek-chat|anon=6.4 deepseek-chat|named=6.4 | за 12 мес. -30.0% (IMOEX -6.4%) → -23.7 п.п.
+2025-04-01 PHOR  отчёт 2024 формула  5.6 deepseek-chat|anon=5.2 deepseek-chat|named=5.4 | за 12 мес. +16.0% (IMOEX -6.4%) → +22.4 п.п.
+2025-04-01 MGNT  отчёт 2023 формула  5.5 deepseek-chat|anon=5.2 deepseek-chat|named=5.2 | за 12 мес. -35.0% (IMOEX -6.4%) → -28.6 п.п.
+2025-04-01 MTSS  отчёт 2024 формула  4.6 deepseek-chat|anon=4.2 deepseek-chat|named=4.2 | за 12 мес. +2.3% (IMOEX -6.4%) → +8.7 п.п.
+2025-04-01 YDEX  отчёт 2023 формула  5.0 deepseek-chat|anon=4.8 deepseek-chat|named=5.4 | за 12 мес. -1.8% (IMOEX -6.4%) → +4.5 п.п.
+2025-04-01 OZON  отчёт 2024 формула  4.0 deepseek-chat|anon=3.2 deepseek-chat|named=4.2 | за 12 мес. +22.0% (IMOEX -6.4%) → +28.4 п.п.
+2025-04-01 AFLT  отчёт 2024 формула  6.9 deepseek-chat|anon=6.5 deepseek-chat|named=6.4 | за 12 мес. -26.6% (IMOEX -6.4%) → -20.2 п.п.
+2025-10-01 SBER  отчёт 2024 формула  7.3 deepseek-chat|anon=7.0 deepseek-chat|named=7.1 | за 12 мес. -3.6% (IMOEX -13.9%) → +10.4 п.п.
+2025-10-01 VTBR  отчёт 2024 формула  4.1 deepseek-chat|anon=4.3 deepseek-chat|named=4.8 | за 12 мес. -23.5% (IMOEX -13.9%) → -9.6 п.п.
+2025-10-01 T     отчёт 2024 формула  6.7 deepseek-chat|anon=6.2 deepseek-chat|named=6.4 | за 12 мес. -14.8% (IMOEX -13.9%) → -0.8 п.п.
+2025-10-01 MOEX  отчёт 2024 формула  7.4 deepseek-chat|anon=6.8 deepseek-chat|named=6.8 | за 12 мес. -7.7% (IMOEX -13.9%) → +6.3 п.п.
+2025-10-01 LKOH  отчёт 2024 формула  6.5 deepseek-chat|anon=6.3 deepseek-chat|named=6.3 | за 12 мес. -10.2% (IMOEX -13.9%) → +3.8 п.п.
+2025-10-01 ROSN  отчёт 2024 формула  6.6 deepseek-chat|anon=6.4 deepseek-chat|named=6.4 | за 12 мес. -14.5% (IMOEX -13.9%) → -0.6 п.п.
+2025-10-01 GAZP  отчёт 2024 формула  6.7 deepseek-chat|anon=5.8 deepseek-chat|named=5.8 | за 12 мес. -16.6% (IMOEX -13.9%) → -2.6 п.п.
+2025-10-01 NVTK  отчёт 2024 формула  6.6 deepseek-chat|anon=6.6 deepseek-chat|named=6.7 | за 12 мес. -6.7% (IMOEX -13.9%) → +7.2 п.п.
+2025-10-01 TATN  отчёт 2024 формула  7.5 deepseek-chat|anon=7.2 deepseek-chat|named=7.2 | за 12 мес. +4.2% (IMOEX -13.9%) → +18.1 п.п.
+2025-10-01 GMKN  отчёт 2024 формула  4.5 deepseek-chat|anon=4.2 deepseek-chat|named=4.3 | за 12 мес. -3.5% (IMOEX -13.9%) → +10.5 п.п.
+2025-10-01 PLZL  отчёт 2024 формула  7.1 deepseek-chat|anon=6.6 deepseek-chat|named=6.8 | за 12 мес. -59.4% (IMOEX -13.9%) → -45.5 п.п.
+2025-10-01 ALRS  отчёт 2024 формула  4.2 deepseek-chat|anon=3.9 deepseek-chat|named=4.3 | за 12 мес. -56.3% (IMOEX -13.9%) → -42.3 п.п.
+2025-10-01 CHMF  отчёт 2024 формула  6.6 deepseek-chat|anon=6.2 deepseek-chat|named=6.2 | за 12 мес. -31.7% (IMOEX -13.9%) → -17.8 п.п.
+2025-10-01 NLMK  отчёт 2024 формула  5.6 deepseek-chat|anon=5.2 deepseek-chat|named=5.2 | за 12 мес. -33.7% (IMOEX -13.9%) → -19.8 п.п.
+2025-10-01 PHOR  отчёт 2024 формула  5.9 deepseek-chat|anon=5.4 deepseek-chat|named=5.6 | за 12 мес. -26.5% (IMOEX -13.9%) → -12.6 п.п.
+2025-10-01 MGNT  отчёт 2024 формула  4.5 deepseek-chat|anon=4.2 deepseek-chat|named=4.3 | за 12 мес. -48.3% (IMOEX -13.9%) → -34.3 п.п.
+2025-10-01 MTSS  отчёт 2024 формула  4.9 deepseek-chat|anon=4.3 deepseek-chat|named=4.3 | за 12 мес. -18.2% (IMOEX -13.9%) → -4.3 п.п.
+2025-10-01 YDEX  отчёт 2024 формула  5.9 deepseek-chat|anon=6.2 deepseek-chat|named=6.4 | за 12 мес. -6.2% (IMOEX -13.9%) → +7.8 п.п.
+2025-10-01 OZON  отчёт 2024 формула  4.3 deepseek-chat|anon=3.8 deepseek-chat|named=4.6 | за 12 мес. -22.1% (IMOEX -13.9%) → -8.2 п.п.
+2025-10-01 AFLT  отчёт 2024 формула  6.7 deepseek-chat|anon=6.2 deepseek-chat|named=6.2 | за 12 мес. -38.7% (IMOEX -13.9%) → -24.7 п.п.
+
+=== Итоги A ===
+deepseek-chat {'mean_spread': 0.06, 'max_spread': 0.5, 'unstable_rec': 0, 'mean_delta': -0.08, 'mean_abs_delta': 0.36, 'rec_vs_formula': 17, 'said_mismatch': 0, 'mean_abs_self_gap': 0.37, 'tokens_per_call': 2529, 'cost_per_call': 0.00139, 'seconds_per_call': 4.8}
+
+=== Итоги B ===
+formula {'spearman': 0.063, 'top_third': -3.4, 'bottom_third': -2.2, 'buy_n': 9, 'buy_beat': 6, 'buy_mean': 0.5, 'sell_n': 7, 'sell_lag': 4, 'sell_mean': -2.7}
+deepseek-chat|anon {'spearman': 0.144, 'top_third': 0.5, 'bottom_third': -2.2, 'buy_n': 4, 'buy_beat': 4, 'buy_mean': 11.3, 'sell_n': 11, 'sell_lag': 6, 'sell_mean': -4.7}
+deepseek-chat|named {'spearman': 0.169, 'top_third': 1.6, 'bottom_third': -4.8, 'buy_n': 4, 'buy_beat': 4, 'buy_mean': 11.3, 'sell_n': 9, 'sell_lag': 4, 'sell_mean': -3.8}
+с названием минус без: среднее +0.15, |среднее| 0.15
+
+всего $0.1879, 134 с → /Users/g.a.s./advent AI challenge/35-stock-rating/data/rating_result.json

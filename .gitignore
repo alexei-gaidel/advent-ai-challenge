@@ -91,3 +91,10 @@ venv/
 34-file-assistant/workspace/
 34-file-assistant/agents.db*
 34-file-assistant/custom_roles.json
+35-stock-rating/data/cache/
+35-stock-rating/data/runs/
+35-stock-rating/data/web.log
+35-stock-rating/data/web.pid
+35-stock-rating/agents.db*
+35-stock-rating/custom_roles.json
+35-stock-rating/data/demo_cache.json
