@@ -112,7 +112,8 @@ ul { margin:4px 0; padding-left:18px; } li { margin:2px 0; }
       <button class="chip" onclick="quick('почему такой рейтинг?')">почему?</button>
     </div>
     <div class="row"><textarea id="q" placeholder="Например: стоит ли брать Газпром?"></textarea>
-      <button id="send" onclick="send()">→</button></div>
+      <button id="send" onclick="send()">→</button>
+      <button class="chip" onclick="reset()" title="Очистить чат и дашборд">Сброс</button></div>
   </section>
   <section id="dash"><div class="panel empty">Здесь появится дашборд: график, показатели и рейтинг.</div></section>
 </div>
@@ -127,6 +128,11 @@ function add(html, cls) { $("log").insertAdjacentHTML("beforeend", `<div class="
 async function api(path, body) {
   const r = await fetch(path, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
   const d = await r.json(); if (d.error) throw new Error(d.error); return d;
+}
+const START = {log: $("log").innerHTML, dash: $("dash").innerHTML};
+async function reset() {
+  try { await api("/api/reset", {}); } catch (e) { add(`<span class="r-sell">${esc(e.message)}</span>`); return; }
+  $("log").innerHTML = START.log; $("dash").innerHTML = START.dash; $("q").value = ""; $("q").focus();
 }
 function quick(t) { $("q").value = t; send(); }
 async function send() {
