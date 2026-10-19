@@ -368,3 +368,8 @@
 {"at": "2026-10-19T03:22:14+00:00", "coin": "litecoin", "title": "LTC", "price": 59.44, "change_24h": 0.7471492985404612, "age_seconds": 13, "stale": false}
 {"at": "2026-10-19T03:22:14+00:00", "coin": "monero", "title": "XMR", "price": 599.67, "change_24h": 0.3640757722878708, "age_seconds": 13, "stale": false}
 {"at": "2026-10-19T03:22:14+00:00", "coin": "ethereum-classic", "title": "ETC", "price": 7.74, "change_24h": -0.4084105500703831, "age_seconds": 24, "stale": false}
+{"at": "2026-10-19T15:17:40+00:00", "coin": "bitcoin", "title": "BTC", "price": 82159.0, "change_24h": 1.307711493306674, "age_seconds": 17, "stale": false}
+{"at": "2026-10-19T15:17:40+00:00", "coin": "ethereum", "title": "ETH", "price": 2406.57, "change_24h": 1.2317041650901517, "age_seconds": 31, "stale": false}
+{"at": "2026-10-19T15:17:40+00:00", "coin": "litecoin", "title": "LTC", "price": 59.72, "change_24h": 1.7816907381807707, "age_seconds": 14, "stale": false}
+{"at": "2026-10-19T15:17:40+00:00", "coin": "monero", "title": "XMR", "price": 600.49, "change_24h": 2.5529068482780413, "age_seconds": 31, "stale": false}
+{"at": "2026-10-19T15:17:40+00:00", "coin": "ethereum-classic", "title": "ETC", "price": 7.73, "change_24h": 1.2969853223477508, "age_seconds": 31, "stale": false}
